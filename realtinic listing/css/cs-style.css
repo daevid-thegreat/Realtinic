@@ -73,7 +73,7 @@ font-family: 'Jost', sans-serif;
 .loader-inner {
   position: absolute;
   margin: -18px 0 0 -18px;
-  border: 3.6px solid #3270FC;
+  border: 3.6px solid #7F00FF;
   box-sizing: border-box;
   overflow: hidden;
   width: 36px;
@@ -83,14 +83,14 @@ font-family: 'Jost', sans-serif;
   animation: loader-spin 2s linear infinite reverse;
   -webkit-filter: url(#goo);
           filter: url(#goo);
-  box-shadow: 0 0 0 1px #3270FC inset;
+  box-shadow: 0 0 0 1px #7F00FF inset;
 }
 .loader-inner:before {
   content: "";
   position: absolute;
   -webkit-animation: loader-spin 2s cubic-bezier(0.59, 0.25, 0.4, 0.69) infinite;
           animation: loader-spin 2s cubic-bezier(0.59, 0.25, 0.4, 0.69) infinite;
-  background: #3270FC;
+  background: #7F00FF;
   -webkit-transform-origin: top center;
           transform-origin: top center;
   border-radius: 50%;
@@ -105,7 +105,7 @@ p {
 	line-height: 22px;
 	padding-bottom: 10px;
 	font-weight: 400;
-	color: #878C9F;
+	color: #2f243a;
     text-align: left;
  
 }
@@ -177,7 +177,7 @@ p {
 	width: 620px;
 	min-height: 100vh;
 	position: relative;
-	background: #3270FC;
+	background: #7F00FF;
 	z-index: 2;
 	padding: 150px 50px 60px;
 }
@@ -239,14 +239,14 @@ p {
     box-shadow: 0px 0px 0px 6px rgba(255,255,255,0.2);
 }
 #subscribe .enteremail::-webkit-input-placeholder {
-	color: #666;
+	color: #2f243a;
 	font-weight: 500;
 	font-size: 12px;
 	position: relative;
  	font-family: 'Jost', sans-serif;
 }
 #subscribe .enteremail::-webkit-input-placeholder {
-	color: #666;
+	color: #2f243a;
 	font-weight: 500;
 	font-size: 12px;
  	font-family: 'Jost', sans-serif;
@@ -282,7 +282,7 @@ p {
 	height: 36px;
 	border-radius: 4px;
 	line-height: 36px;
-	color: #3270FC;
+	color: #7F00FF;
 	transition: all 200ms linear;
 }
 .cs-social li a:hover {
@@ -449,13 +449,13 @@ p {
 }
 .cs-contacts li span {
 	margin-right:12px;
-	color: #3270FC;
+	color: #7F00FF;
 }
 .cf_btn {
 	position: absolute;
 	right: 70px;
 	top: 40px;
-	background: #3270FC;
+	background: #7F00FF;
     background: linear-gradient(to left, #3C6AFD, #3270FC);
 	color: #fff;
 	z-index: 20;
@@ -498,7 +498,7 @@ p {
 	stroke-dashoffset: 220px; transition: linear 6s stroke-dashoffset;
 }
 .gradient-bg  , #subscribe-button:hover , .cf_btn:hover , .btn:hover    {
-    background: linear-gradient(to left, #3C6AFD, #57C7FA);
+    background: linear-gradient(to left, #7F00FF, #bd7cfd);
 }
 .contact-form-wrap  {
 	position: fixed;
@@ -556,13 +556,13 @@ p {
 	cursor: pointer;
 	border-left: 1px solid #eee;
 	border-bottom: 1px solid #eee;
-	color: #3270FC;
+	color: #7F00FF;
 	background: #fff;
 	transition: all 200ms linear;
 }
 .close-contact-form:hover {
 	color:#fff;
-	background:#3270FC; 
+	background:#7F00FF; 
 }
 .contact-form-main {
 	padding: 70px 50px 20px;
@@ -605,7 +605,7 @@ p {
     height: 44px;
     line-height: 44px;
     margin-top: 11px;
-   color: #3270FC;
+   color: #7F00FF;
     font-weight: bold;
     font-size: 14px;
     text-align: center;
@@ -637,7 +637,7 @@ p {
     font-weight: 500;
     font-size: 12px;
     margin-top: 15px;
-	background: #3270FC;
+	background: #7F00FF;
 	outline: none;
     border: none;
     cursor: pointer;
@@ -674,7 +674,7 @@ p {
 	color: #144273;
 }
 #message div strong {
-	color:#3270FC;
+	color:#7F00FF;
 }
 .hid-body {
 	overflow: hidden;

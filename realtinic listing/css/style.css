@@ -68,7 +68,7 @@ body {
 .loader-inner {
   position: absolute;
   margin: -18px 0 0 -18px;
-  border: 3.6px solid #3270FC;
+  border: 3.6px solid #7F00FF;
   box-sizing: border-box;
   overflow: hidden;
   width: 36px;
@@ -78,14 +78,14 @@ body {
   animation: loader-spin 2s linear infinite reverse;
   -webkit-filter: url(#goo);
           filter: url(#goo);
-  box-shadow: 0 0 0 1px #3270FC inset;
+  box-shadow: 0 0 0 1px #7F00FF inset;
 }
 .loader-inner:before {
   content: "";
   position: absolute;
   -webkit-animation: loader-spin 2s cubic-bezier(0.59, 0.25, 0.4, 0.69) infinite;
           animation: loader-spin 2s cubic-bezier(0.59, 0.25, 0.4, 0.69) infinite;
-  background: #3270FC;
+  background: #7F00FF;
   -webkit-transform-origin: top center;
           transform-origin: top center;
   border-radius: 50%;
@@ -784,7 +784,7 @@ blockquote p {
 } 
 .header-search-wrapper label {
 	margin-bottom:5px;
-	color: #144273;
+	color: #3b2f47;
 	font-weight:600;
 }
 .header-search-wrapper .nice-select , .header-search-wrapper .custom-form input[type="text"] {
@@ -810,7 +810,7 @@ blockquote p {
 	border-radius:4px;
 }
 .header-search-wrapper .custom-form label {
- 	color: #144273
+ 	color: #3b2f47
 }
 .header-search-wrapper .custom-form .btn i {
 	margin-right:10px;
@@ -845,7 +845,7 @@ blockquote p {
     transition: all 200ms ease-out;
 	font-size:12px;
 	font-weight:600;
-	color: #144273;
+	color: #412e53;
 	border-radius: 4px;
 }
 .custom-switcher label.lss_lb {
@@ -949,12 +949,12 @@ blockquote p {
     text-transform: none;
     line-height: 25px;
     letter-spacing: 0px;
-    color: #144273;
+    color: #3b2f47;
 	position: relative;
     transition: all 100ms linear;
 }
 .nav-holder nav li a.act-link i {
-	 color: #144273;
+	 color: #4f207e;
 } 
 .nav-holder nav li a i {
 	padding-left:6px;
@@ -1618,7 +1618,7 @@ nav li ul a:before , nav li ul a:after {
 	background: #fff;
 } 
 .color-form .irs-slider {
-	background:#313DB0;
+	background:#7F00FF;
 }
 .color-form .irs-line  {
 	background:rgba(255,255,255,0.2);
@@ -1833,7 +1833,7 @@ nav li ul a:before , nav li ul a:after {
 	font-weight:500;
 	position:relative;
 	text-align: center;
-	background:#205DA5;
+	background:#7c58a0;
     box-shadow: 0px 0px 0px 7px rgba(255,255,255,0.2);
 }
 .log-separator {
@@ -2109,7 +2109,7 @@ nav li ul a:before , nav li ul a:after {
 	font-weight: 500;
 }
 .main-search-input-item input::-webkit-input-placeholder {
-	color: #7d93b2;
+	color: #51455c;
 	font-weight: 400;
 	font-size: 12px;
 	position: relative;
@@ -2440,7 +2440,7 @@ section.parallax-section .bg {
 	margin-bottom: 50px;
 }
 .section-title h2 {
-	color: #144273;
+	color: #4f2679;
 	font-size: 26px;
 	text-align: left;
 	font-weight: 600;
@@ -3381,7 +3381,7 @@ section.single-par2  .scroll-down-wrap{
     cursor: pointer;
     border-radius: 2px;
     border: 1px solid #eee;
-    color: #144273;
+    color: #553575;
     font-weight: 600;
     box-shadow: 0 15px 5px rgba(0,0,0,0.03);
     font-size: 12px;
@@ -3648,7 +3648,7 @@ section.single-par2  .scroll-down-wrap{
 }
 .list-single-facts .inline-facts-wrap h6 {
 	padding-left:4px;
-	color: #144273;
+	color: #621ca8;
 	font-size:14px;
     display: block;
     padding-bottom: 5px;
@@ -3841,7 +3841,7 @@ section.single-par2  .scroll-down-wrap{
 }
 .progress-bar__progress {
     fill: none;
-    stroke: #3572F4;
+    stroke: #7F00FF;
     stroke-dasharray: 100 100;
     stroke-dashoffset: 100;
     stroke-linecap: round;
@@ -3914,7 +3914,7 @@ section.single-par2  .scroll-down-wrap{
 	background: #fff;
 	font-weight: 500;
 	font-size: 12px;
-	color: #144273;
+	color: #2f243a;
 }
 .listing-filters a:first-child {
 	border: none;
@@ -4166,7 +4166,7 @@ section.single-par2  .scroll-down-wrap{
     color: #7d93b2;
 }
 .breadcrumbs-list a:hover{
-	color: #144273;
+	color: #50267a;
 }
 .breadcrumbs-list a:before {
     content: '';
@@ -4200,7 +4200,7 @@ section.single-par2  .scroll-down-wrap{
 	border-radius:4px;
 	cursor:pointer;
 	background: #fff;
-	color: #144273;
+	color: #552c7e;
 	font-weight:600;
     box-shadow: 0 5px 5px rgba(0,0,0,0.05);
 }
@@ -4300,7 +4300,7 @@ section.single-par2  .scroll-down-wrap{
 	text-align: left;
 	padding: 10px 0;
 	font-weight: 600;
-	color: #144273;
+	color: #563f6d;
 	border-bottom: 1px solid #eee;
 }
 .box-widget .footer-social {
@@ -4688,7 +4688,7 @@ section.single-par2  .scroll-down-wrap{
 }
 .contats-list li a   {
 	float:right;
-	color: #144273;
+	color: #633591;
 }
 .contats-list.contats-list-inline li {
 	width: 33.3%;
