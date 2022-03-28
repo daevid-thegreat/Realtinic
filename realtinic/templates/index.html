@@ -38,7 +38,7 @@
             <!-- header -->
             <header class="main-header">
                 <!--  logo  -->
-                <div class="logo-holder"><a href="index.html"><img src="{% static 'images/logo.png' %}" alt=""></a></div>
+                <div class="logo-holder"><a href="/"><img src="{% static 'images/logo.png' %}" alt=""></a></div>
                 <!-- logo end  -->
                 <!-- nav-button-wrap--> 
                 <div class="nav-button-wrap color-bg nvminit">
@@ -1096,7 +1096,7 @@
                                         </div>
                                         <ul class="footer-list fl-wrap">
                                             <li><a href="about.html">Realtinic Rental Manager</a></li>
-                                            <li><a href="blog.html">Raetly</a></li>
+                                            <li><a href="blog.html">Guven Realty</a></li>
                                             <li><a href="pricing.html">Vintyl</a></li>
                                         </ul>
                                     </div>
@@ -1151,9 +1151,13 @@
                                     <!--tab -->
                                     <div id="tab-1" class="tab-content first-tab">
                                         <div class="custom-form">
-                                            <form method="post"  name="registerform">
-                                                <label>Username or Email Address  * <span class="dec-icon"><i class="fal fa-user"></i></span></label>
-                                                <input name="email" type="text"  placeholder="Your Name or Mail"  onClick="this.select()" value="">
+                                            <form method="post" action="" name="registerform">
+                                                {% csrf_token %}
+                                                {% for message in messages %}
+                                          <h4 style="color: red;">{{message}}</h4>
+                                          {% endfor %}
+                                                <label>Email Address  * <span class="dec-icon"><i class="fal fa-user"></i></span></label>
+                                                <input name="email" type="email"  placeholder="Your Mail"  onClick="this.select()" value="">
                                                 <div class="pass-input-wrap fl-wrap">
                                                     <label >Password  * <span class="dec-icon"><i class="fal fa-key"></i></span></label>
                                                     <input name="password" placeholder="Your Password" type="password"  autocomplete="off" onClick="this.select()" value="" >
@@ -1176,9 +1180,13 @@
                                     <div class="tab">
                                         <div id="tab-2" class="tab-content">
                                             <div class="custom-form">
-                                                <form method="post"   name="registerform" class="main-register-form" id="main-register-form2">
+                                                <form method="POST"  action="" id="registerform" class="main-register-form" name="registerform">
+                                                    {% csrf_token %}
+                                                {% for message in messages %}
+                                          <h4 style="color: red;">{{message}}</h4>
+                                          {% endfor %}
                                                     <label >Full Name  * <span class="dec-icon"><i class="fal fa-user"></i></span></label>
-                                                    <input name="name" type="text" placeholder="Your Name"    onClick="this.select()" value="">
+                                                    <input name="full_name" type="text" placeholder="Your Name"    onClick="this.select()" value="">
                                                     <label>Email Address  * <span class="dec-icon"><i class="fal fa-envelope"></i></span></label>
                                                     <input name="email" type="text"  placeholder="Your Mail"   onClick="this.select()" value="">
                                                     <div class="pass-input-wrap fl-wrap">
@@ -1200,9 +1208,11 @@
                                 </div>
                                 <!--tabs end -->
                                 <div class="log-separator fl-wrap"><span>or</span></div>
-                                <div class="soc-log fl-wrap">
+                                <div class="soc-lg fl-wrap">
                                     <p>For faster login or register use your social account.</p>
-                                    <a href="#" class="facebook-log"> Facebook</a>
+                                    <a href="#" class="facebook-log">Facebook</a>
+                                    <a href="#" class="facebook-log">Twitter</a>
+                                    <a href="#" class="facebook-log">Google</i></a>
                                 </div>
                             </div>
                         </div>
