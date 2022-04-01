@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE HTML>
 <html lang="en">
     <head>
@@ -9,12 +11,11 @@
         <meta name="keywords" content=""/>
         <meta name="description" content=""/>
         <!--=============== css  ===============-->	
-        <link type="text/css" rel="stylesheet" href="css/plugins.css">
-        <link type="text/css" rel="stylesheet" href="css/style.css">
-        <link type="text/css" rel="stylesheet" href="css/dashboard-style.css">
-        <link type="text/css" rel="stylesheet" href="css/color.css">
-        <!--=============== favicons ===============-->
-        <link rel="shortcut icon" href="images/favicon.ico">
+        <link type="text/css" rel="stylesheet" href="{% static 'css/plugins.css' %}">
+        <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link type="text/css" rel="stylesheet" href="{% static 'css/color.css' %}">
+        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+        <link type="text/css" rel="stylesheet" href="{% static 'css/dashboard-style.css' %}">
     </head>
     <body>
         <!--loader-->
@@ -332,18 +333,9 @@
                             <h3>Main</h3>
                             <ul class="no-list-style">
                                 <li><a href="dashboard.html"><i class="fal fa-chart-line"></i>Dashboard</a></li>
-                                <li><a href="dashboard-myprofile.html"><i class="fal fa-user-edit"></i> Edit profile</a></li>
+                                <li><a href="dashboard-myprofile.html"><i class="fal fa-user-edit"></i> Profile</a></li>
                                 <li><a href="dashboard-messages.html"><i class="fal fa-envelope"></i> Messages <span>3</span></a></li>
-                                <li><a href="dashboard-agents.html"><i class="fal fa-users"></i> Agents List</a></li>
-                                <li>
-                                    <a href="#" class="submenu-link"><i class="fal fa-plus"></i>Submenu</a>
-                                    <ul  class="no-list-style">
-                                        <li><a href="#"><i class="fal fa-th-list"></i> Submenu 2 </a></li>
-                                        <li><a href="#"> <i class="fal fa-calendar-check"></i> Submenu 2</a></li>
-                                        <li><a href="#"><i class="fal fa-comments-alt"></i>Submenu 2</a></li>
-                                        <li><a href="#"><i class="fal fa-file-plus"></i> Submenu 2</a></li>
-                                    </ul>
-                                </li>
+                                <li><a href="dashboard-agents.html"><i class="fal fa-users"></i> Billing</a></li>
                             </ul>
                         </div>
                         <!-- user-profile-menu end-->
@@ -359,7 +351,7 @@
                         </div>
                         <!-- user-profile-menu end--> 
                     </div>
-                    <div class="dashbard-menu-footer"> &#169;  Homeradar 2022 .  All rights reserved.</div>
+                    <div class="dashbard-menu-footer"> &#169;  Realtinic 2022 .  All rights reserved.</div>
                 </div>
                 <!-- dashbard-menu-wrap end  -->		
                 <!-- content -->	
@@ -367,25 +359,6 @@
                     <div class="dashboard-menu-btn color-bg"><span><i class="fas fa-bars"></i></span>Dasboard Menu</div>
                     <div class="container dasboard-container">
                         <!-- dashboard-title -->	
-                        <div class="dashboard-title fl-wrap">
-                            <div class="dashboard-title-item"><span>Add Listing</span></div>
-                            <div class="dashbard-menu-header">
-                                <div class="dashbard-menu-avatar fl-wrap">
-                                    <img src="images/avatar/5.jpg" alt="">
-                                    <h4>Welcome, <span>Alica Noory</span></h4>
-                                </div>
-                                <a href="index.html" class="log-out-btn   tolt" data-microtip-position="bottom"  data-tooltip="Log Out"><i class="far fa-power-off"></i></a>
-                            </div>
-                            <!--Tariff Plan menu-->
-                            <div class="tfp-det-container">
-                                <div   class="tfp-btn"><span>Your Tariff Plan : </span> <strong>Extended</strong></div>
-                                <div class="tfp-det">
-                                    <p>You Are on <a href="#">Extended</a> . Use link bellow to view details or upgrade. </p>
-                                    <a href="#" class="tfp-det-btn color-bg">Details</a>
-                                </div>
-                            </div>
-                            <!--Tariff Plan menu end-->						
-                        </div>
                         <!-- dashboard-title end -->		
                         <div class="dasboard-wrapper fl-wrap no-pag">
                             <div class="dasboard-scrollnav-wrap scroll-to-fixed-fixed scroll-init2 fl-wrap">
@@ -884,11 +857,11 @@
         </div>
         <!-- Main end -->
         <!--=============== scripts  ===============-->
-        <script src="js/jquery.min.js"></script>
-        <script src="js/plugins.js"></script>
-        <script src="js/scripts.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwJSRi0zFjDemECmFl9JtRj1FY7TiTRRo&amp;libraries=places"></script>
-        <script src="js/map-add.js"></script>
-        <script src="js/dashboard.js"></script>
+        <script src="{% static 'js/jquery.min.js' %}"></script>
+        <script src="{% static 'js/plugins.js' %}"></script>
+        <script src="{% static 'js/scripts.js' %}"></script>
+        <script src="{% static 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDvJXSMFCgEpnfNzgCr_5NPGgL9YPxenUg&amp;libraries=places' %}"></script>
+        <script src="{% static 'js/map-add.js' %}"></script>
+        <script src="{% static 'js/dashboard.js' %}"></script>
     </body>
 </html>

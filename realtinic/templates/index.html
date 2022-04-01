@@ -54,9 +54,6 @@
                 </div>
                 <!-- header-search button end  -->
                 <!--  add new  btn -->
-                <div class="add-list_wrap">
-                    <a href="dashboard-add-listing.html" class="add-list color-bg"><i class="fal fa-plus"></i> <span>Add Listing</span></a>
-                </div>
                 <!--  add new  btn end -->
                 <!--  header-opt_btn -->
                 <div class="header-opt_btn tolt " data-microtip-position="bottom"  data-tooltip="Language / Currency">
@@ -77,23 +74,23 @@
                     <nav>
                         <ul class="no-list-style">
                             <li>
-                                <a href="#">Buy a Home</i></a>
+                                <a href="listing">Buy or Rent</i></a>
                                     </li>
                             </li>
                             <li>
-                                <a href="#">Sell a Home</i></a>
+                                <a href="add-listing">Sell or Lease</i></a>                               
                             </li>
                             <li>
-                                <a href="#">Rent a Home</i></a>                               
+                                <a href="prop-management">Property Management</i></a>
                             </li>
                             <li>
-                                <a href="#">Lease a Home</i></a>                               
+                                <a href="find-agent">Find Agents</i></a>                               
                             </li>
                             <li>
-                                <a href="#">Contact Us</i></a>                               
+                                <a href="help">Help</i></a>                               
                             </li>
                             <li>
-                                <a href="blog.html">Blog</a>
+                                <a href="blog">Blog</a>
                             </li>
                         </ul>
                     </nav>
@@ -151,7 +148,7 @@
                                     <div class="widget-posts  fl-wrap">
                                         <ul class="no-list-style">
                                             <li>
-                                                <div class="widget-posts-img"><a href="listing-single3.html"><img src="images/all/small/1.jpg" alt=""></a>  
+                                                <div class="widget-posts-img"><a href="listing-single3.html"><img src="{% static 'images/all/small/1.jpg' %}" alt=""></a>  
                                                 </div>
                                                 <div class="widget-posts-descr">
                                                     <h4><a href="listing-single.html">Affordable Urban Room</a></h4>
@@ -1180,7 +1177,7 @@
                                     <div class="tab">
                                         <div id="tab-2" class="tab-content">
                                             <div class="custom-form">
-                                                <form method="POST"  action="" id="registerform" class="main-register-form" name="registerform">
+                                                <form method="POST" name="registerform"  action="" id="registerform" class="main-register-form">
                                                     {% csrf_token %}
                                                 {% for message in messages %}
                                           <h4 style="color: red;">{{message}}</h4>
@@ -1199,7 +1196,7 @@
                                                         <label for="check-a2">I agree to the <a href="#">Privacy Policy</a> and <a href="#">Terms and Conditions</a></label>
                                                     </div>
                                                     <div class="clearfix"></div>
-                                                    <button type="submit"     class="log_btn color-bg"> Register </button>
+                                                    <button type="submit" class="log_btn color-bg"> Register </button>
                                                 </form>
                                             </div>
                                         </div>
