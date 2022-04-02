@@ -1,1 +1,1 @@
-web: gunicorn main.wsgi
+web: gunicorn --pythonpath realtinic realtinic.wsgi

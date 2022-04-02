@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-skmjtv#)pn5978nss_x9)#nl7&%k%frr96-z&ho14e(^i$rf_3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['realtinic.com', 'realtinic.herokuapp.com']
 
 
 # Application definition
