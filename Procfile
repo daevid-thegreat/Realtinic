@@ -1,1 +1,1 @@
-web: gunicorn realtinic --log-file -
+web: gunicorn realtinic.wsgi.application --log-file -
