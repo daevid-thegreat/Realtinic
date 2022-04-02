@@ -1,1 +1,1 @@
-web: gunicorn realtinic.wsgi
+web: gunicorn main.wsgi
