@@ -1,3 +1,4 @@
+from multiprocessing import context
 from random import randint
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
@@ -18,12 +19,12 @@ def signup(request):
         email = request.POST['email']
         password = request.POST['password']
 
+        user_username = full_name[0] + str(random.randint(0, 9999999))
+
         if User.objects.filter(email=email).exists():
             messages.info(request, 'Email is taken')
             return redirect('listing')
         else:
-            user_username = full_name[0] + str(random.randint(0, 9999999))
-
 
             user = User.objects.create_user(full_name=full_name, email=email, username=user_username, password=password)
             user.save() 
@@ -31,7 +32,7 @@ def signup(request):
             user_model = User.objects.get(username=user_username)
             new_profile = Userprofile.objects.create(user=user_model, id_user=user_model.id)
             new_profile.save()
-            return render(request, 'index.html')
+            return render(request, 'add-listing')
 
     return render(request, 'index.html')
 
@@ -54,20 +55,30 @@ def listing(request):
 
 #@login_required(login_url='agent-login.html')
 def addlisting(request):
-    return render(request, 'dashboard-add-listing.html')
 
-#@login_required(login_url='agent-login.html')
+    context = {}
+    return render(request, 'dashboard-add-listing.html', context)
+
 def propmanage(request):
     return render(request, 'prop-management.html')
 
-#@login_required(login_url='agent-login.html')
 def findagents(request):
     return render(request, 'agent-list.html')
 
-#@login_required(login_url='agent-login.html')
 def help(request):
     return render(request, 'help.html')
 
-#@login_required(login_url='agent-login.html')
 def blog(request):
     return render(request, 'blog.html')
+
+def about(request):
+    return render(request, 'about.html')
+
+def terms(request):
+    return render(request, 'terms.html')
+
+def download(request):
+    return render(request, 'download.html')
+
+def privacy_policy(request):
+    return render(request, 'privacy.html')

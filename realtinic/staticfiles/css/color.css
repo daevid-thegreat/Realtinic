@@ -2,7 +2,8 @@
 	color style
 --*/ 
 ::selection {
-	background-color: #3902705e;
+	background-color: #7F00FF;
+	color: #eee5f8;
 }
 .color-bg   , .sb-btn-wrap:before    , .irs-bar , .irs-slider ,  .irs-bar-edge , .nice-select .option.focus, .nice-select .option.selected.focus  , .main-register-holder .tabs-menu li.current a , .tolt::after  , .scrollbar-inner .simplebar-scrollbar:before ,  .list-single-carousel-wrap .sw-btn  , .breadcrumbs-list a:before  , .slick-dots li.slick-active button  , .footer-social li a  , .scroll-nav li a.act-scrlink , .scroll-nav li span , .gal-link  , .show-info span   , .accordion a.toggle.act-accordion , .accordion a.toggle span  , .pac-item:hover , .progress-indicator:before  , .header-modal .tabs-menu li.current a , .categoties-column_container li a span , .categoties-column_container li a.act-category  , .pagination a.current-page, .pagination a:hover  , .cluster-visible , .more-filter-option-btn.mfilopact , .agent-card-social li a  , .card-info-content_social li a , .content-tabs li.current a , .tags-stylwrap a:hover  , .cat-item  li  span , .user-profile-menu li a.user-profile-act:before  , .user-profile-menu li a span , .dashboard-stats i  , .chat-contacts-item:after , .message-counter  , .dashboard-addnew_btn:hover  , .onoffswitch-inner:before  , .dashboard-title-item:before , section.single-par2 .section-title:after , .contact-social li a:hover , .category-column:hover , .hero-notifer a , .listing-filters a.gallery-filter-active , .services-opions li i , .listing-carousel-wrapper.lc_hero .lc-wbtn  , .hero-title.ht-column:before  , .soc-log a   {
 	background:#7F00FF;

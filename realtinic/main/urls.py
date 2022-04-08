@@ -9,4 +9,9 @@ urlpatterns = [
     path('find-agent', views.findagents, name='Find Agents'),
     path('help', views.help, name='Help'),
     path('blog', views.blog, name='Blog'),
+    path('property-management', views.propmanage, name='Property Management Software'),
+    path('privacy-policy', views.privacy_policy, name='Privacy Policy'),
+    path('about', views.about, name='About'),
+    path('download', views.download, name='Download'),
+    path('terms-of-use', views.terms, name='Terms of Use'),
 ]
