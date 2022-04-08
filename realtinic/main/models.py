@@ -33,13 +33,16 @@ class Property(models.Model):
     )
 
 
+    property_name = models.CharField(max_length=250, default='e.g 19 Queens Ave, Encino')
     property_location = models.CharField(max_length=250, default='e.g 19 Queens Ave, Encino')
     list_type = models.CharField(max_length=2, choices=list_types, default= 'For Sale')
+    price= models.DecimalField(max_digits=13, decimal_places=2)
     home_type = models.CharField(max_length=2, choices=home_types, default= 'Bungalow')
     property_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     property_price = models.IntegerField(default=0)
     bedrooms = models.IntegerField(default=0)
     bathrooms = models.IntegerField(default=0)
+    garage = models.IntegerField(default=0)
     lot_size = models.IntegerField(default=0)
     images = models.ImageField(upload_to='property_images')
     description = models.TextField(max_length=600)
