@@ -28,12 +28,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='property',
             name='home_type',
-            field=models.CharField(choices=[('BG', 'Bungalow'), ('DP', 'Duplex'), ('AP', 'Apartment'), ('MN', 'Mansion'), ('VA', 'Villa'), ('CO', 'Condo')], default='Bungalow', max_length=2),
+            field=models.CharField(choices=[('BG', 'Bungalow'), ('DP', 'Duplex'), ('AP', 'Apartment'), ('MN', 'Mansion'), ('VA', 'Villa'), ('CO', 'Condo')], default='AP', max_length=2),
         ),
         migrations.AddField(
             model_name='property',
             name='list_type',
-            field=models.CharField(choices=[('FS', 'For Sale'), ('FR', 'For Rent')], default='For Sale', max_length=2),
+            field=models.CharField(choices=[('FS', 'For Sale'), ('FR', 'For Rent')], default='FS', max_length=2),
         ),
         migrations.AddField(
             model_name='property',
@@ -48,13 +48,13 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='property',
             name='property_link',
-            field=models.CharField(max_length=150, null=b'I01\n'),
+            field=models.CharField(max_length=500, null=b'I01\n'),
             preserve_default=b'I01\n',
         ),
         migrations.AddField(
             model_name='property',
             name='property_location',
-            field=models.CharField(default='location', max_length=250),
+            field=models.CharField(default='location', max_length=500),
         ),
         migrations.AddField(
             model_name='property',

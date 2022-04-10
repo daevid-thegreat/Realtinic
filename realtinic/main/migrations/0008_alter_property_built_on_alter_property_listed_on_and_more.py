@@ -29,6 +29,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='property',
             name='property_location',
-            field=models.CharField(default='e.g 19 Queens Ave, Encino', max_length=250),
+            field=models.CharField(default='e.g 19 Queens Ave, Encino', max_length=500),
         ),
     ]

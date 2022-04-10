@@ -28,6 +28,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='property',
             name='property_link',
-            field=models.URLField(max_length=150, null=b'I01\n'),
+            field=models.URLField(max_length=500, null=b'I01\n'),
         ),
     ]

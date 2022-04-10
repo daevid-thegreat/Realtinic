@@ -13,7 +13,6 @@ class Userprofile(models.Model):
     #avatar = models.ImageField()
 
     id_user = models.IntegerField()
-    location = models.CharField(max_length=120, blank=True)
 
 
     def __str__(self):
@@ -36,11 +35,11 @@ class Property(models.Model):
     )
 
 
-    property_name = models.CharField(max_length=250, default='property name')
-    property_location = models.CharField(max_length=250, default='property location')
-    list_type = models.CharField(max_length=2, choices=list_types, default= 'For Sale')
+    property_name = models.CharField(max_length=500, default='property name')
+    property_location = models.CharField(max_length=500, default='property location')
+    list_type = models.CharField(max_length=25, choices=list_types, default= 'FS')
     price= models.DecimalField(max_digits=13, decimal_places=2)
-    home_type = models.CharField(max_length=2, choices=home_types, default= 'Single-family')
+    home_type = models.CharField(max_length=50, choices=home_types, default= 'Single-family')
     property_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     bedrooms = models.IntegerField(default=0)
     full_bathrooms = models.IntegerField(default=0)
@@ -50,11 +49,10 @@ class Property(models.Model):
     garage = models.IntegerField(default=0)
     lot_size = models.IntegerField(default=0)
     images = models.ImageField(upload_to='property_images')
-    description = models.TextField(max_length=600)
+    description = models.TextField(max_length=1000)
     built_on = models.DateTimeField(null=True)
     listed_on =models.DateTimeField(auto_now_add=True, auto_now=False, null=True)
-    property_link = models.URLField(max_length=150, null=TRUE, blank=True)
-    video_link = models.URLField(max_length=150, null=TRUE, blank=True)
+    video_link = models.URLField(max_length=350, null=TRUE, blank=True)
 
 
 

@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
             name='Property',
             fields=[
                 ('property_id', models.UUIDField(default=uuid.uuid4, primary_key=True, serialize=False)),
-                ('agent', models.CharField(max_length=100)),
+                ('agent', models.CharField(max_length=500)),
                 ('images', models.ImageField(upload_to='property_images')),
                 ('description', models.TextField()),
                 ('built_on', models.DateTimeField(default=datetime.date)),
