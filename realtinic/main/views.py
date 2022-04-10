@@ -55,9 +55,26 @@ def listing(request):
 
 #@login_required(login_url='agent-login.html')
 def addlisting(request):
+    """
+    property_name = request.POST.get('property_name')
+    property_location = request.POST.get('property_location')
+    list_type = request.POST.get('list_type')
+    price = request.POST.get('price')
+    home_type = request.POST.get('home_type')
+    bedrooms = request.POST.get('bedrooms')
+    bathrooms = request.POST.get('bathrooms')
+    garage = request.POST.get('garage')
+    lot_size = request.POST.get('lot_size')
+    images = request.POST.get('images')
+    description = request.POST.get('description')
+    built_on = request.POST.get('built_on')
+    property_link = request.POST.get('property_link')
+    property_name = request.POST.get('property_name')   , {context:context}
+    property_name = request.POST.get('property_name')
+    context = [property_name, property_location, list_type, price, home_type, bedrooms, bathrooms, garage, lot_size, images, description, built_on, property_link]
+    """
 
-    context = {}
-    return render(request, 'dashboard-add-listing.html', context)
+    return render(request, 'dashboard-add-listing.html')
 
 def propmanage(request):
     return render(request, 'prop-management.html')
