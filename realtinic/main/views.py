@@ -18,23 +18,25 @@ def signup(request):
         full_name = request.POST['full_name']
         email = request.POST['email']
         password = request.POST['password']
+        print(full_name)
+        print(email)
+        print(password)
 
-        user_username = full_name[0] + str(random.randint(0, 9999999))
 
         if User.objects.filter(email=email).exists():
             messages.info(request, 'Email is taken')
             return redirect('listing')
         else:
 
-            user = User.objects.create_user(full_name=full_name, email=email, username=user_username, password=password)
+            user = User.objects.create_user(full_name=full_name, email=email, username=email, password=password)
             user.save() 
 
-            user_model = User.objects.get(username=user_username)
+            user_model = User.objects.get(username=email)
             new_profile = Userprofile.objects.create(user=user_model, id_user=user_model.id)
             new_profile.save()
             return render(request, 'add-listing')
 
-    return render(request, 'index.html')
+    return render(request, '/')
 
 def login(request):
     if request.method == 'POST':
