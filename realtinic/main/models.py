@@ -52,6 +52,7 @@ class Property(models.Model):
     description = models.TextField(max_length=1000)
     built_on = models.DateTimeField(null=True)
     listed_on =models.DateTimeField(auto_now_add=True, auto_now=False, null=True)
+    last_updated = models.DateTimeField(auto_now_add=False, auto_now=True, null=True)
     video_link = models.URLField(max_length=350, null=TRUE, blank=True)
 
 

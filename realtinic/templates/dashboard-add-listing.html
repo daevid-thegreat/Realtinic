@@ -34,6 +34,7 @@
         <link type="text/css" rel="stylesheet" href="{% static 'css/color.css' %}">
         <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
         <link type="text/css" rel="stylesheet" href="{% static 'css/dashboard-style.css' %}">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
     </head>
     <body>
         <!--loader-->
@@ -326,7 +327,8 @@
                     <div class="dashboard-menu-btn color-bg"><span><i class="fas fa-bars"></i></span>Dasboard Menu</div>
                     <div class="container dasboard-container">
                         <!-- dashboard-title -->	
-                        <!-- dashboard-title end -->		
+                        <!-- dashboard-title end -->
+                        <form id="add-listing-form" method="POST">		
                         <div class="dasboard-wrapper fl-wrap no-pag">
                             <div class="dasboard-scrollnav-wrap scroll-to-fixed-fixed scroll-init2 fl-wrap">
                                 <ul>
@@ -390,10 +392,6 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-sm-8">
-                                            <label>Keywords  <span class="dec-icon"><i class="far fa-key"></i></span></label>
-                                            <input type="text" placeholder="Maximum 15 , should be separated by commas" value=""/>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -431,14 +429,10 @@
                                             <div class="listsearch-input-item">
                                                 <select data-placeholder="Apartments" class="chosen-select no-search-select" >
                                                     <option>All Cities</option>
-                                                    <option>New York</option>
-                                                    <option>London</option>
-                                                    <option>Paris</option>
-                                                    <option>Kiev</option>
-                                                    <option>Moscow</option>
-                                                    <option>Dubai</option>
-                                                    <option>Rome</option>
-                                                    <option>Beijing</option>
+                                                    <option>Abuja</option>
+                                                    <option>Lagos</option>
+                                                    <option>Ibadan</option>
+                                                    <option>Osun</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -461,13 +455,13 @@
                                 <div class="custom-form">
                                     <div class="clearfix"></div>
                                     <div class="listsearch-input-item fl-wrap">
-                                        <form class="fuzone">
+                                        <div class="fuzone">
                                             <div class="fu-text">
                                                 <span><i class="far fa-cloud-upload-alt"></i> Click here or drop files to upload</span>
                                                 <div class="photoUpload-files fl-wrap"></div>
                                             </div>
                                             <input type="file" class="upload" multiple>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -509,6 +503,10 @@
                                             <label>Property Description</label>
                                             <div class="listsearch-input-item">
                                                 <textarea cols="40" rows="3" style="height: 235px" placeholder="Datails" spellcheck="false"></textarea>
+                                                <div>
+                                                    <label>Built On:</label>
+                                                    <input type="text" id="datepicker">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>											
@@ -531,156 +529,140 @@
                                         <!-- Checkboxes -->
                                         <ul class="fl-wrap filter-tags no-list-style ds-tg">
                                             <li>
-                                                <input id="check-aaa5" type="checkbox" name="check" checked>
-                                                <label for="check-aaa5"> Wi Fi</label>
+                                                <input id="check-wifi" type="checkbox" name="check" checked>
+                                                <label for="check-wifi"> Wi Fi</label>
                                             </li>
                                             <li>
-                                                <input id="check-bb5" type="checkbox" name="check" checked>
-                                                <label for="check-bb5">Pool</label>
+                                                <input id="check-pool" type="checkbox" name="check" checked>
+                                                <label for="check-pool">Pool</label>
                                             </li>
                                             <li>
-                                                <input id="check-dd5" type="checkbox" name="check">
-                                                <label for="check-dd5"> Security</label>
+                                                <input id="check-sec" type="checkbox" name="check">
+                                                <label for="check-sec"> System Security</label>
                                             </li>
                                             <li>
-                                                <input id="check-cc5" type="checkbox" name="check">
-                                                <label for="check-cc5"> Laundry Room</label>
+                                                <input id="check-kit" type="checkbox" name="check" checked>
+                                                <label for="check-kit"> Equipped Kitchen</label>
                                             </li>
                                             <li>
-                                                <input id="check-ff5" type="checkbox" name="check" checked>
-                                                <label for="check-ff5"> Equipped Kitchen</label>
+                                                <input id="check-air" type="checkbox" name="check">
+                                                <label for="check-air">Air Conditioning</label>
                                             </li>
                                             <li>
-                                                <input id="check-c4" type="checkbox" name="check">
-                                                <label for="check-c4">Air Conditioning</label>
-                                            </li>
-                                            <li>
-                                                <input id="check-c18" type="checkbox" name="check">
-                                                <label for="check-c18">Parking</label>
+                                                <input id="check-sol" type="checkbox" name="check">
+                                                <label for="check-sol">Solar Power</label>
                                             </li>
                                         </ul>
                                         <label>Indoor Utilities Utilies: </label>
                                         <ul class="fl-wrap filter-tags no-list-style ds-tg">
                                             <li>
-                                                <input id="check-aaa5" type="checkbox" name="check" checked>
-                                                <label for="check-aaa5"> Wi Fi</label>
+                                                <input id="check-fire" type="checkbox" name="check" checked>
+                                                <label for="check-fire">Fireplace</label>
                                             </li>
                                             <li>
-                                                <input id="check-bb5" type="checkbox" name="check" checked>
-                                                <label for="check-bb5">Pool</label>
+                                                <input id="check-att" type="checkbox" name="check">
+                                                <label for="check-att"> Attic</label>
                                             </li>
                                             <li>
-                                                <input id="check-dd5" type="checkbox" name="check">
-                                                <label for="check-dd5"> Security</label>
-                                            </li>
-                                            <li>
-                                                <input id="check-cc5" type="checkbox" name="check">
-                                                <label for="check-cc5"> Laundry Room</label>
-                                            </li>
-                                            <li>
-                                                <input id="check-ff5" type="checkbox" name="check" checked>
-                                                <label for="check-ff5"> Equipped Kitchen</label>
-                                            </li>
-                                            <li>
-                                                <input id="check-c4" type="checkbox" name="check">
-                                                <label for="check-c4">Air Conditioning</label>
-                                            </li>
-                                            <li>
-                                                <input id="check-c18" type="checkbox" name="check">
-                                                <label for="check-c18">Parking</label>
+                                                <input id="check-cha" type="checkbox" name="check">
+                                                <label for="check-cha"> Chandelier</label>
                                             </li>
                                         </ul>
                                         <label>Appliances: </label>
                                         <ul class="fl-wrap filter-tags no-list-style ds-tg">
                                             <li>
-                                                <input id="check-aaa5" type="checkbox" name="check" checked>
-                                                <label for="check-aaa5"> Wi Fi</label>
+                                                <input id="check-dish" type="checkbox" name="check" checked>
+                                                <label for="check-dish">Dishwater</label>
                                             </li>
                                             <li>
-                                                <input id="check-bb5" type="checkbox" name="check" checked>
-                                                <label for="check-bb5">Pool</label>
+                                                <input id="check-dry" type="checkbox" name="check" checked>
+                                                <label for="check-dry">Dryer</label>
                                             </li>
                                             <li>
-                                                <input id="check-dd5" type="checkbox" name="check">
-                                                <label for="check-dd5"> Security</label>
+                                                <input id="check-fre" type="checkbox" name="check">
+                                                <label for="check-fre">Freezer/Refrigerator</label>
                                             </li>
                                             <li>
-                                                <input id="check-cc5" type="checkbox" name="check">
-                                                <label for="check-cc5"> Laundry Room</label>
+                                                <input id="check-ove" type="checkbox" name="check">
+                                                <label for="check-ove">Microwave/Oven</label>
                                             </li>
                                             <li>
-                                                <input id="check-ff5" type="checkbox" name="check" checked>
-                                                <label for="check-ff5"> Equipped Kitchen</label>
+                                                <input id="check-wash" type="checkbox" name="check" checked>
+                                                <label for="check-wash">Washing Machine</label>
                                             </li>
                                             <li>
-                                                <input id="check-c4" type="checkbox" name="check">
-                                                <label for="check-c4">Air Conditioning</label>
+                                                <input id="check-dis" type="checkbox" name="check">
+                                                <label for="check-dis">Garbage Disposesr</label>
                                             </li>
                                             <li>
-                                                <input id="check-c18" type="checkbox" name="check">
-                                                <label for="check-c18">Parking</label>
+                                                <input id="check-smoke" type="checkbox" name="check" checked>
+                                                <label for="check-smoke">Smoke Detector</label>
                                             </li>
                                         </ul>
                                         <label>Outdoor Features: </label>
                                         <ul class="fl-wrap filter-tags no-list-style ds-tg">
                                             <li>
-                                                <input id="check-aaa5" type="checkbox" name="check" checked>
-                                                <label for="check-aaa5"> Wi Fi</label>
+                                                <input id="check-pat" type="checkbox" name="check" checked>
+                                                <label for="check-pat">Balcony/Patio</label>
                                             </li>
                                             <li>
-                                                <input id="check-bb5" type="checkbox" name="check" checked>
-                                                <label for="check-bb5">Pool</label>
+                                                <input id="check-pat" type="checkbox" name="check" checked>
+                                                <label for="check-pat">Lawn</label>
                                             </li>
                                             <li>
-                                                <input id="check-dd5" type="checkbox" name="check">
-                                                <label for="check-dd5"> Security</label>
+                                                <input id="check-bbq" type="checkbox" name="check">
+                                                <label for="check-bbq"> BBQ Area</label>
                                             </li>
                                             <li>
-                                                <input id="check-cc5" type="checkbox" name="check">
-                                                <label for="check-cc5"> Laundry Room</label>
+                                                <input id="check-pool" type="checkbox" name="check">
+                                                <label for="check-pool"> Pool</label>
                                             </li>
                                             <li>
-                                                <input id="check-ff5" type="checkbox" name="check" checked>
-                                                <label for="check-ff5"> Equipped Kitchen</label>
+                                                <input id="check-porch" type="checkbox" name="check" checked>
+                                                <label for="check-porch"> Porch</label>
                                             </li>
                                             <li>
-                                                <input id="check-c4" type="checkbox" name="check">
-                                                <label for="check-c4">Air Conditioning</label>
+                                                <input id="check-spri" type="checkbox" name="check">
+                                                <label for="check-spri"> Sprinkler System</label>
                                             </li>
                                             <li>
-                                                <input id="check-c18" type="checkbox" name="check">
-                                                <label for="check-c18">Parking</label>
+                                                <input id="check-spa" type="checkbox" name="check">
+                                                <label for="check-spa">Hot tub/spa</label>
+                                            </li>
+                                            <li>
+                                                <input id="check-gar" type="checkbox" name="check">
+                                                <label for="check-gar">  Garden</label>
+                                            </li>
+                                            <li>
+                                                <input id="check-fence" type="checkbox" name="check">
+                                                <label for="check-fence"> Fence</label>
                                             </li>
                                         </ul>
                                         <label>Building Ammenities: </label>
                                         <ul class="fl-wrap filter-tags no-list-style ds-tg">
                                             <li>
-                                                <input id="check-aaa5" type="checkbox" name="check" checked>
-                                                <label for="check-aaa5"> Wi Fi</label>
+                                                <input id="check-bball" type="checkbox" name="check" checked>
+                                                <label for="check-bball"> Basketball Court</label>
                                             </li>
                                             <li>
-                                                <input id="check-bb5" type="checkbox" name="check" checked>
-                                                <label for="check-bb5">Pool</label>
+                                                <input id="check-gate" type="checkbox" name="check" checked>
+                                                <label for="check-gate">Gated Entry</label>
                                             </li>
                                             <li>
-                                                <input id="check-dd5" type="checkbox" name="check">
-                                                <label for="check-dd5"> Security</label>
+                                                <input id="check-arena" type="checkbox" name="check">
+                                                <label for="check-arena"> Sport Arena</label>
                                             </li>
                                             <li>
                                                 <input id="check-cc5" type="checkbox" name="check">
-                                                <label for="check-cc5"> Laundry Room</label>
+                                                <label for="check-cc5"> Fitness Arena</label>
                                             </li>
                                             <li>
-                                                <input id="check-ff5" type="checkbox" name="check" checked>
-                                                <label for="check-ff5"> Equipped Kitchen</label>
+                                                <input id="check-tennis" type="checkbox" name="check" checked>
+                                                <label for="check-tennis"> Tennis Court</label>
                                             </li>
                                             <li>
-                                                <input id="check-c4" type="checkbox" name="check">
-                                                <label for="check-c4">Air Conditioning</label>
-                                            </li>
-                                            <li>
-                                                <input id="check-c18" type="checkbox" name="check">
-                                                <label for="check-c18">Parking</label>
+                                                <input id="check-park" type="checkbox" name="check">
+                                                <label for="check-park">Parking</label>
                                             </li>
                                         </ul>
                                         <!-- add_room-item   -->
@@ -690,20 +672,32 @@
                                                 <!-- Checkboxes -->
                                                 <ul class="fl-wrap filter-tags no-list-style ds-tg">
                                                     <li>
-                                                        <input id="check-2aaa5" type="checkbox" name="check" checked>
-                                                        <label for="check-2aaa5">Air conditioner</label>
+                                                        <input id="check-laund" type="checkbox" name="check" checked>
+                                                        <label for="check-laund">Laundry Room</label>
                                                     </li>
                                                     <li>
-                                                        <input id="check-2bb5" type="checkbox" name="check" checked>
-                                                        <label for="check-2bb5">Tv Inside</label>
+                                                        <input id="check-dine" type="checkbox" name="check" checked>
+                                                        <label for="check-dine">Dining Room</label>
                                                     </li>
                                                     <li>
-                                                        <input id="check-2dd5" type="checkbox" name="check">
-                                                        <label for="check-2dd5"> Ceramic bath</label>
+                                                        <input id="check-lib" type="checkbox" name="check">
+                                                        <label for="check-lib">  Library</label>
                                                     </li>
                                                     <li>
-                                                        <input id="check-2cc5" type="checkbox" name="check" checked>
-                                                        <label for="check-2cc5">Microwave</label>
+                                                        <input id="check-office" type="checkbox" name="check" checked>
+                                                        <label for="check-office">Office</label>
+                                                    </li>
+                                                    <li>
+                                                        <input id="check-work" type="checkbox" name="check" checked>
+                                                        <label for="check-work">Workshop</label>
+                                                    </li>
+                                                    <li>
+                                                        <input id="check-closet" type="checkbox" name="check" checked>
+                                                        <label for="check-closet">Walk-in closets</label>
+                                                    </li>
+                                                    <li>
+                                                        <input id="check-base" type="checkbox" name="check" checked>
+                                                        <label for="check-base">Basement</label>
                                                     </li>
                                                 </ul>
                                                 <!-- Checkboxes end -->												
@@ -733,7 +727,7 @@
                                                 </div>
                                             </div>
                                         </div>	
-                                        <div class="col-md-4">
+                                        <!-- <div class="col-md-4">
                                             <div class="content-widget-switcher fl-wrap">
                                                 <span class="content-widget-switcher-title">Mortgage Calculator</span>
                                                 <div class="onoffswitch">
@@ -744,12 +738,13 @@
                                                     </label>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
                             <!-- dasboard-widget-box  end-->
-                            <a href="#" class="btn  color-bg float-btn">List property </a>
+                            <input type="submit"class="btn  color-bg float-btn" name="List property" >
+                        </form>
                         </div>
                     </div>
                     <div class="limit-box fl-wrap"></div>
@@ -781,5 +776,11 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvJXSMFCgEpnfNzgCr_5NPGgL9YPxenUg&amp;libraries=places"></script>
         <script src="{% static 'js/map-add.js' %}"></script>
         <script src="{% static 'js/dashboard.js' %}"></script>
+        <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+        <script>
+            $( function() {
+                $( "#datepicker" ).datepicker();
+            } );
+        </script>
     </body>
 </html>
