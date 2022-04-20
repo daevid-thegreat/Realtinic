@@ -93,7 +93,7 @@
                 <!--  login btn  end -->
                 <!--  dashboard-submenu-->
                 <div class="dashboard-submenu">
-                    <div class="dashboard-submenu-title fl-wrap">Welcome , <span>Alica Noory</span></div>
+                    <div class="dashboard-submenu-title fl-wrap">Welcome , <span>{{ user.first_name }}</span></div>
                     <ul>
                         <li><a href="dashboard"><i class="fal fa-chart-line"></i>Dashboard</a></li>
                         <li><a href="add-listing"> <i class="fal fa-file-plus"></i>Add Listing</a></li>
@@ -329,7 +329,8 @@
                         <!-- dashboard-title -->	
                         <!-- dashboard-title end -->
                         <form id="add-listing-form" method="POST">		
-                        <div class="dasboard-wrapper fl-wrap no-pag">
+                            {% csrf_token %}
+                            <div class="dasboard-wrapper fl-wrap no-pag">
                             <div class="dasboard-scrollnav-wrap scroll-to-fixed-fixed scroll-init2 fl-wrap">
                                 <ul>
                                     <li><a href="#sec1" class="act-scrlink">Info</a></li>
@@ -361,13 +362,13 @@
                                     <div class="row">
                                         <div class="col-sm-4">		 
                                             <label>Listing Title  <span class="dec-icon"><i class="far fa-briefcase"></i></span></label>
-                                            <input type="text" placeholder="Name of your business" value=""/>
+                                            <input id="property_name" name="property_name" type="text" placeholder="Name" value=""/>
                                         </div>
                                         <div class="col-sm-4">
                                             <label>Type</label>
                                             <div class="listsearch-input-item">
-                                                <select data-placeholder="All Types" class="chosen-select no-search-select" >
-                                                    <option>All Types</option>
+                                                <select data-placeholder="All Types" name="list_type" class="chosen-select no-search-select" >
+                                                    <option>Choose Type</option>
                                                     <option>Rent</option>
                                                     <option>Sale</option>
                                                 </select>
@@ -375,12 +376,12 @@
                                         </div>
                                         <div class="col-sm-4">		 
                                             <label>Listing Price  <span class="dec-icon"><i class="far fa-money-bill-wave"></i></span></label>
-                                            <input type="text" placeholder="Listing Price" value=""/>
+                                            <input type="text" name="price" placeholder="Listing Price" value=""/>
                                         </div>
                                         <div class="col-sm-4">
                                             <label>Category</label>
                                             <div class="listsearch-input-item">
-                                                <select data-placeholder="Single-family" class="chosen-select no-search-select" >
+                                                <select data-placeholder="Single-family" name="home_type" class="chosen-select no-search-select" >
                                                     <option>All Categories</option>
                                                     <option>Single-family</option>
                                                     <option>Semi-detached</option>
@@ -407,7 +408,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label>Location <span class="dec-icon"><i class="far fa-map-marker"></i></span></label>
-                                            <input type="text" placeholder="Location of your property" value=""/>
+                                            <input type="text" name="property_location" placeholder="Location of your property" value=""/>
                                         </div>
                                         <div class="col-sm-4">		 
                                             <label>Longitude (Drag marker on the map)  <span class="dec-icon"><i class="far fa-long-arrow-alt-right"></i></span></label>
@@ -427,7 +428,7 @@
                                         <div class="col-sm-6">
                                             <label>City</label>
                                             <div class="listsearch-input-item">
-                                                <select data-placeholder="Apartments" class="chosen-select no-search-select" >
+                                                <select data-placeholder="Apartments" name="property_city" class="chosen-select no-search-select" >
                                                     <option>All Cities</option>
                                                     <option>Abuja</option>
                                                     <option>Lagos</option>
@@ -438,7 +439,7 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <label>Phone <span class="dec-icon"><i class="far fa-phone"></i> </span> </label>
-                                            <input type="text" placeholder="+7(123)987654" value=""/>
+                                            <input type="text" name="property_tel" placeholder="+7(123)987654" value=""/>
                                             <span>Though you will be contacted by email, a phone number is required for incasity.</span>
                                         </div>
                                     </div>
@@ -460,7 +461,7 @@
                                                 <span><i class="far fa-cloud-upload-alt"></i> Click here or drop files to upload</span>
                                                 <div class="photoUpload-files fl-wrap"></div>
                                             </div>
-                                            <input type="file" class="upload" multiple>
+                                            <input type="file" name="images" class="upload" multiple>
                                         </div>
                                     </div>
                                 </div>
@@ -479,33 +480,33 @@
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <label>Area: <span class="dec-icon"><i class="far fa-sort-size-down-alt"></i></span></label>
-                                                    <input type="text" placeholder="House Area (in sq .ft)" value=""/>																								
+                                                    <input name="lot_size" type="text" placeholder="House Area (in sq .ft)" value=""/>																								
                                                     <label>Yard size: <span class="dec-icon"><i class="far fa-trees"></i></span></label>
-                                                    <input type="text" placeholder="Yard size" value=""/>		
+                                                    <input name="yard_size" type="text" placeholder="Yard size" value=""/>		
                                                     <label>Garage: <span class="dec-icon"><i class="far fa-warehouse"></i></span></label>
-                                                    <input type="text" placeholder="Number of cars" value=""/>												
+                                                    <input name="garage" type="text" placeholder="Number of cars" value=""/>												
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <label>Bedrooms: <span class="dec-icon"><i class="far fa-bed"></i></span></label>
-                                                    <input type="text" placeholder="House Bedrooms" value=""/>
+                                                    <input name="bedrooms" type="text" placeholder="House Bedrooms" value=""/>
                                                     <label>Full Bathrooms: <span class="dec-icon"><i class="far fa-bath"></i></span></label>
-                                                    <input type="text" placeholder="House Bathrooms" value=""/>	
+                                                    <input name="full_bathrooms" type="text" placeholder="House Bathrooms" value=""/>	
                                                     <label>Half Bathrooms: <span class="dec-icon"><i class="far fa-bath"></i></span></label>
-                                                    <input type="text" placeholder="Half Bathrooms" value=""/>	
+                                                    <input name="half_bathrooms" type="text" placeholder="Half Bathrooms" value=""/>	
                                                     <label>One-quarter Bathrooms: <span class="dec-icon"><i class="far fa-bath"></i></span></label>
-                                                    <input type="text" placeholder="¼ Bathrooms" value=""/>	
+                                                    <input name="one_quarter_bathrooms" type="text" placeholder="¼ Bathrooms" value=""/>	
                                                     <label>Three-quarter Bathrooms: <span class="dec-icon"><i class="far fa-bath"></i></span></label>
-                                                    <input type="text" placeholder="¾ Bathrooms" value=""/>																									
+                                                    <input name="three_quarter_bathrooms" type="text" placeholder="¾ Bathrooms" value=""/>																									
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <label>Property Description</label>
                                             <div class="listsearch-input-item">
-                                                <textarea cols="40" rows="3" style="height: 235px" placeholder="Datails" spellcheck="false"></textarea>
+                                                <textarea id="description" name="description" cols="40" rows="3" style="height: 235px" placeholder="Datails" spellcheck="false"></textarea>
                                                 <div>
                                                     <label>Built On:</label>
-                                                    <input type="text" id="datepicker">
+                                                    <input id="built_on" type="text" name="built_on">
                                                 </div>
                                             </div>
                                         </div>
@@ -529,140 +530,136 @@
                                         <!-- Checkboxes -->
                                         <ul class="fl-wrap filter-tags no-list-style ds-tg">
                                             <li>
-                                                <input id="check-wifi" type="checkbox" name="check" checked>
-                                                <label for="check-wifi"> Wi Fi</label>
+                                                <input id="wifi" type="checkbox" name="wifi" checked>
+                                                <label for="wifi"> Wi Fi</label>
                                             </li>
                                             <li>
-                                                <input id="check-pool" type="checkbox" name="check" checked>
-                                                <label for="check-pool">Pool</label>
+                                                <input id="security" type="checkbox" name="security">
+                                                <label for="security"> System Security</label>
                                             </li>
                                             <li>
-                                                <input id="check-sec" type="checkbox" name="check">
-                                                <label for="check-sec"> System Security</label>
+                                                <input id="equiped_kitchen" type="checkbox" name="equiped_kitchen" checked>
+                                                <label for="equiped_kitchen"> Equipped Kitchen</label>
                                             </li>
                                             <li>
-                                                <input id="check-kit" type="checkbox" name="check" checked>
-                                                <label for="check-kit"> Equipped Kitchen</label>
+                                                <input id="air_con" type="checkbox" name="air_con">
+                                                <label for="air_con">Air Conditioning</label>
                                             </li>
                                             <li>
-                                                <input id="check-air" type="checkbox" name="check">
-                                                <label for="check-air">Air Conditioning</label>
-                                            </li>
-                                            <li>
-                                                <input id="check-sol" type="checkbox" name="check">
-                                                <label for="check-sol">Solar Power</label>
+                                                <input id="solar_power" type="checkbox" name="solar_power">
+                                                <label for="solar_power">Solar Power</label>
                                             </li>
                                         </ul>
                                         <label>Indoor Utilities Utilies: </label>
                                         <ul class="fl-wrap filter-tags no-list-style ds-tg">
                                             <li>
-                                                <input id="check-fire" type="checkbox" name="check" checked>
-                                                <label for="check-fire">Fireplace</label>
+                                                <input id="fireplace" type="checkbox" name="fireplace" checked>
+                                                <label for="fireplace">Fireplace</label>
                                             </li>
                                             <li>
-                                                <input id="check-att" type="checkbox" name="check">
-                                                <label for="check-att"> Attic</label>
+                                                <input id="attic" type="checkbox" name="attic">
+                                                <label for="attic"> Attic</label>
                                             </li>
                                             <li>
-                                                <input id="check-cha" type="checkbox" name="check">
-                                                <label for="check-cha"> Chandelier</label>
+                                                <input id="chandelier" type="checkbox" name="chandelier">
+                                                <label for="chandelier"> Chandelier</label>
+                                            </li>
+                                            <li>
+                                                <input id="indoor_pool" type="checkbox" name="indoor_pool" checked>
+                                                <label for="indoor_pool">Pool</label>
                                             </li>
                                         </ul>
                                         <label>Appliances: </label>
                                         <ul class="fl-wrap filter-tags no-list-style ds-tg">
                                             <li>
-                                                <input id="check-dish" type="checkbox" name="check" checked>
-                                                <label for="check-dish">Dishwater</label>
+                                                <input id="dishwasher" type="checkbox" name="dishwasher" checked>
+                                                <label for="dishwasher">Dishwater</label>
                                             </li>
                                             <li>
-                                                <input id="check-dry" type="checkbox" name="check" checked>
-                                                <label for="check-dry">Dryer</label>
+                                                <input id="dryer" type="checkbox" name="dryer" checked>
+                                                <label for="dryer">Dryer</label>
                                             </li>
                                             <li>
-                                                <input id="check-fre" type="checkbox" name="check">
-                                                <label for="check-fre">Freezer/Refrigerator</label>
+                                                <input id="freezer_fridge" type="checkbox" name="freezer_fridge">
+                                                <label for="freezer_fridge">Freezer/Refrigerator</label>
                                             </li>
                                             <li>
-                                                <input id="check-ove" type="checkbox" name="check">
-                                                <label for="check-ove">Microwave/Oven</label>
+                                                <input id="oven" type="checkbox" name="oven">
+                                                <label for="oven">Microwave/Oven</label>
                                             </li>
                                             <li>
-                                                <input id="check-wash" type="checkbox" name="check" checked>
-                                                <label for="check-wash">Washing Machine</label>
+                                                <input id="washing_machine" type="checkbox" name="washing_machine" checked>
+                                                <label for="washing_machine">Washing Machine</label>
                                             </li>
                                             <li>
-                                                <input id="check-dis" type="checkbox" name="check">
-                                                <label for="check-dis">Garbage Disposesr</label>
+                                                <input id="garbage_disposer" type="checkbox" name="garbage_disposer">
+                                                <label for="garbage_disposer">Garbage Disposesr</label>
                                             </li>
                                             <li>
-                                                <input id="check-smoke" type="checkbox" name="check" checked>
-                                                <label for="check-smoke">Smoke Detector</label>
+                                                <input id="smoke_detector" type="checkbox" name="smoke_detector" checked>
+                                                <label for="smoke_detector">Smoke Detector</label>
                                             </li>
                                         </ul>
                                         <label>Outdoor Features: </label>
                                         <ul class="fl-wrap filter-tags no-list-style ds-tg">
                                             <li>
-                                                <input id="check-pat" type="checkbox" name="check" checked>
-                                                <label for="check-pat">Balcony/Patio</label>
+                                                <input id="patio" type="checkbox" name="patio" checked>
+                                                <label for="patio">Balcony/Patio</label>
                                             </li>
                                             <li>
-                                                <input id="check-pat" type="checkbox" name="check" checked>
-                                                <label for="check-pat">Lawn</label>
+                                                <input id="bbq_area" type="checkbox" name="bbq_area">
+                                                <label for="bbq_area"> BBQ Area</label>
                                             </li>
                                             <li>
-                                                <input id="check-bbq" type="checkbox" name="check">
-                                                <label for="check-bbq"> BBQ Area</label>
+                                                <input id="pool" type="checkbox" name="pool">
+                                                <label for="pool"> Pool</label>
                                             </li>
                                             <li>
-                                                <input id="check-pool" type="checkbox" name="check">
-                                                <label for="check-pool"> Pool</label>
+                                                <input id="porch" type="checkbox" name="porch" checked>
+                                                <label for="porch"> Porch</label>
                                             </li>
                                             <li>
-                                                <input id="check-porch" type="checkbox" name="check" checked>
-                                                <label for="check-porch"> Porch</label>
+                                                <input id="sprinkler" type="checkbox" name="sprinkler">
+                                                <label for="sprinkler"> Sprinkler System</label>
                                             </li>
                                             <li>
-                                                <input id="check-spri" type="checkbox" name="check">
-                                                <label for="check-spri"> Sprinkler System</label>
+                                                <input id="spa" type="checkbox" name="spa">
+                                                <label for="spa">Hot tub/spa</label>
                                             </li>
                                             <li>
-                                                <input id="check-spa" type="checkbox" name="check">
-                                                <label for="check-spa">Hot tub/spa</label>
+                                                <input id="garden" type="checkbox" name="garden">
+                                                <label for="garden">  Garden</label>
                                             </li>
                                             <li>
-                                                <input id="check-gar" type="checkbox" name="check">
-                                                <label for="check-gar">  Garden</label>
-                                            </li>
-                                            <li>
-                                                <input id="check-fence" type="checkbox" name="check">
-                                                <label for="check-fence"> Fence</label>
+                                                <input id="fence" type="checkbox" name="fence">
+                                                <label for="fence"> Fence</label>
                                             </li>
                                         </ul>
                                         <label>Building Ammenities: </label>
                                         <ul class="fl-wrap filter-tags no-list-style ds-tg">
                                             <li>
-                                                <input id="check-bball" type="checkbox" name="check" checked>
-                                                <label for="check-bball"> Basketball Court</label>
+                                                <input id="bball" type="checkbox" name="bball" checked>
+                                                <label for="bball"> Basketball Court</label>
                                             </li>
                                             <li>
-                                                <input id="check-gate" type="checkbox" name="check" checked>
-                                                <label for="check-gate">Gated Entry</label>
+                                                <input id="gate" type="checkbox" name="gate" checked>
+                                                <label for="gate">Gated Entry</label>
                                             </li>
                                             <li>
-                                                <input id="check-arena" type="checkbox" name="check">
-                                                <label for="check-arena"> Sport Arena</label>
+                                                <input id="sport_arena" name="sport_arena" type="checkbox">
+                                                <label for="sport_arena"> Sport Arena</label>
                                             </li>
                                             <li>
-                                                <input id="check-cc5" type="checkbox" name="check">
-                                                <label for="check-cc5"> Fitness Arena</label>
+                                                <input id="fitness_arena" name="fitness_area" type="checkbox">
+                                                <label for="fitness_arena"> Fitness Arena</label>
                                             </li>
                                             <li>
-                                                <input id="check-tennis" type="checkbox" name="check" checked>
-                                                <label for="check-tennis"> Tennis Court</label>
+                                                <input id="tennis_court" name="tennis_court" type="checkbox" checked>
+                                                <label for="tennis_court"> Tennis Court</label>
                                             </li>
                                             <li>
-                                                <input id="check-park" type="checkbox" name="check">
-                                                <label for="check-park">Parking</label>
+                                                <input id="parking" name="parking" type="checkbox">
+                                                <label for="parking">Parking</label>
                                             </li>
                                         </ul>
                                         <!-- add_room-item   -->
@@ -672,32 +669,32 @@
                                                 <!-- Checkboxes -->
                                                 <ul class="fl-wrap filter-tags no-list-style ds-tg">
                                                     <li>
-                                                        <input id="check-laund" type="checkbox" name="check" checked>
-                                                        <label for="check-laund">Laundry Room</label>
+                                                        <input id="laundry_room" name="laundry_room" type="checkbox" checked>
+                                                        <label for="laundry_room">Laundry Room</label>
                                                     </li>
                                                     <li>
-                                                        <input id="check-dine" type="checkbox" name="check" checked>
-                                                        <label for="check-dine">Dining Room</label>
+                                                        <input id="dining_room" name="dining_room" type="checkbox" checked>
+                                                        <label for="dining_room">Dining Room</label>
                                                     </li>
                                                     <li>
-                                                        <input id="check-lib" type="checkbox" name="check">
-                                                        <label for="check-lib">  Library</label>
+                                                        <input id="library" name="library" type="checkbox">
+                                                        <label for="library">  Library</label>
                                                     </li>
                                                     <li>
-                                                        <input id="check-office" type="checkbox" name="check" checked>
-                                                        <label for="check-office">Office</label>
+                                                        <input id="office" name="office" type="checkbox" checked>
+                                                        <label for="office">Office</label>
                                                     </li>
                                                     <li>
-                                                        <input id="check-work" type="checkbox" name="check" checked>
-                                                        <label for="check-work">Workshop</label>
+                                                        <input id="workshop" name="workshop" type="checkbox" checked>
+                                                        <label for="workshop">Workshop</label>
                                                     </li>
                                                     <li>
-                                                        <input id="check-closet" type="checkbox" name="check" checked>
-                                                        <label for="check-closet">Walk-in closets</label>
+                                                        <input id="closets" name="closets" type="checkbox" checked>
+                                                        <label for="closets">Walk-in closets</label>
                                                     </li>
                                                     <li>
-                                                        <input id="check-base" type="checkbox" name="check" checked>
-                                                        <label for="check-base">Basement</label>
+                                                        <input id="basement" name="basement" type="checkbox" checked>
+                                                        <label for="basement">Basement</label>
                                                     </li>
                                                 </ul>
                                                 <!-- Checkboxes end -->												
@@ -723,7 +720,7 @@
                                                 <span class="content-widget-switcher-title">Property URls</span>
                                                 <div class="content-widget-switcher-item fl-wrap">					  
                                                     <label>Video URL: <span class="dec-icon"><i class="fab fa-youtube"></i></span></label>
-                                                    <input type="text" placeholder="Youtube Or Vimeo" value=""/>
+                                                    <input name="video_link" type="text" placeholder="Youtube Or Vimeo" value=""/>
                                                 </div>
                                             </div>
                                         </div>	
@@ -779,7 +776,7 @@
         <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
         <script>
             $( function() {
-                $( "#datepicker" ).datepicker();
+                $( "#built_on" ).datepicker({ dateFormat: 'yy-mm-dd' }).val();
             } );
         </script>
     </body>

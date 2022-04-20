@@ -359,7 +359,7 @@ function initHomeradar() {
         $('.contact-form-wrap').fadeIn(400);
         $("html, body").addClass("hid-body");
         $("#message").slideUp(100);
-        $(".custom-form").find("input[type=text], textarea").val("");
+        // $(".custom-form").find("input[type=text], textarea").val("");
     });
     $('.contact-form-overlay , .close-contact-form').on("click", function () {
         $('.contact-form-wrap').hide();
@@ -965,8 +965,26 @@ function initparallax() {
 $(document).ready(function () {
     initHomeradar();
     initparallax();
+
+    
 });
 
 // add listing--------------------
+// $(document).on('submit', '#add-listing-form',function () {
+//     e.preventDefault();
 
+//     $.ajax({
+//         type :'POST',
+//         url : "{% url 'created' %}",
+//         data :{
+//             name:$('#name').val(),
+//             name:$('#name').val(),
+//             name:$('#name').val(),
+//             name:$('#name').val(),
+//         } 
+//     })
+    
+
+    
+// });
 

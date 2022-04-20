@@ -379,7 +379,7 @@
                                                     <a href="#" class="single-map-item tolt" data-newlatitude="40.72956781" data-newlongitude="-73.99726866"   data-microtip-position="top-left" data-tooltip="On the map"><i class="fas fa-map-marker-alt"></i> <span>  70 Bright St New York, USA</span></a>
                                                 </div>
                                                 <ul class="list-single-opt_header_cat">
-                                                    <li><a href="#" class="cat-opt blue-bg">Sale</a></li>
+                                                    <li><a href="#" class="cat-opt blue-bg">Rent</a></li>
                                                     <li><a href="#" class="cat-opt color-bg">Apartment</a></li>
                                                 </ul>
                                                 <a href="#" class="geodir_save-btn tolt" data-microtip-position="left" data-tooltip="Save"><span><i class="fal fa-heart"></i></span></a>
@@ -633,7 +633,7 @@
                                 <!-- gallery-item end-->																
                             </div>
                             <!-- grid-item-holder-->	
-                            <a href="listing.html" class="btn float-btn small-btn color-bg">View All Properties</a>
+                            <a href="listing" class="btn float-btn small-btn color-bg">View All Properties</a>
                         </div>
                     </section>
                     <!-- section end-->	
@@ -1163,7 +1163,7 @@
                                     <!--tab -->
                                     <div id="tab-1" class="tab-content first-tab">
                                         <div class="custom-form">
-                                            <form method="post" action="" name="registerform">
+                                            <form method="post" action="" name="loginform">
                                                 {% csrf_token %}
                                                 {% for message in messages %}
                                           <h4 style="color: red;">{{message}}</h4>
@@ -1183,7 +1183,7 @@
                                                     <label for="check-a3">Remember me</label>
                                                 </div>
                                                 <div class="clearfix"></div>
-                                                <button type="submit"  class="log_btn color-bg"> LogIn </button>
+                                                <button type="submit"  class="log_btn color-bg" name="signin" value="signin"> LogIn </button>
                                             </form>
                                         </div>
                                     </div>
@@ -1197,8 +1197,10 @@
                                                 {% for message in messages %}
                                           <h4 style="color: red;">{{message}}</h4>
                                           {% endfor %}
-                                                    <label >Full Name  * <span class="dec-icon"><i class="fal fa-user"></i></span></label>
-                                                    <input name="full_name" type="text" placeholder="Your Name"    onClick="this.select()" value="">
+                                                    <label >First Name  * <span class="dec-icon"><i class="fal fa-user"></i></span></label>
+                                                    <input name="first_name" type="text" placeholder="Your first Name"    onClick="this.select()" value="">
+                                                    <label >Last Name  * <span class="dec-icon"><i class="fal fa-user"></i></span></label>
+                                                    <input name="last_name" type="text" placeholder="Your Last Name"    onClick="this.select()" value="">
                                                     <label>Email Address  * <span class="dec-icon"><i class="fal fa-envelope"></i></span></label>
                                                     <input name="email" type="text"  placeholder="Your Mail"   onClick="this.select()" value="">
                                                     <div class="pass-input-wrap fl-wrap">
@@ -1211,7 +1213,7 @@
                                                         <label for="check-a2">I agree to the <a href="#">Privacy Policy</a> and <a href="#">Terms and Conditions</a></label>
                                                     </div>
                                                     <div class="clearfix"></div>
-                                                    <button type="submit" class="log_btn color-bg"> Register </button>
+                                                    <button type="submit" class="log_btn color-bg" name="signup" value="signup"> Register </button>
                                                 </form>
                                             </div>
                                         </div>
@@ -1273,7 +1275,7 @@
         <script src="{% static 'js/jquery.min.js' %}"></script>
         <script src="{% static 'js/plugins.js' %}"></script>
         <script src="{% static 'js/scripts.js' %}"></script>
-        <script src="{% static 'https://maps.googleapis.com/maps/api/js?key=AIzaSyDvJXSMFCgEpnfNzgCr_5NPGgL9YPxenUg&amp;libraries=places' %}"></script>
+        <script src='https://maps.googleapis.com/maps/api/js?key=AIzaSyDvJXSMFCgEpnfNzgCr_5NPGgL9YPxenUg&amp;libraries=places'></script>
         <script src="{% static 'js/map-single.js' %}"></script>
     </body>
 </html>
