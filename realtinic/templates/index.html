@@ -89,7 +89,11 @@
                 </div>
                 <!--  cart-btn end -->
                 <!--  login btn -->
+                {% if user.is_authenticated %}
+                <div class="show-reg-form"><i class="fas fa-user"></i><span>{{ user.first_name }}</span></div>
+                {% else %}
                 <div class="show-reg-form modal-open"><i class="fas fa-user"></i><span>Sign In</span></div>
+                {% endif %}
                 <!--  login btn  end -->
                 <!--  navigation --> 
                 <div class="nav-holder main-menu">
@@ -1109,7 +1113,6 @@
                                         <ul class="footer-list fl-wrap">
                                             <li><a href="https://www.manager.realtinic.com" target="_blank">Realtinic Rental Manager</a></li>
                                             <li><a href="https://www.guvenrealty.com" target="_blank">Guven Realty</a></li>
-                                            <li><a href="vintyl">Vintyl</a></li>
                                         </ul>
                                     </div>
                                 </div>

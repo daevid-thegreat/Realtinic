@@ -9,9 +9,10 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
-from pathlib import Path
+import django_heroku
 import os
+from pathlib import Path
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -85,6 +86,14 @@ DATABASES={
       'PASSWORD':'1212',
       'HOST':'localhost',
       'PORT':'5432',
+   },
+      'heroku':{
+      'ENGINE':'django.db.backends.postgresql_psycopg2',
+      'NAME':'ddfd9jhpl67moq',
+      'USER':'ztxrkscwtcygxk',
+      'PASSWORD':'21904b0a2e9a3e9f14ea7c9d5b183051fa0e648bac6df18b3797db8cc77c63f7',
+      'HOST':'ec2-52-3-60-53.compute-1.amazonaws.com',
+      'PORT':'5432',
    }
 }
 
@@ -126,6 +135,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT =  os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+django_heroku.settings(locals())
 
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

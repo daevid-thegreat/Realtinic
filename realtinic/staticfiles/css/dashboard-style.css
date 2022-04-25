@@ -1404,7 +1404,6 @@
     z-index: 3;
     overflow: auto;
     display: none;
-    -webkit-transform: translate3d(0,0,0);
     background: rgba(37,44,65,.7);
 }
 @media only screen and (max-width: 1500px) {

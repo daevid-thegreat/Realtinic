@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE HTML>
 <html lang="en">
     <head>
@@ -9,9 +10,9 @@
         <meta name="keywords" content=""/>
         <meta name="description" content=""/>
         <!--=============== css  ===============-->	
-        <link type="text/css" rel="stylesheet" href="css/plugins.css">
-        <link type="text/css" rel="stylesheet" href="css/style.css">
-        <link type="text/css" rel="stylesheet" href="css/color.css">
+        <link type="text/css" rel="stylesheet" href="{% static 'css/plugins.css' %}">
+        <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link type="text/css" rel="stylesheet" href="{% static 'css/color.css' %}">
         <!--=============== favicons ===============-->
         <link rel="shortcut icon" href="images/favicon.ico">
     </head>
@@ -953,8 +954,8 @@
         </div>
         <!-- Main end -->
         <!--=============== scripts  ===============-->
-        <script src="js/jquery.min.js"></script>
-        <script src="js/plugins.js"></script>
-        <script src="js/scripts.js"></script>
+        <script src="{% static 'js/jquery.min.js' %}"></script>
+        <script src="{% static 'js/plugins.js' %}"></script>
+        <script src="{% static 'js/scripts.js' %}"></script>
     </body>
 </html>

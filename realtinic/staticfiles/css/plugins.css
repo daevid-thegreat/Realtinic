@@ -8054,7 +8054,6 @@ source {
 }
 .lg-icon {
   font-family: "lg";
-  speak: none;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -9582,7 +9581,7 @@ body .pac-container {
   position: relative;
   z-index: 5;
 }
-,
+
 #autocomplete-input a {
   z-index: 101;
 }

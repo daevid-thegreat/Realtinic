@@ -111,23 +111,30 @@ def addlisting(request):
          lot_size = request.POST['lot_size']
          yard_size = request.POST['lot_size']
          images = request.FILES.getlist('images')
+
+         for  image in images:
+             multi_images = Property(
+                 images = image
+             )
+             multi_images.save()
          description = request.POST['description']
          built_on = request.POST['built_on']
          video_link = request.POST['video_link']
+         property_agent = request.user
         
 
-         new_property = Property.objects.create(property_name=property_name, property_city=property_city, property_tel=property_tel, property_location=property_location, list_type=list_type, price=price, home_type=home_type, bedrooms=bedrooms, full_bathrooms=full_bathrooms, half_bathrooms=half_bathrooms, one_quarter_bathrooms=one_quarter_bathrooms, three_quarter_bathrooms=three_quarter_bathrooms, garage=garage, wifi=wifi, indoor_pool=indoor_pool, security=security, equiped_kitchen=equiped_kitchen, air_con=air_con, solar_power=solar_power, fireplace=fireplace, attic=attic, chandelier=chandelier, dishwasher=dishwasher, dryer=dryer, freezer_fridge=freezer_fridge, oven=oven, washing_machine=washing_machine, garbage_disposer=garbage_disposer, smoke_detector=smoke_detector, patio=patio, bbq_area=bbq_area, pool=pool, porch=porch, sprinkler=sprinkler, spa=spa, garden=garden, fence=fence, bball=bball, gate=gate, sport_arena=sport_arena, fitness_arena=fitness_arena, tennis_court=tennis_court, parking=parking, laundry_room=laundry_room,dining_room=dining_room, library=library, office=office, workshop=workshop, closets=closets,basement=basement, lot_size=lot_size, yard_size=yard_size, images=images, description=description, built_on=built_on, video_link=video_link)
+         new_property = Property.objects.create(property_name=property_name, property_city=property_city, property_tel=property_tel, property_location=property_location, list_type=list_type, price=price, home_type=home_type, bedrooms=bedrooms, full_bathrooms=full_bathrooms, half_bathrooms=half_bathrooms, one_quarter_bathrooms=one_quarter_bathrooms, three_quarter_bathrooms=three_quarter_bathrooms, garage=garage, wifi=wifi, indoor_pool=indoor_pool, security=security, equiped_kitchen=equiped_kitchen, air_con=air_con, solar_power=solar_power, fireplace=fireplace, attic=attic, chandelier=chandelier, dishwasher=dishwasher, dryer=dryer, freezer_fridge=freezer_fridge, oven=oven, washing_machine=washing_machine, garbage_disposer=garbage_disposer, smoke_detector=smoke_detector, patio=patio, bbq_area=bbq_area, pool=pool, porch=porch, sprinkler=sprinkler, spa=spa, garden=garden, fence=fence, bball=bball, gate=gate, sport_arena=sport_arena, fitness_arena=fitness_arena, tennis_court=tennis_court, parking=parking, laundry_room=laundry_room,dining_room=dining_room, library=library, office=office, workshop=workshop, closets=closets,basement=basement, lot_size=lot_size, yard_size=yard_size, images=images, description=description, built_on=built_on, video_link=video_link, user_agent=property_agent)
          new_property.save()
          return render(request, 'index.html')
 
     return render(request, 'dashboard-add-listing.html')
-
-
-def propmanage(request):
-    return render(request, 'prop-management.html') 
+ 
 
 def findagents(request):
     return render(request, 'agent-list.html')
+
+def findagency(request):
+    return render(request, 'agency-list.html')
 
 def help(request):
     return render(request, 'help.html')

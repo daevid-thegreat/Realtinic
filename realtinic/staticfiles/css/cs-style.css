@@ -46,7 +46,6 @@ font-family: 'Jost', sans-serif;
 	z-index:100;
 	background: #fff;
  
-	-webkit-transform: translate3d(0,0,0);
 }
  
 @-webkit-keyframes loader-spin {
@@ -508,7 +507,6 @@ p {
 	bottom: 0;
 	overflow: auto;
 	z-index: 10;
-	-webkit-transform: translate3d(0,0,0);
 	display: none;
 }
 .contact-form-overlay {
@@ -520,7 +518,6 @@ p {
 	z-index: 2;
 	background:#000;
 	opacity: 0.6;
-	-webkit-transform: translate3d(0,0,0);
 }
 .contact-form-container {
 	max-width: 500px;
@@ -710,7 +707,6 @@ p {
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
 	.bg {
 		background-attachment: scroll !important;
-		-webkit-background-size: cover;
 		background-position: center;
 	}
 }
