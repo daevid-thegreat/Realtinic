@@ -1,15 +1,59 @@
+import email
 from django.db import models
-from django.contrib.auth import get_user_model
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 import uuid
 from datetime import datetime
 
-User = get_user_model()
+from realtinic.settings import AUTH_USER_MODEL
 
-# Create your models here.
-class Userprofile(models.Model):
+User = AUTH_USER_MODEL
+
+class UserprofileManager(BaseUserManager):
+
+    def create_user(self, first_name, last_name, username, email, password, **other_fields ):
+        
+        if not email:
+            raise ValueError("not an email")
+
+        email = self.normalize_email(email)
+        user = self.model(first_name= first_name, last_name = last_name, username = username, email =email, password = password, **other_fields)
+        user.set_password(password)
+        user.save()
+
+        return user
+
+    def create_superuser(self, first_name, last_name, username, email, password, **other_fields ):
+        
+        other_fields.setdefault('is_staff', True)
+        other_fields.setdefault('is_superuser', True)
+        other_fields.setdefault('is_active', True)
+
+        if other_fields.get('is_staff') is not True:
+            raise ValueError('superuser must be assigned is_staff=True')
+
+        if other_fields.get('is_superuser') is not True:
+            raise ValueError('superuser must be assigned is_superuser=True')
+
+        return self.create_user(first_name, last_name, username, email, password, **other_fields)
+
+
+class Userprofile(AbstractBaseUser, PermissionsMixin):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    id_user = models.UUIDField(primary_key=True, default=uuid.uuid4)
-    tel = models.IntegerField(default=000000000)
+    first_name = models.CharField(max_length=250)
+    last_name = models.CharField(max_length=250)
+    username = models.CharField(max_length=250)
+    email = models.EmailField(unique=True)
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    is_superuser = models.BooleanField(default=False)
+    last_login = models.DateTimeField(auto_now_add=True)
+
+    password = models.CharField(max_length=250)
+    objects = UserprofileManager()
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'username']
+
 
 
     def __str__(self):
@@ -34,34 +78,6 @@ class Agency(models.Model):
 
     def __str__(self):
         return self.agency_displayname
-
-    
-
-class Agent(models.Model):
-
-    agent_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
-    agent_name = models.CharField(max_length=250)
-    agent_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
-    in_business_since = models.DateTimeField(null=True)
-    agent_bio = models.CharField(max_length=700)
-    agent_displayname = models.CharField(max_length=150)
-    agent_tel = models.IntegerField(default=000000000)
-    agent_profilepic = models.ImageField(upload_to="agent profile image")
-    agent_email = models.EmailField()
-    agent_website = models.URLField()
-    agent_license = models.CharField(max_length=700)
-    agent_address = models.CharField(max_length=500)
-    agent_rating = models.DecimalField(max_digits=5, decimal_places=1)
-    agent_whatsapp = models.IntegerField()
-    agent_facebook =models.URLField()
-    agent_instagram =models.URLField()
-    agent_twitter =models.URLField()
-    agent_linkedin =models.URLField()
-
-    def __str__(self):
-        return self.agent_displayname
-
-
         
 class Property(models.Model):
     home_types = (

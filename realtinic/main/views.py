@@ -6,6 +6,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .models import Userprofile, Property
 import random
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 # Create your views here.
@@ -15,9 +17,6 @@ def index(request):
         last_name = request.POST['last_name']
         email = request.POST['email']
         password = request.POST['password']
-        print(first_name + last_name)
-        print(email)
-        print(password)
 
 
         if User.objects.filter(email=email).exists():
@@ -29,7 +28,7 @@ def index(request):
             user.save() 
 
             user_model = User.objects.get(username=email)
-            new_profile = Userprofile.objects.create(user=user_model, id_user=user_model.id)
+            new_profile = Userprofile.objects.create(user=user_model, id=user_model.id)
             new_profile.save()
             return render(request, 'listing')
 
@@ -46,7 +45,7 @@ def index(request):
             return redirect('index')
 
 
-    l_property = Property.objects.order_by('-listed_on')[:6]
+    l_property = Property.objects.order_by('-listed_on')
     return render(request, 'index.html', {'l_property':l_property})
 
 
