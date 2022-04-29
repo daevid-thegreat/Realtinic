@@ -25,7 +25,7 @@ def index(request):
         else:
 
             user = User.objects.create_user(first_name=first_name, last_name=last_name, email=email, username=email, password=password)
-            user.save() 
+            # user.save() 
 
             user_model = User.objects.get(username=email)
             new_profile = Userprofile.objects.create(user=user_model, id=user_model.id)
@@ -46,6 +46,7 @@ def index(request):
 
 
     l_property = Property.objects.order_by('-listed_on')
+    print(l_property[0].list_type)
     return render(request, 'index.html', {'l_property':l_property})
 
 

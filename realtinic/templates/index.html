@@ -369,6 +369,7 @@
                             <div class="clearfix"></div>
                             <!-- grid-item-holder-->	
                             <div class="grid-item-holder gallery-items gisp fl-wrap">
+                                {% for l in l_properties %}
                                 <!-- gallery-item-->
                                 <div class="gallery-item for_sale">
                                     <!-- listing-item -->
@@ -383,8 +384,8 @@
                                                     <a href="#" class="single-map-item tolt" data-newlatitude="40.72956781" data-newlongitude="-73.99726866"   data-microtip-position="top-left" data-tooltip="On the map"><i class="fas fa-map-marker-alt"></i> <span>  70 Bright St New York, USA</span></a>
                                                 </div>
                                                 <ul class="list-single-opt_header_cat">
-                                                    <li><a href="#" class="cat-opt blue-bg">Rent</a></li>
-                                                    <li><a href="#" class="cat-opt color-bg">Apartment</a></li>
+                                                    <li><a href="#" class="cat-opt blue-bg">{{ l.0.list_type}}</a></li>
+                                                    <li><a href="#" class="cat-opt color-bg"> Apartment </a></li>
                                                 </ul>
                                                 <a href="#" class="geodir_save-btn tolt" data-microtip-position="left" data-tooltip="Save"><span><i class="fal fa-heart"></i></span></a>
                                                 <a href="#" class="compare-btn tolt" data-microtip-position="left" data-tooltip="Compare"><span><i class="fal fa-random"></i></span></a>
@@ -427,7 +428,7 @@
                                                     <a href="#" class="single-map-item tolt" data-newlatitude="40.88496706" data-newlongitude="-73.88191222" data-microtip-position="top-left" data-tooltip="On the map"><i class="fas fa-map-marker-alt"></i> <span>  40 Journal Square  , NJ, USA</span></a>												
                                                 </div>
                                                 <ul class="list-single-opt_header_cat">
-                                                    <li><a href="#" class="cat-opt blue-bg">Sale</a></li>
+                                                    <li><a href="#" class="cat-opt blue-bg">{{ l.1.list_type }}</a></li>
                                                     <li><a href="#" class="cat-opt color-bg">Apartment</a></li>
                                                 </ul>
                                                 <a href="#" class="geodir_save-btn tolt" data-microtip-position="left" data-tooltip="Save"><span><i class="fal fa-heart"></i></span></a>
@@ -634,6 +635,7 @@
                                     </div>
                                     <!-- listing-item end-->															
                                 </div>
+                                {% endfor %}
                                 <!-- gallery-item end-->																
                             </div>
                             <!-- grid-item-holder-->	
@@ -1088,9 +1090,8 @@
                                             <h4>Contacts Info</h4>
                                         </div>
                                         <ul  class="footer-contacts fl-wrap">
-                                            <li><span><i class="fal fa-envelope"></i> Mail :</span><a href="mailto:contact.realtinic.com" target="_blank">yourmail@domain.com</a></li>
-                                            <li> <span><i class="fal fa-map-marker"></i> Adress :</span><a href="#" target="_blank">USA 27TH Brooklyn NY</a></li>
-                                            <li><span><i class="fal fa-phone"></i> Phone :</span><a href="tel:6031112298">+7(111)123456789</a></li>
+                                            <li><span><i class="fal fa-envelope"></i> Mail :</span><a href="mailto:support@realtinic.com" target="_blank">support@realtinic.com</a></li>
+                                            <li><span><i class="fal fa-phone"></i> Phone :</span><a href="tel:+2349037817373">+234(0)9037817373</a></li>
                                         </ul>
                                         <div class="footer-social fl-wrap">
                                             <ul>
@@ -1112,7 +1113,7 @@
                                         </div>
                                         <ul class="footer-list fl-wrap">
                                             <li><a href="https://www.manager.realtinic.com" target="_blank">Realtinic Rental Manager</a></li>
-                                            <li><a href="https://www.guvenrealty.com" target="_blank">Guven Realty</a></li>
+                                            <!-- <li><a href="https://www.guvenrealty.com" target="_blank">Guven Realty</a></li> -->
                                         </ul>
                                     </div>
                                 </div>

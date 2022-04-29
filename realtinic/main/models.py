@@ -1,4 +1,5 @@
 import email
+from tkinter import CASCADE
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 import uuid
@@ -13,14 +14,21 @@ class UserprofileManager(BaseUserManager):
     def create_user(self, first_name, last_name, username, email, password, **other_fields ):
         
         if not email:
-            raise ValueError("not an email")
+            raise ValueError("you must add an email")
 
         email = self.normalize_email(email)
         user = self.model(first_name= first_name, last_name = last_name, username = username, email =email, password = password, **other_fields)
         user.set_password(password)
         user.save()
 
-        return user
+        return user.first_name
+
+    def create_realtor(self, first_name, last_name, username, email, password, **other_fields ):
+        user = self.create_user(first_name, last_name, username, email, password, **other_fields)
+        user.is_realtor = True
+        user.save()
+
+        return user.first_name
 
     def create_superuser(self, first_name, last_name, username, email, password, **other_fields ):
         
@@ -38,7 +46,6 @@ class UserprofileManager(BaseUserManager):
 
 
 class Userprofile(AbstractBaseUser, PermissionsMixin):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=250)
     last_name = models.CharField(max_length=250)
     username = models.CharField(max_length=250)
@@ -46,6 +53,7 @@ class Userprofile(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_superuser = models.BooleanField(default=False)
+    is_realtor = models.BooleanField(default=False)
     last_login = models.DateTimeField(auto_now_add=True)
 
     password = models.CharField(max_length=250)
@@ -57,27 +65,51 @@ class Userprofile(AbstractBaseUser, PermissionsMixin):
 
 
     def __str__(self):
-        return self.user.username
+        return self.username
 
-class Agency(models.Model):
-    agency_name = models.CharField(max_length=250)
-    agency_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
-    agency_bio = models.CharField(max_length=700)
-    agency_displayname = models.CharField(max_length=150)
-    agency_tel = models.IntegerField(default=000000000)
-    agency_profilepic = models.ImageField(upload_to="agency profile image")
-    agency_email = models.EmailField()
-    agency_website = models.URLField()
-    agency_address = models.CharField(max_length=500)
-    agency_rating = models.DecimalField(max_digits=5, decimal_places=1)
-    agency_whatsapp = models.IntegerField()
-    agency_facebook =models.URLField()
-    agency_instagram =models.URLField()
-    agency_twitter =models.URLField()
-    agency_linkedin =models.URLField()
+class Agent(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profilepic = models.ImageField(upload_to="agents profile image")
+    bio = models.CharField(max_length=700)
+    gov_id = models.FileField(upload_to='government ids')
+    business_id = models.FileField(upload_to='business ids')
+    utility_bills = models.FileField(upload_to='utility bills')
+    location = models.CharField(max_length=250)
+    tel = models.BigIntegerField()
+    in_business_since = models.DateTimeField(null=True)
+    website = models.URLField(null=True)
+    whatsapp = models.IntegerField(null=True)
+    facebook =models.URLField(null=True)
+    instagram =models.URLField(null=True)
+    twitter =models.URLField(null=True)
+    linkedin =models.URLField(null=True)
+    verified = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.agency_displayname
+        return self.user.username
+
+
+
+
+# class Agency(models.Model):
+#     agency_name = models.CharField(max_length=250)
+#     agency_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+#     agency_bio = models.CharField(max_length=700)
+#     agency_displayname = models.CharField(max_length=150)
+#     agency_tel = models.IntegerField(default=000000000)
+#     agency_profilepic = models.ImageField(upload_to="agency profile image")
+#     agency_email = models.EmailField()
+#     agency_website = models.URLField()
+#     agency_address = models.CharField(max_length=500)
+#     agency_rating = models.DecimalField(max_digits=5, decimal_places=1)
+#     agency_whatsapp = models.IntegerField()
+#     agency_facebook =models.URLField()
+#     agency_instagram =models.URLField()
+#     agency_twitter =models.URLField()
+#     agency_linkedin =models.URLField()
+
+#     def __str__(self):
+#         return self.agency_displayname
         
 class Property(models.Model):
     home_types = (
