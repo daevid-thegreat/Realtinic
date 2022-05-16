@@ -2,7 +2,7 @@
     "use strict";
     var markerIcon = {
         anchor: new google.maps.Point(22, 16),
-        url: 'images/marker-single.png',
+        url: '/static/images/marker-single.png',
     }
     function mainMap() {
         function locationData(locationURL, locationCategory, locationImg, locationTitle, locationAddress,     locationPrice , locationStatus) {

@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% block title %} {{ user.first_name }}'s Profile - Realtinic{% endblock %}
+<div id="wrapper">
+    <!-- dashbard-menu-wrap -->
+    <div class="dashbard-menu-overlay"></div>
+    <div class="dashbard-menu-wrap">
+        <div class="dashbard-menu-close"><i class="fal fa-times"></i></div>
+        <div class="dashbard-menu-container">
+            <!-- user-profile-menu-->
+            <div class="user-profile-menu">
+                <h3>Main</h3>
+                <ul class="no-list-style">
+                    <li><a href="dashboard.html"><i class="fal fa-chart-line"></i>Messages</a></li>
+                    <li><a href="dashboard-myprofile.html" class="user-profile-act"><i class="fal fa-user-edit"></i> Edit profile</a></li>
+                    <li><a href="dashboard-messages.html"><i class="fal fa-envelope"></i> Favourites <span>3</span></a></li>
+                    <li><a href="dashboard-agents.html"><i class="fal fa-users-cog"></i> Tenant Mode</a></li>
+                    <li><a href="logout"><i class="fal fa-power-off"></i> Log Out</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="dashbard-menu-footer"> &#169;  Homeradar 2022 .  All rights reserved.</div>
+    </div>
+    <!-- dashbard-menu-wrap end  -->		
+    <!-- content -->	
+    <div class="dashboard-content">
+        <div class="dashboard-menu-btn color-bg"><span><i class="fas fa-bars"></i></span>Dasboard Menu</div>
+        <div class="container dasboard-container">
+            <!-- dashboard-title -->	
+            <div class="dashboard-title fl-wrap">
+                <div class="dashboard-title-item"><span>Edit Profile</span></div>
+                <div class="dashbard-menu-header">
+                    <div class="dashbard-menu-avatar fl-wrap">
+                        <img src="{% static 'images\avatar.jpg' %}" alt="">
+                        <h4>Welcome, <span> {{ user.first_name }}</span></h4>
+                    </div>
+                    <a href="index.html" class="log-out-btn   tolt" data-microtip-position="bottom"  data-tooltip="Log Out"><i class="fal fa-power-off"></i></a>
+                </div>					
+            </div>
+            <!-- dashboard-title end -->
+            <!-- dasboard-wrapper-->
+            <div class="dasboard-wrapper fl-wrap no-pag">
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="dasboard-widget-title fl-wrap">
+                            <h5><i class="fas fa-key"></i>Personal Info</h5>
+                        </div>
+                        <div class="dasboard-widget-box fl-wrap">
+                            <div class="custom-form">
+                                <label>First Name <span class="dec-icon"><i class="far fa-user"></i></span></label>
+                                <input type="text" placeholder="{{user.first_name}}" value="{{user.first_name}}"/>
+                                <label>Last Name <span class="dec-icon"><i class="fas fa-user"></i></span></label>
+                                <input type="text" placeholder="{{ user.last_name }}" value="{{ user.last_name }}"/>
+                                <label>Phone<span class="dec-icon"><i class="far fa-phone"></i> </span></label>
+                                <input type="text" placeholder="{{ user.tel }}" value="{{ user.tel }}"/>									
+                                <label>Email Address <span class="dec-icon"><i class="far fa-envelope"></i></span></label>
+                                <input type="text" placeholder="{{ user.email }}" value=""/>
+                                <!-- <div class="dasboard-widget-title fl-wrap">
+                                    <h4>Verification</h4>
+                                </div> -->
+
+                                <!-- <label>Agensy<span class="dec-icon"><i class="far fa-home-lg-alt"></i> </span></label>
+                                <input type="text" placeholder="Mavers RealEstate Agency" value=""/>										 -->										
+                                <button class="btn    color-bg  float-btn">Save Changes</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="dasboard-widget-title dbt-mm fl-wrap">
+                            <h5><i class="fas fa-key"></i>Change Password</h5>
+                        </div>
+                        <div class="dasboard-widget-box fl-wrap">
+                            <div class="custom-form">
+                                <div class="pass-input-wrap fl-wrap">
+                                    <label>Current Password<span class="dec-icon"><i class="far fa-lock-open-alt"></i></span></label>
+                                    <input type="password" class="pass-input" placeholder="" value=""/>
+                                    <span class="eye"><i class="far fa-eye" aria-hidden="true"></i> </span>
+                                </div>
+                                <div class="pass-input-wrap fl-wrap">
+                                    <label>New Password<span class="dec-icon"><i class="far fa-lock-alt"></i></span></label>
+                                    <input type="password" class="pass-input" placeholder="" value=""/>
+                                    <span class="eye"><i class="far fa-eye" aria-hidden="true"></i> </span>
+                                </div>
+                                <div class="pass-input-wrap fl-wrap">
+                                    <label>Confirm New Password<span class="dec-icon"><i class="far fa-shield-check"></i> </span></label>
+                                    <input type="password" class="pass-input" placeholder="" value=""/>
+                                    <span class="eye"><i class="far fa-eye" aria-hidden="true"></i> </span>
+                                </div>
+                                <button class="btn    color-bg  float-btn">Save Changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- dasboard-wrapper end -->	
+        </div>
+        <!-- dashboard-footer -->
+        <div class="dashboard-footer">
+            <div class="dashboard-footer-links fl-wrap">
+                <span>Helpfull Links:</span>
+                <ul>
+                    <li><a href="about.html">About  </a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="pricing.html">Pricing Plans</a></li>
+                    <li><a href="contacts.html">Contacts</a></li>
+                    <li><a href="help.html">Help Center</a></li>
+                </ul>
+            </div>
+            <a href="#main" class="dashbord-totop  custom-scroll-link"><i class="fas fa-caret-up"></i></a>
+        </div>
+        <!-- dashboard-footer end -->			
+    </div>
+    <!-- content end -->	
+    <div class="dashbard-bg gray-bg"></div>
+</div>
+{% endblock %}

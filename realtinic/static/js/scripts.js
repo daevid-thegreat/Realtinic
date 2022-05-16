@@ -354,13 +354,13 @@ function initHomeradar() {
     $(document).on('keyup', '#contactform input, #contactform textarea', function () {
         $("#message").slideUp(1500);
     });
-    $('.cf_btn').on("click", function (e) {
-        e.preventDefault();
-        $('.contact-form-wrap').fadeIn(400);
-        $("html, body").addClass("hid-body");
-        $("#message").slideUp(100);
-        // $(".custom-form").find("input[type=text], textarea").val("");
-    });
+    // $('.cf_btn').on("click", function (e) {
+    //     e.preventDefault();
+    //     $('.contact-form-wrap').fadeIn(400);
+    //     $("html, body").addClass("hid-body");
+    //     $("#message").slideUp(100);
+    //     // $(".custom-form").find("input[type=text], textarea").val("");
+    // });
     $('.contact-form-overlay , .close-contact-form').on("click", function () {
         $('.contact-form-wrap').hide();
         $("html, body").removeClass("hid-body");

@@ -1,3 +1,5 @@
+from email.policy import default
+from tkinter.tix import Tree
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 import uuid
@@ -44,6 +46,7 @@ class UserprofileManager(BaseUserManager):
 
 
 class Userprofile(AbstractBaseUser, PermissionsMixin):
+    id_user = models.UUIDField(primary_key=True, default=uuid.uuid4)
     first_name = models.CharField(max_length=250)
     last_name = models.CharField(max_length=250)
     username = models.CharField(max_length=250)
@@ -53,6 +56,26 @@ class Userprofile(AbstractBaseUser, PermissionsMixin):
     is_superuser = models.BooleanField(default=False)
     is_realtor = models.BooleanField(default=False)
     last_login = models.DateTimeField(auto_now_add=True)
+    #saved properties - many to one
+
+    profilepic = models.ImageField(upload_to="agents profile image", null=True, blank=True)
+    coverpic = models.ImageField(upload_to="agents cover image", null=True, blank=True)
+    bio = models.CharField(max_length=700, null=True, blank=True)
+    location = models.CharField(max_length=250, null=True, blank=True)
+    tel = models.BigIntegerField(null=True, blank=True)
+    website = models.URLField(null=True, blank=True)
+    whatsapp = models.IntegerField(null=True, blank=True)
+    facebook =models.URLField(null=True, blank=True)
+    instagram =models.URLField(null=True, blank=True)
+    twitter =models.URLField(null=True, blank=True)
+    linkedin =models.URLField(null=True, blank=True)
+
+    in_business_since = models.DateTimeField(null=True, blank=True)
+    gov_id = models.FileField(upload_to='government ids', null=True, blank=True)
+    business_id = models.FileField(upload_to='business ids', null=True, blank=True)
+    utility_bills = models.FileField(upload_to='utility bills', null=True, blank=True)
+
+    verified = models.BooleanField(default=False)
 
     password = models.CharField(max_length=250)
     objects = UserprofileManager()
@@ -64,27 +87,6 @@ class Userprofile(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.username
-
-class Agent(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profilepic = models.ImageField(upload_to="agents profile image")
-    bio = models.CharField(max_length=700)
-    gov_id = models.FileField(upload_to='government ids')
-    business_id = models.FileField(upload_to='business ids')
-    utility_bills = models.FileField(upload_to='utility bills')
-    location = models.CharField(max_length=250)
-    tel = models.BigIntegerField()
-    in_business_since = models.DateTimeField(null=True)
-    website = models.URLField(null=True)
-    whatsapp = models.IntegerField(null=True)
-    facebook =models.URLField(null=True)
-    instagram =models.URLField(null=True)
-    twitter =models.URLField(null=True)
-    linkedin =models.URLField(null=True)
-    verified = models.BooleanField(default=False)
-
-    def __str__(self):
-        return self.user.username
 
 
 
@@ -111,43 +113,44 @@ class Agent(models.Model):
         
 class Property(models.Model):
     home_types = (
-        ('SH', 'Single-family'),
-        ('SD','Semi-detached'),
-        ('AP','Apartment'),
-        ('TH','Townhomes'),
-        ('MF','Multi-family'),
-        ('MH','Mobile/Manufactured'),
-        ('CO','Condo'),
+        ('Single-family', 'Single-family'),
+        ('Semi-detached','Semi-detached'),
+        ('Apartment','Apartment'),
+        ('Townhomes','Townhomes'),
+        ('Multi-family','Multi-family'),
+        ('Mobile/Manufactured','Mobile/Manufactured'),
+        ('Condo','Condo'),
     )
 
     property_city = (
-        ('AB', 'Abuja'),
-        ('LG','Lagos'),
-        ('OS','Osun'),
-        ('IB','Ibadan'),
+        ('Abuja', 'Abuja'),
+        ('Lagos','Lagos'),
+        ('Osun','Osun'),
+        ('Ibadan','Ibadan'),
     )
 
     list_types = (
-        ('FS', 'For Sale'),
-        ('FR','For Rent'),
+        ('For Sale', 'For Sale'),
+        ('For Rent','For Rent'),
     )
     true_false = (
         ('yes', 'yes'),
         ('no','no'),
     )
     currency = (
-        ('NGN', 'Naira'),
-        ('USD','Dollar'),
+        ('Naira', 'Naira'),
+        ('Dollar','Dollar'),
     )
 
 
     property_name = models.CharField(max_length=500, default='property name')
     property_location = models.CharField(max_length=500, default='property location')
-    list_type = models.CharField(max_length=25, choices=list_types, default= 'FS')
-    property_city = models.CharField(max_length=25, choices=property_city, default= 'AB')
+    list_type = models.CharField(max_length=25, choices=list_types, default= 'For Sale')
+    property_city = models.CharField(max_length=25, choices=property_city, default= 'Abuja')
     price= models.DecimalField(max_digits=13, decimal_places=2)
     home_type = models.CharField(max_length=50, choices=home_types, default= 'Single-family')
     property_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    rooms = models.IntegerField(default=0)
     bedrooms = models.IntegerField(default=0)
     full_bathrooms = models.IntegerField(default=0)
     half_bathrooms = models.IntegerField(default=0)
@@ -199,7 +202,7 @@ class Property(models.Model):
     description = models.TextField(max_length=1000)
     complete = models.BooleanField(default=False)
     built_on = models.DateTimeField(null=True)
-    listed_on =models.DateTimeField(auto_now_add=True, auto_now=False, null=True)
+    listed_on =models.DateTimeField(auto_now_add=False, auto_now=True)
     last_updated = models.DateTimeField(auto_now=True, null=True)
     video_link = models.URLField(max_length=350, null=True, blank=True)
 
@@ -208,4 +211,9 @@ class Property(models.Model):
 
     def __str__(self):
         return self.property_name
+
+    @property
+    def total_bathrooms(self):
+        total_bathrooms = self.full_bathrooms + self.half_bathrooms + self.three_quarter_bathrooms + self.one_quarter_bathrooms
+        return total_bathrooms
     
