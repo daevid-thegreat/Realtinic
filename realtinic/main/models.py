@@ -1,5 +1,3 @@
-from email.policy import default
-from tkinter.tix import Tree
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 import uuid
