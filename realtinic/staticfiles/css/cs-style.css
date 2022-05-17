@@ -46,6 +46,7 @@ font-family: 'Jost', sans-serif;
 	z-index:100;
 	background: #fff;
  
+	-webkit-transform: translate3d(0,0,0);
 }
  
 @-webkit-keyframes loader-spin {
@@ -507,6 +508,7 @@ p {
 	bottom: 0;
 	overflow: auto;
 	z-index: 10;
+	-webkit-transform: translate3d(0,0,0);
 	display: none;
 }
 .contact-form-overlay {
@@ -518,6 +520,7 @@ p {
 	z-index: 2;
 	background:#000;
 	opacity: 0.6;
+	-webkit-transform: translate3d(0,0,0);
 }
 .contact-form-container {
 	max-width: 500px;
@@ -569,6 +572,21 @@ p {
 	transition: all 200ms linear;
 }
 .custom-form input[type="text"]{
+	float: left;
+    border: 1px solid #e5e7f2;
+    background: #F5F7FB;
+    width: 100%;
+    padding: 15px 20px 15px 70px;
+    border-radius: 4px;
+    color: #7d93b2;
+    font-size: 12px;
+    -webkit-appearance: none;
+    outline: none;
+    overflow: hidden;
+    z-index: 1;
+	margin-bottom: 20px;
+}
+.custom-form input[type="file"]{
 	float: left;
     border: 1px solid #e5e7f2;
     background: #F5F7FB;
@@ -707,6 +725,7 @@ p {
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
 	.bg {
 		background-attachment: scroll !important;
+		-webkit-background-size: cover;
 		background-position: center;
 	}
 }

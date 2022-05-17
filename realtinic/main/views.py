@@ -2,6 +2,7 @@ from random import randint
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
+from django.conf.urls import handler404, handler500
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.contrib.auth import login
@@ -12,6 +13,14 @@ User = get_user_model()
 
 
 # Create your views here.
+
+def handler404(request, exception=None):
+    return render(request, '404.html')
+
+def handler500(request, exception=None):
+    return render(request, '404.html')
+
+
 def index(request):
     if request.method == 'POST' and 'signup' in request.POST:
         first_name = request.POST['first_name']

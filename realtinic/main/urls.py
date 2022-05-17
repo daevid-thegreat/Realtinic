@@ -1,8 +1,13 @@
 from django.urls import path
 from . import views
+from django.conf.urls import handler500, handler404
 
+
+handler404 = views.handler404
+handler500 = views.handler500
 
 urlpatterns = [
+    
     path('', views.index, name='index'),
     path('listing', views.listing, name='listing'),
     path('add-listing', views.addlisting, name='Add listing'),
@@ -30,3 +35,4 @@ urlpatterns = [
     path('logout', views.logout, name='Log Out'),
     # path('agent-signin', views.agent_signin, name='Sign In Agent'),
 ]
+
