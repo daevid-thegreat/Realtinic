@@ -44,7 +44,7 @@ class UserprofileManager(BaseUserManager):
 
 
 class Userprofile(AbstractBaseUser, PermissionsMixin):
-    id_user = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    unique_id = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
     first_name = models.CharField(max_length=250)
     last_name = models.CharField(max_length=250)
     username = models.CharField(max_length=250)
@@ -110,6 +110,7 @@ class Userprofile(AbstractBaseUser, PermissionsMixin):
 #         return self.agency_displayname
         
 class Property(models.Model):
+    
     home_types = (
         ('Single-family', 'Single-family'),
         ('Semi-detached','Semi-detached'),
@@ -196,22 +197,42 @@ class Property(models.Model):
     basement = models.CharField(max_length=25, choices=true_false, default= 'no')
     lot_size = models.IntegerField(default=0)
     yard_size = models.IntegerField(default=0)
-    images = models.FileField(upload_to='property_images')
+    images = models.FileField(upload_to='property_header_images')
     description = models.TextField(max_length=1000)
     complete = models.BooleanField(default=False)
     built_on = models.DateTimeField(null=True)
     listed_on =models.DateTimeField(auto_now_add=False, auto_now=True)
     last_updated = models.DateTimeField(auto_now=True, null=True)
     video_link = models.URLField(max_length=350, null=True, blank=True)
-
+    property_views = models.IntegerField(default = 0, null=True, blank=True)
+    # saved = models.ManyToManyField(User, related_name='saves')
 
 
 
     def __str__(self):
         return self.property_name
+    
+    
 
     @property
     def total_bathrooms(self):
         total_bathrooms = self.full_bathrooms + self.half_bathrooms + self.three_quarter_bathrooms + self.one_quarter_bathrooms
         return total_bathrooms
-    
+
+
+
+class review(models.Model):
+    ratings = (
+        (1, 'Bad'),
+        (2,'Fair'),
+        (3,'Average'),
+        (4,'Good'),
+        (5,'Excellent'),
+    )
+    author = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
+    comment = models.CharField(blank= True, null=True, max_length=500)
+    listing = models.ForeignKey(Property, default=None, on_delete=models.CASCADE)
+    rating = models.CharField(choices=ratings, default = 1, max_length=200)
+
+    def __str__(self):
+        return self.rating

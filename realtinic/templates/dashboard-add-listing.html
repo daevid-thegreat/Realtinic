@@ -39,7 +39,7 @@
                     <div class="container dasboard-container">
                         <!-- dashboard-title -->	
                         <!-- dashboard-title end -->
-                        <form id="add-listing-form" method="POST">		
+                        <form id="add-listing-form" enctype="multipart/form-data" method="POST">		
                             {% csrf_token %}
                             <div class="dasboard-wrapper fl-wrap no-pag">
                             <div class="dasboard-scrollnav-wrap scroll-to-fixed-fixed scroll-init2 fl-wrap">
@@ -172,7 +172,7 @@
                                                 <span><i class="far fa-cloud-upload-alt"></i> Click here or drop files to upload</span>
                                                 <div class="photoUpload-files fl-wrap"></div>
                                             </div>
-                                            <input type="file" name="images" class="upload" multiple>
+                                            <input type="file" name="images"  class="upload" multiple>
                                         </div>
                                     </div>
                                 </div>

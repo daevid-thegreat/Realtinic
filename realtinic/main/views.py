@@ -9,6 +9,7 @@ from django.contrib.auth import login
 from .models import Userprofile, Property
 from django.contrib.auth import get_user_model
 from django.core.paginator import Paginator
+import time
 User = get_user_model()
 
 
@@ -18,7 +19,7 @@ def handler404(request, exception=None):
     return render(request, '404.html')
 
 def handler500(request, exception=None):
-    return render(request, '404.html')
+    return render(request, '500.html')
 
 
 def index(request):
@@ -138,12 +139,6 @@ def addlisting(request):
             lot_size = request.POST['lot_size']
             yard_size = request.POST['lot_size']
             images = request.FILES.getlist('images')
-
-            for  image in images:
-                multi_images = Property(
-                    images = image
-                )
-                multi_images.save()
             description = request.POST['description']
             built_on = request.POST['built_on']
             video_link = request.POST['video_link']
@@ -230,6 +225,9 @@ def user_profile(request):
 
 def single_listing(request, id):
     listing = Property.objects.get(property_id = id)
+    # listing.property_views = Property.property_views + 1
+    # listing.save()
+    # time.sleep(120)
     return render(request, 'listing-single3.html', {'listing': listing})
 
 def my_listings(request):
