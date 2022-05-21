@@ -205,7 +205,7 @@ class Property(models.Model):
     last_updated = models.DateTimeField(auto_now=True, null=True)
     video_link = models.URLField(max_length=350, null=True, blank=True)
     property_views = models.IntegerField(default = 0, null=True, blank=True)
-    # saved = models.ManyToManyField(User, related_name='saves')
+    saved = models.ManyToManyField(User, related_name="saved_property", blank=True)
 
 
 
@@ -233,6 +233,7 @@ class review(models.Model):
     comment = models.CharField(blank= True, null=True, max_length=500)
     listing = models.ForeignKey(Property, default=None, on_delete=models.CASCADE)
     rating = models.CharField(choices=ratings, default = 1, max_length=200)
+    date_created = models.DateTimeField(auto_now_add=False, auto_now=False)
 
     def __str__(self):
         return self.rating
