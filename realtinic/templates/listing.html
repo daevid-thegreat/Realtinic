@@ -100,7 +100,7 @@
                                     <div class="listsearch-input-item">
                                         <div class="price-rage-item fl-wrap">
                                             <span class="pr_title">Price:</span>                            
-                                            <input type="text" class="price-range-double" data-min="10000" data-max="1000000000000"  name="price-range2"  data-step="100" value="1" data-prefix="$">
+                                            <input type="text" class="price-range-double" data-min="10000" data-max="1000000000"  name="price-range2"  data-step="100" value="1" data-prefix="$">
                                         </div>
                                     </div>
                                 </div>
@@ -235,7 +235,7 @@
                                 <article class="geodir-category-listing fl-wrap">
                                     <div class="geodir-category-img fl-wrap">
                                         <a href="listing/{{ property.property_id }}" class="geodir-category-img_item">
-                                            <img src="{{property.images.url}}"style=" max-height: 250px;" alt="">
+                                            <img src="{{ property.images.url }}"style=" max-height: 250px;" alt="">
                                             <div class="overlay"></div>
                                         </a>
                                         <div class="geodir-category-location">

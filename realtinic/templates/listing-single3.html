@@ -84,7 +84,7 @@
                                             </div>
                                             <div class="list-single-header-footer fl-wrap">
                                                 <div class="list-single-header-price" data-propertyprise="{{listing.price}}"><strong>Price:</strong><span>$</span>{{listing.price}}</div>
-                                                <div class="list-single-header-date"><span>Date:</span>{{listing.listed_on}}</div>
+                                                <div class="list-single-header-date"><span>Date:</span>{{listing.listed_on|date:"Y-m-d"}}</div>
                                                 <div class="list-single-stats">
                                                     <ul class="no-list-style">
                                                         <li><span class="viewed-counter"><i class="fas fa-eye"></i> Viewed -  {{ listing.property_views }} </span></li>
@@ -288,26 +288,7 @@
                                                                 <div class="reviews-comments-item-date"><span class="reviews-comments-item-date-item"><i class="far fa-calendar-check"></i>12 April 2018</span><a href="#" class="rate-review"><i class="fal fa-thumbs-up"></i>  Helpful Review  <span>6</span> </a></div>
                                                             </div>
                                                         </div>
-                                                        <!--reviews-comments-item end--> 
-                                                        <!-- reviews-comments-item -->  
-                                                        <div class="reviews-comments-item">
-                                                            <div class="review-comments-avatar">
-                                                                <img src="images/avatar/3.jpg" alt=""> 
-                                                            </div>
-                                                            <div class="reviews-comments-item-text smpar">
-                                                                <div class="box-widget-menu-btn smact"><i class="far fa-ellipsis-h"></i></div>
-                                                                <div class="show-more-snopt-tooltip bxwt">
-                                                                    <a href="#"> <i class="fas fa-reply"></i> Reply</a>
-                                                                    <a href="#"> <i class="fas fa-exclamation-triangle"></i> Report </a>
-                                                                </div>
-                                                                <h4><a href="#">Adam Koncy</a></h4>
-                                                                <div class="listing-rating card-popup-rainingvis" data-starrating2="5"><span class="re_stars-title">Excellent</span></div>
-                                                                <div class="clearfix"></div>
-                                                                <p>" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc posuere convallis purus non cursus. Cras metus neque, gravida sodales massa ut. "</p>
-                                                                <div class="reviews-comments-item-date"><span class="reviews-comments-item-date-item"><i class="far fa-calendar-check"></i>03 December 2017</span><a href="#" class="rate-review"><i class="fal fa-thumbs-up"></i>  Helpful Review  <span>2</span> </a></div>
-                                                            </div>
-                                                        </div>
-                                                        <!--reviews-comments-item end-->                                                                  
+                                                        <!--reviews-comments-item end-->                                                          
                                                     </div>
                                                 </div>
                                             </div>
@@ -319,34 +300,35 @@
                                                 </div>
                                                 <!-- Add Review Box -->
                                                 <form method="post" name="review">
-                                                <div id="add-review" class="add-review-box">
+                                                    {% csrf_token %}
+                                                    <div id="add-review" class="add-review-box">
                                                     <div class="leave-rating-wrap">
                                                         <span class="leave-rating-title">Your rating  for this listing : </span>
                                                         <div class="leave-rating">
-                                                            <input type="radio"    data-ratingtext="Excellent"   name="rating" id="rating-1" value="1"/>
+                                                            <input type="radio"    data-ratingtext="Excellent"   name="rating" id="rating-1" value="Excellent"/>
                                                             <label for="rating-1" class="fal fa-star"></label>
-                                                            <input type="radio" data-ratingtext="Good" name="rating" id="rating-2" value="2"/>
+                                                            <input type="radio" data-ratingtext="Good" name="rating" id="rating-2" value="Good"/>
                                                             <label for="rating-2" class="fal fa-star"></label>
-                                                            <input type="radio" name="rating"  data-ratingtext="Average" id="rating-3" value="3"/>
+                                                            <input type="radio" name="rating"  data-ratingtext="Average" id="rating-3" value="Average"/>
                                                             <label for="rating-3" class="fal fa-star"></label>
-                                                            <input type="radio" data-ratingtext="Fair" name="rating" id="rating-4" value="4"/>
+                                                            <input type="radio" data-ratingtext="Fair" name="rating" id="rating-4" value="Fair"/>
                                                             <label for="rating-4" class="fal fa-star"></label>
-                                                            <input type="radio" data-ratingtext=" Bad "   name="rating" id="rating-5" value="5"/>
+                                                            <input type="radio" data-ratingtext=" Bad "   name="rating" id="rating-5" value="Bad"/>
                                                             <label for="rating-5"    class="fal fa-star"></label>
                                                         </div>
                                                         <div class="count-radio-wrapper">
                                                             <span id="count-checked-radio" name="rating">Your Rating</span>  
                                                         </div>
                                                     </div>
+                                                    </div>
                                                     <!-- Review Comment -->
                                                     <div   class="add-comment custom-form">
                                                         <fieldset>
                                                             <textarea cols="40" rows="3" placeholder="Your Review:" name="comment"></textarea>
                                                         </fieldset>
-                                                        <button class="btn big-btn color-bg float-btn" type="submit">Submit Review <i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                                                        <button class="btn big-btn color-bg float-btn" type="submit" name="review">Submit Review <i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
                                                     </div>
                                                 </form>
-                                                </div>
                                                 <!-- Add Review Box / End -->
                                             </div>
                                             <!-- list-single-main-item end -->                                            
@@ -383,7 +365,9 @@
                                             <div class="profile-widget-content fl-wrap">
                                                 <div class="contats-list fl-wrap">
                                                     <ul class="no-list-style">
+                                                        {% if listing.user_agent.tel != None %}
                                                         <li><span><i class="fal fa-phone"></i> Phone :</span> <a href="#">{{listing.user_agent.tel}}</a></li>
+                                                        {% endif %}
                                                         <li><span><i class="fal fa-envelope"></i> Mail :</span> <a href="#">{{listing.user_agent.email}}</a></li>
                                                         {% if listing.user_agent.website != None %}
                                                         <li><span><i class="fal fa-browser"></i> Website :</span> <a href="{{listing.user_agent.website}}">{{listing.user_agent.website}}</a></li>
@@ -391,7 +375,7 @@
                                                     </ul>
                                                 </div>
                                                 <div class="profile-widget-footer fl-wrap">
-                                                    <a href="agent-single.html" class="btn float-btn color-bg small-btn">View Profile</a>
+                                                    <a href="/profile/{{listing.user_agent.unique_id}}" class="btn float-btn color-bg small-btn">View Profile</a>
                                                     <a href="#sec-contact" class="custom-scroll-link tolt" data-microtip-position="left"  data-tooltip="Viewing Property"><i class="fal fa-paper-plane"></i></a>
                                                 </div>
                                             </div>
@@ -486,15 +470,19 @@
                                     <!--box-widget-->
                                     <div class="box-widget fl-wrap">
                                         <div class="box-widget-fixed-init fl-wrap" id="sec-contact">
-                                            <div class="box-widget-title fl-wrap box-widget-title-color color-bg">Contact Property</div>
+                                            <div class="box-widget-title fl-wrap box-widget-title-color color-bg">Take a Tour</div>
                                             <div class="box-widget-content fl-wrap">
                                                 <div class="custom-form">
-                                                    <form method="post"  name="contact-property-form">
-                                                        <label>Your name* <span class="dec-icon"><i class="fas fa-user"></i></span></label>
-                                                        <input   name="phone" type="text"    onClick="this.select()" value="">
-                                                        <label>Your phone  * <span class="dec-icon"><i class="fas fa-phone"></i></span></label>
-                                                        <input   name="phone" type="text"    onClick="this.select()" value="">      
+                                                    <form method="post"  name="contact-property-form"> 
+                                                          
                                                         <div class="row">
+                                                            <div class="col-sm-12">
+                                                                <label>Tour Type  </label>
+                                                                <select data-placeholder="Online Tour" name="time" class="chosen-select on-radius no-search-select" >
+                                                                    <option>Online Tour</option>
+                                                                    <option>Physical Tour</option>
+                                                                </select>
+                                                            </div>
                                                             <div class="col-sm-6">
                                                                 <label>Date   <span class="dec-icon"><i class="fas fa-calendar-check"></i></span></label>
                                                                 <div class="date-container fl-wrap">
@@ -503,7 +491,7 @@
                                                             </div>
                                                             <div class="col-sm-6">
                                                                 <label>Time  </label>
-                                                                <select data-placeholder="9 AM" class="chosen-select on-radius no-search-select" >
+                                                                <select data-placeholder="9 AM" name="time" class="chosen-select on-radius no-search-select" >
                                                                     <option>9 AM</option>
                                                                     <option>10 AM</option>
                                                                     <option>11 AM</option>
