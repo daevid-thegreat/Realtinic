@@ -81,12 +81,8 @@ class Userprofile(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name', 'username']
 
-
-
     def __str__(self):
         return self.username
-
-
 
 
 # class Agency(models.Model):
@@ -129,72 +125,35 @@ class Property(models.Model):
     )
 
     list_types = (
-        ('For Sale', 'For Sale'),
-        ('For Rent','For Rent'),
+        ('for_sale', 'For Sale'),
+        ('for_rent','For Rent'),
     )
-    true_false = (
-        ('yes', 'yes'),
-        ('no','no'),
-    )
+    # true_false = (
+    #     ('yes', 'yes'),
+    #     ('no','no'),
+    # )
     currency = (
         ('Naira', 'Naira'),
         ('Dollar','Dollar'),
     )
 
-
-    property_name = models.CharField(max_length=500, default='property name')
-    property_location = models.CharField(max_length=500, default='property location')
-    list_type = models.CharField(max_length=25, choices=list_types, default= 'For Sale')
-    property_city = models.CharField(max_length=25, choices=property_city, default= 'Abuja')
+    name = models.CharField(max_length=500)
+    location = models.CharField(max_length=500)
+    list_type = models.CharField(max_length=25, choices=list_types)#, default= 'For Sale'
+    city = models.CharField(max_length=25, choices=property_city, default= 'Abuja')
     price= models.DecimalField(max_digits=13, decimal_places=2)
     home_type = models.CharField(max_length=50, choices=home_types, default= 'Single-family')
-    property_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     rooms = models.IntegerField(default=0)
     bedrooms = models.IntegerField(default=0)
     full_bathrooms = models.IntegerField(default=0)
     half_bathrooms = models.IntegerField(default=0)
     three_quarter_bathrooms = models.IntegerField(default=0)
     one_quarter_bathrooms = models.IntegerField(default=0)
-    property_tel = models.BigIntegerField(default=000000000000)
+    telephone = models.BigIntegerField(default=000000000000)
     garage = models.IntegerField(default=0)
-    wifi = models.CharField(max_length=25, choices=true_false, default= 'no')
-    indoor_pool = models.CharField(max_length=25, choices=true_false, default= 'no')
-    security = models.CharField(max_length=25, choices=true_false, default= 'no')
-    equiped_kitchen = models.CharField(max_length=25, choices=true_false, default= 'no')
-    air_con = models.CharField(max_length=25, choices=true_false, default= 'no')
-    solar_power = models.CharField(max_length=25, choices=true_false, default= 'no')
-    fireplace = models.CharField(max_length=25, choices=true_false, default= 'no')
-    attic = models.CharField(max_length=25, choices=true_false, default= 'no')
-    chandelier = models.CharField(max_length=25, choices=true_false, default= 'no')
-    dishwasher = models.CharField(max_length=25, choices=true_false, default= 'no')
-    dryer = models.CharField(max_length=25, choices=true_false, default= 'no')
-    freezer_fridge = models.CharField(max_length=25, choices=true_false, default= 'no')
-    oven = models.CharField(max_length=25, choices=true_false, default= 'no')
-    washing_machine = models.CharField(max_length=25, choices=true_false, default= 'no')
-    garbage_disposer = models.CharField(max_length=25, choices=true_false, default= 'no')
-    smoke_detector = models.CharField(max_length=25, choices=true_false, default= 'no')
-    patio = models.CharField(max_length=25, choices=true_false, default= 'no')
-    bbq_area = models.CharField(max_length=25, choices=true_false, default= 'no')
-    pool = models.CharField(max_length=25, choices=true_false, default= 'no')
-    porch = models.CharField(max_length=25, choices=true_false, default= 'no')
-    sprinkler = models.CharField(max_length=25, choices=true_false, default= 'no')
-    spa = models.CharField(max_length=25, choices=true_false, default= 'no')
-    garden = models.CharField(max_length=25, choices=true_false, default= 'no')
-    user_agent = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
-    fence = models.CharField(max_length=25, choices=true_false, default= 'no')
-    bball = models.CharField(max_length=25, choices=true_false, default= 'no')
-    gate = models.CharField(max_length=25, choices=true_false, default= 'no')
-    sport_arena = models.CharField(max_length=25, choices=true_false, default= 'no')
-    fitness_arena = models.CharField(max_length=25, choices=true_false, default= 'no')
-    tennis_court = models.CharField(max_length=25, choices=true_false, default= 'no')
-    parking = models.CharField(max_length=25, choices=true_false, default= 'no')
-    laundry_room = models.CharField(max_length=25, choices=true_false, default= 'no')
-    dining_room = models.CharField(max_length=25, choices=true_false, default= 'no')
-    library = models.CharField(max_length=25, choices=true_false, default= 'no')
-    office = models.CharField(max_length=25, choices=true_false, default= 'no')
-    workshop = models.CharField(max_length=25, choices=true_false, default= 'no')
-    closets = models.CharField(max_length=25, choices=true_false, default= 'no')
-    basement = models.CharField(max_length=25, choices=true_false, default= 'no')
+    features = models.JSONField(blank=True)
+    agent = models.ForeignKey(User, related_name='agent', blank=True, null=True, default=None, on_delete=models.CASCADE)
     lot_size = models.IntegerField(default=0)
     yard_size = models.IntegerField(default=0)
     images = models.FileField(upload_to='property_header_images')
@@ -204,14 +163,15 @@ class Property(models.Model):
     listed_on =models.DateTimeField(auto_now_add=False, auto_now=True)
     last_updated = models.DateTimeField(auto_now=True, null=True)
     video_link = models.URLField(max_length=350, null=True, blank=True)
-    property_views = models.IntegerField(default = 0, null=True, blank=True)
+    views = models.IntegerField(default = 0, null=True, blank=True, editable=False)
     # saved = models.ManyToManyField(User, related_name='saves')
 
-
+    class Meta:
+        verbose_name = 'Property'
+        verbose_name_plural = 'Properties'
 
     def __str__(self):
-        return self.property_name
-    
+        return self.name
     
 
     @property

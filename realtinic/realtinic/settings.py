@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-skmjtv#)pn5978nss_x9)#nl7&%k%frr96-z&ho14e(^i$rf_3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'realtinic.com', 'realtinic.herokuapp.com', 'www.realtinic.com']
 
@@ -80,22 +80,26 @@ WSGI_APPLICATION = 'realtinic.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES={
-#    'default':{
-#       'ENGINE':'django.db.backends.postgresql_psycopg2',
-#       'NAME':'postgres',
-#       'USER':'postgres',
-#       'PASSWORD':'1212',
-#       'HOST':'localhost',
-#       'PORT':'5432',
-#    },
-      'default':{
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # }
+   'default':{
       'ENGINE':'django.db.backends.postgresql_psycopg2',
-      'NAME':'ddfd9jhpl67moq',
-      'USER':'ztxrkscwtcygxk',
-      'PASSWORD':'21904b0a2e9a3e9f14ea7c9d5b183051fa0e648bac6df18b3797db8cc77c63f7',
-      'HOST':'ec2-52-3-60-53.compute-1.amazonaws.com',
+      'NAME':'realtinic',
+      'USER':'postgres',
+      'PASSWORD':'password',
+      'HOST':'localhost',
       'PORT':'5432',
-   }
+   },
+#       'default':{
+#       'ENGINE':'django.db.backends.postgresql_psycopg2',
+#       'NAME':'ddfd9jhpl67moq',
+#       'USER':'ztxrkscwtcygxk',
+#       'PASSWORD':'21904b0a2e9a3e9f14ea7c9d5b183051fa0e648bac6df18b3797db8cc77c63f7',
+#       'HOST':'ec2-52-3-60-53.compute-1.amazonaws.com',
+#       'PORT':'5432',
+#    }
 }
 
 
