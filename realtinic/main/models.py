@@ -164,7 +164,7 @@ class Property(models.Model):
     last_updated = models.DateTimeField(auto_now=True, null=True)
     video_link = models.URLField(max_length=350, null=True, blank=True)
     views = models.IntegerField(default = 0, null=True, blank=True, editable=False)
-    # saved = models.ManyToManyField(User, related_name='saves')
+    saved = models.ManyToManyField(User, related_name="saved_property", blank=True)
 
     class Meta:
         verbose_name = 'Property'
@@ -183,16 +183,17 @@ class Property(models.Model):
 
 class review(models.Model):
     ratings = (
-        (1, 'Bad'),
-        (2,'Fair'),
-        (3,'Average'),
-        (4,'Good'),
-        (5,'Excellent'),
+        ('Bad', 'Bad'),
+        ('Fair','Fair'),
+        ('Average','Average'),
+        ('Good','Good'),
+        ('Excellent','Excellent'),
     )
     author = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
     comment = models.CharField(blank= True, null=True, max_length=500)
     listing = models.ForeignKey(Property, default=None, on_delete=models.CASCADE)
-    rating = models.CharField(choices=ratings, default = 1, max_length=200)
+    rating = models.CharField(choices=ratings, default = 'Fair', max_length=200)
+    date_created = models.DateTimeField(auto_now_add=False, auto_now=True)
 
     def __str__(self):
-        return self.rating
+        return self.comment

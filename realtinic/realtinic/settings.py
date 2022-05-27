@@ -84,22 +84,22 @@ DATABASES={
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     # }
-   'default':{
-      'ENGINE':'django.db.backends.postgresql_psycopg2',
-      'NAME':'realtinic',
-      'USER':'postgres',
-      'PASSWORD':'password',
-      'HOST':'localhost',
-      'PORT':'5432',
-   },
-#       'default':{
+#    'default':{
 #       'ENGINE':'django.db.backends.postgresql_psycopg2',
-#       'NAME':'ddfd9jhpl67moq',
-#       'USER':'ztxrkscwtcygxk',
-#       'PASSWORD':'21904b0a2e9a3e9f14ea7c9d5b183051fa0e648bac6df18b3797db8cc77c63f7',
-#       'HOST':'ec2-52-3-60-53.compute-1.amazonaws.com',
+#       'NAME':'realtinic',
+#       'USER':'postgres',
+#       'PASSWORD':'',
+#       'HOST':'localhost',
 #       'PORT':'5432',
-#    }
+#    },
+      'default':{
+      'ENGINE':'django.db.backends.postgresql_psycopg2',
+      'NAME':'ddfd9jhpl67moq',
+      'USER':'ztxrkscwtcygxk',
+      'PASSWORD':'21904b0a2e9a3e9f14ea7c9d5b183051fa0e648bac6df18b3797db8cc77c63f7',
+      'HOST':'ec2-52-3-60-53.compute-1.amazonaws.com',
+      'PORT':'5432',
+   }
 }
 
 

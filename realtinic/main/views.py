@@ -4,12 +4,13 @@ from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.conf.urls import handler404, handler500
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import login
-from .models import Userprofile, Property
+from .models import Userprofile, Property, review
 from django.contrib.auth import get_user_model
 from django.core.paginator import Paginator
 import time
+from django.urls import reverse
 User = get_user_model()
 
 
@@ -42,12 +43,11 @@ def index(request):
             new_profile = Userprofile.objects.create(id=user_model.id)
             new_profile.save()
             login(request, new_profile)
-            return render(request, '/')
+            return render(request, 'my-profile')
 
     if request.method == 'POST' and 'signin' in request.POST : 
          email = request.POST['email']
          password = request.POST['password']
-         print('logged in')
          user = auth.authenticate(username=email, password=password)
          if user is not None:
             auth.login(request, user)
@@ -66,8 +66,11 @@ def listing(request):
 
         if request.method == 'GET':
             search =  request.GET.get('search')
+            list_type =  request.GET.get('list_type')
+            city =  request.GET.get('city')
             if search:       
-                propertys = Paginator(Property.objects.filter(name__icontains =search).order_by('-listed_on'), 2)
+                propertys = Paginator(Property.objects.filter(name__icontains =search).order_by('-listed_on')
+                |Property.objects.filter(description__icontains =search).order_by('-listed_on'), 2)
                 page = request.GET.get('page')
                 propertys = propertys.get_page(page)
                 nums = "p" * propertys.paginator.num_pages
@@ -103,6 +106,12 @@ def addlisting(request):
             lot_size = request.POST['lot_size']
             yard_size = request.POST['lot_size']
             images = request.FILES.getlist('images')
+            
+            for  image in images:
+             images = Property(
+                 images = image
+             )
+             images.save()
             description = request.POST['description']
             built_on = request.POST['built_on']
             video_link = request.POST['video_link']
@@ -134,7 +143,7 @@ def addlisting(request):
                 agent=agent
             )
             new_property.save()
-            return render(request, 'index.html')
+            
 
         return render(request, 'dashboard-add-listing.html')
     else:
@@ -182,16 +191,16 @@ def privacy_policy(request):
 def signin(request):
     return render(request, 'signin.html')
 
-def agency_single(request, id):
-    profile = Userprofile.objects.get(id_user = id)
+def agency_single(request):
 
-    return render(request, 'agency-single.html', {'profile':profile})
+    return render(request, 'agency-single.html')
 
-def agents(request):
+def agents(request,):
     return redirect(request, 'find-agents')
 
-def agent_single(request):
-    return render(request, 'agent-singe.html')
+def user_single(request, id):
+    user = Userprofile.objects.get(unique_id = id)
+    return render(request, 'agent-single.html', {'user':user})
 
 def compare(request):
     return render(request, 'compare.html')
@@ -212,9 +221,22 @@ def user_profile(request):
 
 def single_listing(request, id):
     listing = Property.objects.get(id = id)
-    listing.views += 1
+    listing.property_views=listing.property_views+1
     listing.save()
-    # time.sleep(120)
+    if request.method == 'POST' and 'save' in request.POST:
+        listing.saved.add(request.user)
+        return redirect('/listing/'+str(listing.property_id))
+
+    if request.method == 'POST' and 'review' in request.POST:
+        author = request.user
+        comment = request.POST['comment']
+        rating = request.POST['rating']
+        listing = listing
+
+        reviews = review.objects.create(author=author, comment=comment, rating=rating, listing=listing)
+        reviews.save()
+        return redirect('/listing/'+str(listing.property_id))
+
     return render(request, 'listing-single3.html', {'listing': listing})
 
 def my_listings(request):
