@@ -56,8 +56,7 @@ def index(request):
             messages.info(request, 'Sorry we cannot find this user')
             return redirect('/')
 
-
-    properties = Property.objects.order_by('-listed_on')
+    properties = Property.objects.order_by('-listed_on')[:6]
     return render(request, 'index.html', {'properties':properties})
 
 
@@ -70,7 +69,7 @@ def listing(request):
             list_type =  request.GET.get('list_type')
             city =  request.GET.get('city')
             if search:       
-                propertys = Paginator(Property.objects.filter(property_name__icontains =search).order_by('-listed_on')
+                propertys = Paginator(Property.objects.filter(name__icontains =search).order_by('-listed_on')
                 |Property.objects.filter(description__icontains =search).order_by('-listed_on'), 2)
                 page = request.GET.get('page')
                 propertys = propertys.get_page(page)
@@ -88,11 +87,12 @@ def listing(request):
 def addlisting(request):
     if request.user.is_realtor == True:
         if request.method == 'POST':
-            property_name = request.POST['property_name']
-            property_location = request.POST['property_location']
+
+            name = request.POST['name']
+            location = request.POST['location']
             list_type = request.POST['list_type']
-            property_city = request.POST['property_city']
-            price = request.POST['price']
+            city = request.POST['city']
+            price= request.POST['price']
             home_type = request.POST['home_type']
             rooms = request.POST['rooms']
             bedrooms = request.POST['bedrooms']
@@ -101,44 +101,8 @@ def addlisting(request):
             one_quarter_bathrooms = request.POST['one_quarter_bathrooms']
             three_quarter_bathrooms = request.POST['three_quarter_bathrooms']
             garage = request.POST['garage']
-            wifi = request.POST.get('wifi', False)
-            indoor_pool = request.POST.get('indoor_pool', False)
-            security = request.POST.get('security', False)
-            equiped_kitchen = request.POST.get('equiped_kitchen', False)
-            air_con = request.POST.get('air_con', False)
-            solar_power = request.POST.get('solar_power', False)
-            fireplace = request.POST.get('fireplace', False)
-            attic = request.POST.get('attic', False)
-            property_tel = request.POST.get('property_tel', False)
-            chandelier = request.POST.get('chandelier', False)
-            dishwasher = request.POST.get('dishwasher', False)
-            dryer = request.POST.get('dryer', False)
-            freezer_fridge = request.POST.get('freezer_fridge', False)
-            oven = request.POST.get('oven', False)
-            washing_machine = request.POST.get('washing_machine', False)
-            garbage_disposer = request.POST.get('garbage_disposer', False)
-            smoke_detector = request.POST.get('smoke_detector', False)
-            patio = request.POST.get('patio', False)
-            bbq_area = request.POST.get('bbq_area', False)
-            pool = request.POST.get('pool', False)
-            porch = request.POST.get('porch', False)
-            sprinkler = request.POST.get('sprinkler', False)
-            spa = request.POST.get('spa', False)
-            garden = request.POST.get('garden', False)
-            fence = request.POST.get('fence', False)
-            bball = request.POST.get('bball', False)
-            gate = request.POST.get('gate', False)
-            sport_arena = request.POST.get('sport_arena', False)
-            fitness_arena = request.POST.get('fitness_arena', False)
-            tennis_court = request.POST.get('tennis_court', False)
-            parking = request.POST.get('parking', False)
-            laundry_room = request.POST.get('laundry_room', False)
-            dining_room = request.POST.get('dining_room', False)
-            library = request.POST.get('library', False)
-            office = request.POST.get('office', False)
-            workshop = request.POST.get('workshop', False)
-            closets = request.POST.get('closets', False)
-            basement = request.POST.get('basement', False)
+            telephone = request.POST.get('telephone', False)
+            features = request.POST['features']
             lot_size = request.POST['lot_size']
             yard_size = request.POST['lot_size']
             images = request.FILES.getlist('images')
@@ -151,10 +115,33 @@ def addlisting(request):
             description = request.POST['description']
             built_on = request.POST['built_on']
             video_link = request.POST['video_link']
-            property_agent = request.user
+            agent = request.user
             
 
-            new_property = Property.objects.create(property_name=property_name, property_city=property_city, property_tel=property_tel, property_location=property_location, list_type=list_type, price=price, home_type=home_type, rooms=rooms, bedrooms=bedrooms, full_bathrooms=full_bathrooms, half_bathrooms=half_bathrooms, one_quarter_bathrooms=one_quarter_bathrooms, three_quarter_bathrooms=three_quarter_bathrooms, garage=garage, wifi=wifi, indoor_pool=indoor_pool, security=security, equiped_kitchen=equiped_kitchen, air_con=air_con, solar_power=solar_power, fireplace=fireplace, attic=attic, chandelier=chandelier, dishwasher=dishwasher, dryer=dryer, freezer_fridge=freezer_fridge, oven=oven, washing_machine=washing_machine, garbage_disposer=garbage_disposer, smoke_detector=smoke_detector, patio=patio, bbq_area=bbq_area, pool=pool, porch=porch, sprinkler=sprinkler, spa=spa, garden=garden, fence=fence, bball=bball, gate=gate, sport_arena=sport_arena, fitness_arena=fitness_arena, tennis_court=tennis_court, parking=parking, laundry_room=laundry_room,dining_room=dining_room, library=library, office=office, workshop=workshop, closets=closets,basement=basement, lot_size=lot_size, yard_size=yard_size, images=images, description=description, built_on=built_on, video_link=video_link, user_agent=property_agent)
+            new_property = Property.objects.create(
+                name=name, 
+                city=city, 
+                telephone=telephone, 
+                location=location, 
+                list_type=list_type, 
+                price=price, 
+                home_type=home_type, 
+                rooms=rooms, 
+                bedrooms=bedrooms, 
+                features=features,
+                full_bathrooms=full_bathrooms, 
+                half_bathrooms=half_bathrooms, 
+                one_quarter_bathrooms=one_quarter_bathrooms, 
+                three_quarter_bathrooms=three_quarter_bathrooms, 
+                garage=garage, 
+                lot_size=lot_size, 
+                yard_size=yard_size, 
+                images=images, 
+                description=description, 
+                built_on=built_on, 
+                video_link=video_link, 
+                agent=agent
+            )
             new_property.save()
             
 
@@ -233,7 +220,7 @@ def user_profile(request):
         return render(request, 'user-profile.html')
 
 def single_listing(request, id):
-    listing = Property.objects.get(property_id = id)
+    listing = Property.objects.get(id = id)
     listing.property_views=listing.property_views+1
     listing.save()
     if request.method == 'POST' and 'save' in request.POST:
@@ -260,5 +247,3 @@ def reviews(request):
 
 def bookings(request):
     return render(request, 'dashboard-bookings.html')
-
-
