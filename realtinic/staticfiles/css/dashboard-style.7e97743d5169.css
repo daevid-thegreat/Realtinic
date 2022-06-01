@@ -1582,26 +1582,41 @@ padding: 15px 40px 15px 20px;
 
 
 /* Tag CSS */
-.tag-wrapper :where(.title, li, li i, .tag-details){
+
+.add-list-tags .tag-wrapper{
+  width: 496px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 18px 25px 20px;
+  box-shadow: 0 0 30px rgba(0,0,0,0.06);
+}
+.add-list-tags .tag-wrapper :where(.title, li, li i, .details){
   display: flex;
   align-items: center;
 }
-
-.tag-wrapper .tag-content{
+.tag-title img{
+  max-width: 21px;
+}
+.add-list-tags .tag-title h2{
+  font-size: 21px;
+  font-weight: 600;
+  margin-left: 8px;
+}
+.add-list-tags .tag-wrapper .content{
   margin: 10px 0;
 }
-.tag-content p{
+.add-list-tags .tag-content p{
   font-size: 15px;
 }
-.tag-content ul{
+.add-list-tags .tag-content ul{
   display: flex;
   flex-wrap: wrap;
   padding: 7px;
   margin: 12px 0;
   border-radius: 5px;
-  border: 1px solid #eeeeee;
+  border: 1px solid #a6a6a6;
 }
-.tag-content ul  li{
+.add-list-tags .tag-content ul  li{
   color: #333;
   margin: 4px 3px;
   list-style: none;
@@ -1610,7 +1625,7 @@ padding: 15px 40px 15px 20px;
   padding: 5px 8px 5px 10px;
   border: 1px solid #e3e1e1;
 }
-.tag-content ul li i{
+.add-list-tags .tag-content ul li i{
   height: 20px;
   width: 20px;
   color: #808080;
@@ -1621,17 +1636,17 @@ padding: 15px 40px 15px 20px;
   background: #dfdfdf;
   justify-content: center;
 }
-.tag-content ul input{
+.add-list-tags .tag-content ul input{
   flex: 1;
   padding: 5px;
   border: none;
   outline: none;
   font-size: 16px;
 }
-.tag-wrapper .tag-details{
+.add-list-tags .tag-wrapper .tag-details{
   justify-content: space-between;
 }
-.tag-details button{
+.add-list-tags .tag-details button{
   border: none;
   outline: none;
   color: #fff;
@@ -1642,7 +1657,7 @@ padding: 15px 40px 15px 20px;
   background: #5372F0;
   transition: background 0.3s ease;
 }
-.tag-details button:hover{
+.add-list-tags .tag-details button:hover{
   background: #2c52ed;
 }
 

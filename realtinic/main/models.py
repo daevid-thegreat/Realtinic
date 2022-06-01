@@ -44,7 +44,7 @@ class UserprofileManager(BaseUserManager):
 
 
 class Userprofile(AbstractBaseUser, PermissionsMixin):
-    unique_id = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
+    id_user = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
     first_name = models.CharField(max_length=250)
     last_name = models.CharField(max_length=250)
     username = models.CharField(max_length=250)
@@ -128,10 +128,7 @@ class Property(models.Model):
         ('for_sale', 'For Sale'),
         ('for_rent','For Rent'),
     )
-    # true_false = (
-    #     ('yes', 'yes'),
-    #     ('no','no'),
-    # )
+
     currency = (
         ('Naira', 'Naira'),
         ('Dollar','Dollar'),
@@ -143,7 +140,7 @@ class Property(models.Model):
     city = models.CharField(max_length=25, choices=property_city, default= 'Abuja')
     price= models.DecimalField(max_digits=13, decimal_places=2)
     home_type = models.CharField(max_length=50, choices=home_types, default= 'Single-family')
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    property_id = models.UUIDField(unique=True, default=uuid.uuid4)
     rooms = models.IntegerField(default=0)
     bedrooms = models.IntegerField(default=0)
     full_bathrooms = models.IntegerField(default=0)

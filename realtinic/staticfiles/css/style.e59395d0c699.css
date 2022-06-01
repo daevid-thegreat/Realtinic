@@ -76,8 +76,8 @@ body {
   left: 50%;
   top: 50%;
   animation: loader-spin 2s linear infinite reverse;
-  -webkit-filter: url(#goo);
-          filter: url(#goo);
+  -webkit-filter: url("#goo");
+          filter: url("#goo");
   box-shadow: 0 0 0 1px #7F00FF inset;
 }
 .loader-inner:before {
@@ -1959,7 +1959,7 @@ nav li ul a:before , nav li ul a:after {
 	background-position: left;
 	background-repeat: repeat;
 	background-origin: content-box;
-	background:url(../images/city-bg.png);
+	background:url("../images/city-bg.6dc6ce4e097d.png");
 	overflow:hidden;
 }
 .main-register-logo {
@@ -4371,7 +4371,7 @@ section.single-par2  .scroll-down-wrap{
 	background-position: left;
 	background-repeat: repeat;
 	background-origin: content-box;
-	background:url(../images/city-bg.png);
+	background:url("../images/city-bg.6dc6ce4e097d.png");
 }
 .profile-widget-header:before {
 	content:'';
@@ -5646,7 +5646,7 @@ section.single-par2  .scroll-down-wrap{
 }
 .controls-mapwn {
     position: absolute;
-    background: #fff url(../images/search-icon.png) right no-repeat;
+    background: #fff url("../images/search-icon.c203f4abe588.png") right no-repeat;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,.1);
     width: 300px;
     z-index: 1000;

@@ -33,17 +33,18 @@ def index(request):
 
         if User.objects.filter(email=email).exists():
             messages.info(request, 'Email is taken')
-            return redirect('listing')
+            return redirect('/')
         else:
 
             user = User.objects.create_user(first_name=first_name, last_name=last_name, email=email, username=email, password=password)
             # user.save() 
 
-            user_model = User.objects.get(username=email)
-            new_profile = Userprofile.objects.create(id=user_model.id)
-            new_profile.save()
-            login(request, new_profile)
-            return render(request, 'my-profile')
+            # user_model = User.objects.get(username=email)
+            # new_profile = Userprofile.objects.create(id=user_model.id)
+            # new_profile.save()
+            user = auth.authenticate(username=email, password=password)
+            login(request, user)
+            return redirect('/my-profile')
 
     if request.method == 'POST' and 'signin' in request.POST : 
          email = request.POST['email']
@@ -51,10 +52,10 @@ def index(request):
          user = auth.authenticate(username=email, password=password)
          if user is not None:
             auth.login(request, user)
-            return redirect('/')
+            return redirect('/my-profile')
          else:
             messages.info(request, 'Sorry we cannot find this user')
-            return redirect('/')
+            return redirect('index')
 
     properties = Property.objects.order_by('-listed_on')[:6]
     return render(request, 'index.html', {'properties':properties})
@@ -74,13 +75,18 @@ def listing(request):
                 page = request.GET.get('page')
                 propertys = propertys.get_page(page)
                 nums = "p" * propertys.paginator.num_pages
-                return render(request,"listing.html",{"propertys":propertys, "nums": nums, 'search':search})
+                return render(request,'listing.html',{"propertys":propertys, "nums": nums, 'search':search})
             else:
                 p = Paginator(Property.objects.order_by('-listed_on'), 2)
                 page = request.GET.get('page')
                 propertys = p.get_page(page)
                 nums = "p" * propertys.paginator.num_pages
-                return render(request,"listing.html", {"propertys":propertys, "nums": nums})
+                return render(request, 'listing.html', {"propertys":propertys, "nums": nums})
+        p = Paginator(Property.objects.order_by('-listed_on'), 2)
+        page = request.GET.get('page')
+        propertys = p.get_page(page)
+        nums = "p" * propertys.paginator.num_pages
+        return render(request, 'listing.html', {"propertys":propertys, "nums": nums})
 
 
 @login_required(login_url='/')
@@ -102,7 +108,7 @@ def addlisting(request):
             three_quarter_bathrooms = request.POST['three_quarter_bathrooms']
             garage = request.POST['garage']
             telephone = request.POST.get('telephone', False)
-            features = request.POST['features']
+            features = request.GET.get('features')
             lot_size = request.POST['lot_size']
             yard_size = request.POST['lot_size']
             images = request.FILES.getlist('images')

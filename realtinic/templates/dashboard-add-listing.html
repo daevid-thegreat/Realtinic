@@ -73,7 +73,7 @@
                                     <div class="row">
                                         <div class="col-sm-4">		 
                                             <label>Listing Title  <span class="dec-icon"><i class="far fa-briefcase"></i></span></label>
-                                            <input id="property_name" name="property_name" type="text" placeholder="Name" value=""/>
+                                            <input id="property_name" name="name" type="text" placeholder="Name" value=""/>
                                         </div>
                                         <div class="col-sm-4">
                                             <label>Type</label>
@@ -119,7 +119,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <label>Location <span class="dec-icon"><i class="far fa-map-marker"></i></span></label>
-                                            <input type="text" name="property_location" placeholder="Location of your property" value=""/>
+                                            <input type="text" name="location" placeholder="Location of your property" value=""/>
                                         </div>
                                         <div class="col-sm-4">		 
                                             <label>Longitude (Drag marker on the map)  <span class="dec-icon"><i class="far fa-long-arrow-alt-right"></i></span></label>
@@ -139,7 +139,7 @@
                                         <div class="col-sm-6">
                                             <label>City</label>
                                             <div class="listsearch-input-item">
-                                                <select data-placeholder="Apartments" name="property_city" class="chosen-select no-search-select" >
+                                                <select data-placeholder="Apartments" name="city" class="chosen-select no-search-select" >
                                                     <option>All Cities</option>
                                                     <option>Abuja</option>
                                                     <option>Lagos</option>
@@ -150,7 +150,7 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <label>Phone <span class="dec-icon"><i class="far fa-phone"></i> </span> </label>
-                                            <input type="text" name="property_tel" placeholder="+7(123)987654" value=""/>
+                                            <input type="text" name="telephone" placeholder="+7(123)987654" value=""/>
                                             <span>Though you will be contacted by email, a phone number is required for incasity.</span>
                                         </div>
                                     </div>
@@ -243,177 +243,48 @@
                                         <!-- Checkboxes -->
                                         <ul class="fl-wrap filter-tags no-list-style ds-tg">
                                             <li>
-                                                <input id="wifi" type="checkbox" name="wifi" checked>
-                                                <label for="wifi"> Wi Fi</label>
+                                                <input id="wifi" type="checkbox" name="wifi">
+                                                <label for="wifi"> Pool</label>
                                             </li>
                                             <li>
                                                 <input id="security" type="checkbox" name="security">
-                                                <label for="security"> System Security</label>
+                                                <label for="security"> 24/7 Power Supply</label>
                                             </li>
                                             <li>
-                                                <input id="equiped_kitchen" type="checkbox" name="equiped_kitchen" checked>
-                                                <label for="equiped_kitchen"> Equipped Kitchen</label>
+                                                <input id="equiped_kitchen" type="checkbox" name="equiped_kitchen">
+                                                <label for="equiped_kitchen"> Basement</label>
                                             </li>
                                             <li>
                                                 <input id="air_con" type="checkbox" name="air_con">
-                                                <label for="air_con">Air Conditioning</label>
+                                                <label for="air_con">Attic</label>
                                             </li>
                                             <li>
                                                 <input id="solar_power" type="checkbox" name="solar_power">
                                                 <label for="solar_power">Solar Power</label>
                                             </li>
                                         </ul>
-                                        <label>Indoor Utilities Utilies: </label>
-                                        <ul class="fl-wrap filter-tags no-list-style ds-tg">
-                                            <li>
-                                                <input id="fireplace" type="checkbox" name="fireplace" checked>
-                                                <label for="fireplace">Fireplace</label>
-                                            </li>
-                                            <li>
-                                                <input id="attic" type="checkbox" name="attic">
-                                                <label for="attic"> Attic</label>
-                                            </li>
-                                            <li>
-                                                <input id="chandelier" type="checkbox" name="chandelier">
-                                                <label for="chandelier"> Chandelier</label>
-                                            </li>
-                                            <li>
-                                                <input id="indoor_pool" type="checkbox" name="indoor_pool" checked>
-                                                <label for="indoor_pool">Pool</label>
-                                            </li>
-                                        </ul>
-                                        <label>Appliances: </label>
-                                        <ul class="fl-wrap filter-tags no-list-style ds-tg">
-                                            <li>
-                                                <input id="dishwasher" type="checkbox" name="dishwasher" checked>
-                                                <label for="dishwasher">Dishwater</label>
-                                            </li>
-                                            <li>
-                                                <input id="dryer" type="checkbox" name="dryer" checked>
-                                                <label for="dryer">Dryer</label>
-                                            </li>
-                                            <li>
-                                                <input id="freezer_fridge" type="checkbox" name="freezer_fridge">
-                                                <label for="freezer_fridge">Freezer/Refrigerator</label>
-                                            </li>
-                                            <li>
-                                                <input id="oven" type="checkbox" name="oven">
-                                                <label for="oven">Microwave/Oven</label>
-                                            </li>
-                                            <li>
-                                                <input id="washing_machine" type="checkbox" name="washing_machine" checked>
-                                                <label for="washing_machine">Washing Machine</label>
-                                            </li>
-                                            <li>
-                                                <input id="garbage_disposer" type="checkbox" name="garbage_disposer">
-                                                <label for="garbage_disposer">Garbage Disposesr</label>
-                                            </li>
-                                            <li>
-                                                <input id="smoke_detector" type="checkbox" name="smoke_detector" checked>
-                                                <label for="smoke_detector">Smoke Detector</label>
-                                            </li>
-                                        </ul>
-                                        <label>Outdoor Features: </label>
-                                        <ul class="fl-wrap filter-tags no-list-style ds-tg">
-                                            <li>
-                                                <input id="patio" type="checkbox" name="patio" checked>
-                                                <label for="patio">Balcony/Patio</label>
-                                            </li>
-                                            <li>
-                                                <input id="bbq_area" type="checkbox" name="bbq_area">
-                                                <label for="bbq_area"> BBQ Area</label>
-                                            </li>
-                                            <li>
-                                                <input id="pool" type="checkbox" name="pool">
-                                                <label for="pool"> Pool</label>
-                                            </li>
-                                            <li>
-                                                <input id="porch" type="checkbox" name="porch" checked>
-                                                <label for="porch"> Porch</label>
-                                            </li>
-                                            <li>
-                                                <input id="sprinkler" type="checkbox" name="sprinkler">
-                                                <label for="sprinkler"> Sprinkler System</label>
-                                            </li>
-                                            <li>
-                                                <input id="spa" type="checkbox" name="spa">
-                                                <label for="spa">Hot tub/spa</label>
-                                            </li>
-                                            <li>
-                                                <input id="garden" type="checkbox" name="garden">
-                                                <label for="garden">  Garden</label>
-                                            </li>
-                                            <li>
-                                                <input id="fence" type="checkbox" name="fence">
-                                                <label for="fence"> Fence</label>
-                                            </li>
-                                        </ul>
-                                        <label>Building Ammenities: </label>
-                                        <ul class="fl-wrap filter-tags no-list-style ds-tg">
-                                            <li>
-                                                <input id="bball" type="checkbox" name="bball" checked>
-                                                <label for="bball"> Basketball Court</label>
-                                            </li>
-                                            <li>
-                                                <input id="gate" type="checkbox" name="gate" checked>
-                                                <label for="gate">Gated Entry</label>
-                                            </li>
-                                            <li>
-                                                <input id="sport_arena" name="sport_arena" type="checkbox">
-                                                <label for="sport_arena"> Sport Arena</label>
-                                            </li>
-                                            <li>
-                                                <input id="fitness_arena" name="fitness_area" type="checkbox">
-                                                <label for="fitness_arena"> Fitness Arena</label>
-                                            </li>
-                                            <li>
-                                                <input id="tennis_court" name="tennis_court" type="checkbox" checked>
-                                                <label for="tennis_court"> Tennis Court</label>
-                                            </li>
-                                            <li>
-                                                <input id="parking" name="parking" type="checkbox">
-                                                <label for="parking">Parking</label>
-                                            </li>
-                                        </ul>
-                                        <!-- add_room-item   -->
-                                            <div class="clearfix"></div>
-                                            <label>Room Amenities: </label>
-                                            <div class=" add-list-tags fl-wrap">
-                                                <!-- Checkboxes -->
-                                                <ul class="fl-wrap filter-tags no-list-style ds-tg">
-                                                    <li>
-                                                        <input id="laundry_room" name="laundry_room" type="checkbox" checked>
-                                                        <label for="laundry_room">Laundry Room</label>
-                                                    </li>
-                                                    <li>
-                                                        <input id="dining_room" name="dining_room" type="checkbox" checked>
-                                                        <label for="dining_room">Dining Room</label>
-                                                    </li>
-                                                    <li>
-                                                        <input id="library" name="library" type="checkbox">
-                                                        <label for="library">  Library</label>
-                                                    </li>
-                                                    <li>
-                                                        <input id="office" name="office" type="checkbox" checked>
-                                                        <label for="office">Office</label>
-                                                    </li>
-                                                    <li>
-                                                        <input id="workshop" name="workshop" type="checkbox" checked>
-                                                        <label for="workshop">Workshop</label>
-                                                    </li>
-                                                    <li>
-                                                        <input id="closets" name="closets" type="checkbox" checked>
-                                                        <label for="closets">Walk-in closets</label>
-                                                    </li>
-                                                    <li>
-                                                        <input id="basement" name="basement" type="checkbox" checked>
-                                                        <label for="basement">Basement</label>
-                                                    </li>
-                                                </ul>
-                                                <!-- Checkboxes end -->												
+                                        <div class="clearfix"></div>
+                                        <label>Property Features: </label>
+
+                                        	<div class="tag-wrapper">
+                                            <div class="tag-content">
+                                              <p>Press enter or add a comma after each tag</p>
+                                              <ul name="features-ul"><input type="text" id="features" spellcheck="false" name="features">
+                                            </ul>
                                             </div>
+                                            <div class="tag-details">
+                                              <p><span>16</span> tags are remaining</p>
+                                              <button>Clear All Tags</button>
+                                            </div>
+                                          </div>
+
                                         </div>
-                                        <!--add_room-item end  -->
+
+
+                                        
+
+
+
                                     </div>
                                 </div>
                             </div>
@@ -485,4 +356,6 @@
             $( function() {
                 $( "#built_on" ).datepicker({ dateFormat: 'yy-mm-dd' }).val();
             } );
+            
+
         </script>
