@@ -29,6 +29,7 @@ urlpatterns = [
     path('terms', views.terms, name='Terms and Condition'),
     path('privacy_policy', views.privacy_policy, name='Privacy Policy'),
     path('my-profile', views.user_profile, name='my_profile'),
+    path('register-agent', views.register_agents, name='register agent'),
     path('my-reviews', views.reviews, name='My Reviews'),
     path('my-bookings', views.bookings, name='My Bookings'),
     path('logout', views.logout, name='Log Out'),

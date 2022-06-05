@@ -204,6 +204,23 @@ def agency_single(request):
 def agents(request,):
     return redirect(request, 'find-agents')
 
+
+def register_agents(request):
+    if request.method == 'POST':
+        first_name = request.POST['first_name']
+        last_name = request.POST['last_name']
+        email = request.POST['email']
+        tel = request.POST['tel']
+
+        user = User.objects.get(first_name=first_name, last_name=last_name, email=email)
+        user.is_realtor = True
+        user.tel = tel
+        user.save()
+
+
+        return redirect('my_profile')
+    return render(request, 'register-agent.html')
+
 def user_single(request, id):
     user = Userprofile.objects.get(unique_id = id)
     return render(request, 'agent-single.html', {'user':user})

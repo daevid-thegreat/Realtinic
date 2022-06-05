@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+            {% block content %}
+            {% block title %}Realtinic{% endblock %}
+            <div id="wrapper">
+                <!-- content -->	
+                <div class="content">
+                    <!--  section  -->
+                    <section class="hidden-section single-par2  " data-scrollax-parent="true">
+                        <div class="bg-wrap bg-parallax-wrap-gradien">
+                            <div class="bg par-elem "  data-bg="{% static 'images/bg/5.jpg' %}" data-scrollax="properties: { translateY: '30%' }"></div>
+                        </div>
+                        <div class="container">
+                            <div class="section-title center-align big-title">
+                                <h2><span>Terms and Conditions</span></h2>
+                                <h4>LAST UPDATED: 3/06/2022</h4>
+                            </div>
+                            <div class="scroll-down-wrap">
+                                <div class="mousey">
+                                    <div class="scroller"></div>
+                                </div>
+                                <span>Scroll Down To Discover</span>
+                            </div>
+                        </div>
+                    </section>
+                    <!--  section  end--> 		
+                    <!-- breadcrumbs-->
+                    <div class="breadcrumbs fw-breadcrumbs sp-brd fl-wrap">
+                        <div class="container">
+                            <!-- <div class="breadcrumbs-list">
+                                <a href="#">Home</a> <a href="#">Pages</a><span>Help FAQ</span>
+                            </div> -->
+                            <div class="share-holder hid-share">
+                                <a href="#" class="share-btn showshare sfcs">  <i class="fas fa-share-alt"></i>  Share   </a>
+                                <div class="share-container  isShare"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <section class="gray-bg ">
+                    <div class="container">
+                        <div class="section-title st-center fl-wrap">
+                            <h4>Terms of Use</h4>
+                        </div>
+                        <p></p>
+                    </div>
+
+
+                <!-- footer -->	
+                <footer class="main-footer fl-wrap">
+                    <div class="footer-inner fl-wrap">
+                        <div class="container">
+                            <div class="row">
+                                <!-- footer widget-->
+                                <div class="col-md-3">
+                                    <div class="footer-widget fl-wrap">
+                                        <div class="footer-widget-logo fl-wrap">
+                                            <img src="images/logo.png" alt="">
+                                        </div>
+                                        <p>Realtinic - Where you can find the next property to buy, or to rent, or where ever you are in the market. You can also post your home for sale or lease, or dive into our huge database of any other listings.</p>
+                                    </div>
+                                </div>
+                                <!-- footer widget end-->
+                                <!-- footer widget-->
+                                <div class="col-md-3">
+                                    <div class="footer-widget fl-wrap">
+                                        <div class="footer-widget-title fl-wrap">
+                                            <h4>Helpful links</h4>
+                                        </div>
+                                        <ul class="footer-list fl-wrap">
+                                            <li><a href="about">About Our Company</a></li>
+                                            <li><a href="blog">News and Blog</a></li>
+                                            <li><a href="download">Download</a></li>
+                                            <li><a href="help">Help Center</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- footer widget end--> 
+                                <!-- footer widget-->
+                                <div class="col-md-3">
+                                    <div class="footer-widget fl-wrap">
+                                        <div class="footer-widget-title fl-wrap">
+                                            <h4>Contacts Info</h4>
+                                        </div>
+                                        <ul  class="footer-contacts fl-wrap">
+                                            <li><span><i class="fal fa-envelope"></i> Mail :</span><a href="mailto:support@realtinic.com" target="_blank">support@realtinic.com</a></li>
+                                            <li><span><i class="fal fa-phone"></i> Phone :</span><a href="tel:+2349037817373">+234(0)9037817373</a></li>
+                                        </ul>
+                                        <div class="footer-social fl-wrap">
+                                            <ul>
+                                                <li><a href="https://web.facebook.com/realtinic" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                                <li><a href="https://twitter.com/realtinic" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                                                <li><a href="https://www.instagram.com/realtinic_/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                                                <li><a href="https://www.linkedin.com/company/realtinic" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+                                                <li><a href="https://youtube.com/channel/UCMb2WLOZova9ykm1WzE0spQ" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- footer widget end-->   
+                                <!-- footer widget-->
+                                <div class="col-md-3">
+                                    <div class="footer-widget fl-wrap">
+                                        <div class="footer-widget-title fl-wrap">
+                                            <h4>Affliates and Subsidiaries</h4>
+                                        </div>
+                                        <ul class="footer-list fl-wrap">
+                                            <li><a href="https://www.manager.realtinic.com" target="_blank">Realtinic Rental Manager</a></li>
+                                            <!-- <li><a href="https://www.guvenrealty.com" target="_blank">Guven Realty</a></li> -->
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- footer widget end-->                                     
+                            </div>
+                        </div>
+                    </div>
+                    <!--sub-footer-->
+                    <div class="sub-footer gray-bg fl-wrap">
+                        <div class="container">
+                            <div class="copyright"> &#169; Realtinic 2022 .  All rights reserved.</div>
+                            <div class="subfooter-nav">
+                                <ul class="no-list-style">
+                                    <li><a href="terms">Terms of use</a></li>
+                                    <li><a href="privacy_policy">Privacy Policy</a></li>
+                                    <li><a href="blog">Blog</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!--sub-footer end -->                     
+                </footer>
+            {% endblock content %}
+    </body>
+</html>
