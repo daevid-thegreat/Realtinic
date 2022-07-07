@@ -10,7 +10,7 @@
                     <div class="breadcrumbs fw-breadcrumbs sp-brd fl-wrap   top-smpar  ">
                         <div class="container">
                             <div class="breadcrumbs-list">
-                                <a href="#">Home</a><a href="#">Agency</a> <span>Agent Single</span>
+                                <a href="/">Home</a><a href="/find-agents"> Find Agents</a> <span>Agent</span>
                             </div>
                             <div class="share-holder hid-share">
                                 <a href="#" class="share-btn showshare sfcs">  <i class="fas fa-share-alt"></i>  Share   </a>
@@ -38,7 +38,7 @@
                                         </div>
                                         <div class="card-info-content">
                                             <div class="agent_card-title fl-wrap">
-                                                <h4> Andy Sposty </h4>
+                                                <h4>{{ user.first_name }} {{ user.first_name }} </h4>
                                                 <div class="geodir-category-location fl-wrap">
                                                     <h5><a href="agency-single.html">Mavers RealEstate Agency</a></h5>
                                                     <div class="listing-rating card-popup-rainingvis" data-starrating2="4"><span class="re_stars-title">Good</span></div>
@@ -46,7 +46,6 @@
                                             </div>
                                             <div class="list-single-stats">
                                                 <ul class="no-list-style">
-                                                    <li><span class="viewed-counter"><i class="fas fa-eye"></i> Viewed -  156 </span></li>
                                                     <li><span class="bookmark-counter"><i class="fas fa-comment-alt"></i> Reviews -  4 </span></li>
                                                     <li><span class="bookmark-counter"><i class="fas fa-sitemap"></i> Listings -  6 </span></li>
                                                 </ul>
@@ -61,8 +60,11 @@
                                                 <h3>About This Agent</h3>
                                             </div>
                                             <div class="list-single-main-item_content fl-wrap">
-                                                <p>Vivamus vel lacus lacinia, condimentum nunc non, iaculis diam. Proin in mollis augue, eget fermentum quam. Donec semper purus ut ante tempus gravida. Quisque et ante orci. Sed venenatis turpis mi, non varius justo scelerisque id. Maecenas fermentum nunc sed maximus efficitur. Pellentesque nec turpis viverra, cursus ex porta, porttitor odio. In gravida ante nec eleifend commodo. Cras gravida interdum nisl, vel venenatis nisl consectetur ut. Duis in erat quis dui imperdiet pretium et eu purus. Fusce purus ex, placerat et eros quis, lacinia tempor ligula.  </p>
-                                                <p>Placerat in egestas erat imperdiet sed euismod. Erat pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Quam viverra orci sagittis eu volutpat odio facilisis. Sit amet massa vitae tortor condimentum lacinia. Lacus vestibulum sed arcu non odio. Sodales ut eu sem integer vitae justo. Amet tellus cras adipiscing enim eu turpis egestas.</p>
+                                                {% if user.bio == None %}
+                                                <p>Nothing to see here</p>
+                                                {% else %}
+                                                <p>{{ user.bio }}</p>
+                                                {% endif %}
                                                 <div class="list-single-tags fl-wrap tags-stylwrap" style="margin-top: 20px;">
                                                     <span>Service Areas:</span>
                                                     <a href="#">London</a>
@@ -386,10 +388,13 @@
                                         <div class="box-widget-content fl-wrap">
                                             <div class="contats-list clm fl-wrap">
                                                 <ul class="no-list-style">
-                                                    <li><span><i class="fal fa-phone"></i> Phone :</span> <a href="#">+7(123)987654</a></li>
-                                                    <li><span><i class="fal fa-envelope"></i> Mail :</span> <a href="#">MaversRealEstate@domain.com</a></li>
-                                                    <li><span><i class="fal fa-map-marker"></i> Adress :</span> <a href="#"> 70 Bright St New York, USA</a></li>
+                                                    <li><span><i class="fal fa-phone"></i> Phone :</span> <a href="#">{{ user.tel}}</a></li>
+                                                    <li><span><i class="fal fa-envelope"></i> Mail :</span> <a href="#">{{ user.email}}</a></li>
+                                                    <li><span><i class="fal fa-map-marker"></i> Adress :</span> <a href="#">{{ user.location }}</a></li>
+                                                    {% if user.website != None %}
                                                     <li><span><i class="fal fa-browser"></i> Website :</span> <a href="#">themeforest.net</a></li>
+                                                    {% else %}
+                                                    {% endif %}
                                                 </ul>
                                             </div>
                                             <div class="profile-widget-footer fl-wrap">
@@ -398,7 +403,7 @@
                                                         <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
                                                         <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
                                                         <li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
-                                                        <li><a href="#" target="_blank"><i class="fab fa-vk"></i></a></li>
+                                                        <li><a href="#" target="_blank"><i class="fab fa-linkedin"></i></a></li>
                                                     </ul>
                                                 </div>
                                                 <a href="#sec-contact" class="custom-scroll-link tolt csls" data-microtip-position="left" data-tooltip="Write Message"><i class="fal fa-paper-plane"></i></a>

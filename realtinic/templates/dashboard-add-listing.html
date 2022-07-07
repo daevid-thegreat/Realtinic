@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-{% block title %} Add Listing - Realtinic{% endblock %}
+{% block title %} List Property - Realtinic{% endblock %}
             <div id="wrapper">
                 <!-- dashbard-menu-wrap -->
                 <div class="dashbard-menu-overlay"></div>
@@ -117,6 +117,25 @@
                             <div class="dasboard-widget-box   fl-wrap">
                                 <div class="custom-form">
                                     <div class="row">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <label>City</label>
+                                                <div class="listsearch-input-item">
+                                                    <select data-placeholder="Apartments" name="city" class="chosen-select no-search-select" >
+                                                        <option>All Cities</option>
+                                                        <option>Abuja</option>
+                                                        <option>Lagos</option>
+                                                        <option>Ibadan</option>
+                                                        <option>Osun</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <label>Phone <span class="dec-icon"><i class="far fa-phone"></i> </span> </label>
+                                                <input type="text" name="telephone" placeholder="+7(123)987654" value=""/>
+                                                <!-- <span>Though you will be contacted by email, a phone number is required for incasity.</span> -->
+                                            </div>
+                                        </div>
                                         <div class="col-md-4">
                                             <label>Location <span class="dec-icon"><i class="far fa-map-marker"></i></span></label>
                                             <input type="text" name="location" placeholder="Location of your property" value=""/>
@@ -135,25 +154,7 @@
                                         <div id="singleMap" class="drag-map" data-latitude="40.7427837" data-longitude="-73.11445617675781"></div>
                                     </div>
                                     <div class="clearfix"></div>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <label>City</label>
-                                            <div class="listsearch-input-item">
-                                                <select data-placeholder="Apartments" name="city" class="chosen-select no-search-select" >
-                                                    <option>All Cities</option>
-                                                    <option>Abuja</option>
-                                                    <option>Lagos</option>
-                                                    <option>Ibadan</option>
-                                                    <option>Osun</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <label>Phone <span class="dec-icon"><i class="far fa-phone"></i> </span> </label>
-                                            <input type="text" name="telephone" placeholder="+7(123)987654" value=""/>
-                                            <span>Though you will be contacted by email, a phone number is required for incasity.</span>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
                             <!-- dasboard-widget-box  end-->							
@@ -166,13 +167,22 @@
                             <div class="dasboard-widget-box   fl-wrap">
                                 <div class="custom-form">
                                     <div class="clearfix"></div>
+                                    <div class="header-image">
+                                        <div class="upload-options upload-options-header">
+                                            <label class="file-upload-label">
+                                                <input class="upload" type="file" accept="image/*" name="header_image">
+                                                <span>Upload Header Image</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
                                     <div class="listsearch-input-item fl-wrap">
                                         <div class="fuzone">
                                             <div class="fu-text">
                                                 <span><i class="far fa-cloud-upload-alt"></i> Click here or drop files to upload</span>
                                                 <div class="photoUpload-files fl-wrap"></div>
                                             </div>
-                                            <input type="file" name="images"  class="upload" multiple>
+                                            <input type="file" name="property_images"  class="upload" multiple>
                                         </div>
                                     </div>
                                 </div>
@@ -199,17 +209,17 @@
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <label>Rooms: <span class="dec-icon"><i class="far fa-users"></i></span></label>
-                                                    <input name="rooms" type="text" placeholder="Total House Rooms" value=""/>
+                                                    <input name="rooms" type="text" placeholder="Total House Rooms" value="0"/>
                                                     <label>Bedrooms: <span class="dec-icon"><i class="far fa-bed"></i></span></label>
-                                                    <input name="bedrooms" type="text" placeholder="House Bedrooms" value=""/>
+                                                    <input name="bedrooms" type="text" placeholder="House Bedrooms" value="0"/>
                                                     <label>Full Bathrooms: <span class="dec-icon"><i class="far fa-bath"></i></span></label>
-                                                    <input name="full_bathrooms" type="text" placeholder="House Bathrooms" value=""/>	
+                                                    <input name="full_bathrooms" type="text" placeholder="House Bathrooms" value="0"/>	
                                                     <label>Half Bathrooms: <span class="dec-icon"><i class="far fa-bath"></i></span></label>
-                                                    <input name="half_bathrooms" type="text" placeholder="Half Bathrooms" value=""/>	
+                                                    <input name="half_bathrooms" type="text" placeholder="Half Bathrooms" value="0"/>	
                                                     <label>One-quarter Bathrooms: <span class="dec-icon"><i class="far fa-bath"></i></span></label>
-                                                    <input name="one_quarter_bathrooms" type="text" placeholder="¼ Bathrooms" value=""/>	
+                                                    <input name="one_quarter_bathrooms" type="text" placeholder="¼ Bathrooms" value="0"/>	
                                                     <label>Three-quarter Bathrooms: <span class="dec-icon"><i class="far fa-bath"></i></span></label>
-                                                    <input name="three_quarter_bathrooms" type="text" placeholder="¾ Bathrooms" value=""/>																									
+                                                    <input name="three_quarter_bathrooms" type="text" placeholder="¾ Bathrooms" value="0"/>																									
                                                 </div>
                                             </div>
                                         </div>
@@ -243,40 +253,38 @@
                                         <!-- Checkboxes -->
                                         <ul class="fl-wrap filter-tags no-list-style ds-tg">
                                             <li>
-                                                <input id="wifi" type="checkbox" name="wifi">
-                                                <label for="wifi"> Pool</label>
+                                                <input id="pool" type="checkbox" name="pool">
+                                                <label for="pool"> Pool</label>
                                             </li>
                                             <li>
-                                                <input id="security" type="checkbox" name="security">
-                                                <label for="security"> 24/7 Power Supply</label>
+                                                <input id="power" type="checkbox" name="power">
+                                                <label for="power"> 24/7 Power Supply</label>
                                             </li>
                                             <li>
-                                                <input id="equiped_kitchen" type="checkbox" name="equiped_kitchen">
-                                                <label for="equiped_kitchen"> Basement</label>
+                                                <input id="temp" type="checkbox" name="temp">
+                                                <label for="temp"> Temperature Control</label>
                                             </li>
                                             <li>
-                                                <input id="air_con" type="checkbox" name="air_con">
-                                                <label for="air_con">Attic</label>
+                                                <input id="garden" type="checkbox" name="garden">
+                                                <label for="garden">Garden</label>
                                             </li>
                                             <li>
                                                 <input id="solar_power" type="checkbox" name="solar_power">
                                                 <label for="solar_power">Solar Power</label>
                                             </li>
+                                            <li>
+                                                <input id="drain" type="checkbox" name="drain">
+                                                <label for="drain">Drainage System</label>
+                                            </li>
+                                            <li>
+                                                <input id="cctv" type="checkbox" name="cctv">
+                                                <label for="cctv">CCTV</label>
+                                            </li>
+                                            <li>
+                                                <input id="water" type="checkbox" name="water">
+                                                <label for="water">24/7 Water Supply</label>
+                                            </li>
                                         </ul>
-                                        <div class="clearfix"></div>
-                                        <label>Property Features: </label>
-
-                                        	<div class="tag-wrapper">
-                                            <div class="tag-content">
-                                              <p>Press enter or add a comma after each tag</p>
-                                              <ul name="features-ul"><input type="text" id="features" spellcheck="false" name="features">
-                                            </ul>
-                                            </div>
-                                            <div class="tag-details">
-                                              <p><span>16</span> tags are remaining</p>
-                                              <button>Clear All Tags</button>
-                                            </div>
-                                          </div>
 
                                         </div>
 
@@ -351,11 +359,10 @@
             </div>
             <!-- wrapper end -->
         </div>
-        {% endblock %}
-        <script>
+         <script>
             $( function() {
                 $( "#built_on" ).datepicker({ dateFormat: 'yy-mm-dd' }).val();
             } );
-            
-
         </script>
+        {% endblock %}
+       

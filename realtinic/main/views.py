@@ -37,11 +37,6 @@ def index(request):
         else:
 
             user = User.objects.create_user(first_name=first_name, last_name=last_name, email=email, username=email, password=password)
-            # user.save() 
-
-            # user_model = User.objects.get(username=email)
-            # new_profile = Userprofile.objects.create(id=user_model.id)
-            # new_profile.save()
             user = auth.authenticate(username=email, password=password)
             login(request, user)
             return redirect('/my-profile')
@@ -108,16 +103,20 @@ def addlisting(request):
             three_quarter_bathrooms = request.POST['three_quarter_bathrooms']
             garage = request.POST['garage']
             telephone = request.POST.get('telephone', False)
-            features = request.GET.get('features')
+            
+            pool = request.POST.get('pool', False)
+            power = request.POST.get('power', False)
+            temp = request.POST.get('temp', False)
+            garden = request.POST.get('garden', False)
+            solar_power = request.POST.get('solar_power', False)
+            drain = request.POST.get('drain', False)
+            cctv = request.POST.get('cctv', False)
+            water = request.POST.get('water', False)
+
             lot_size = request.POST['lot_size']
             yard_size = request.POST['lot_size']
-            images = request.FILES.getlist('images')
-            
-            for  image in images:
-             images = Property(
-                 images = image
-             )
-             images.save()
+            header_image = request.FILES.getlist('header_image')
+
             description = request.POST['description']
             built_on = request.POST['built_on']
             video_link = request.POST['video_link']
@@ -133,8 +132,17 @@ def addlisting(request):
                 price=price, 
                 home_type=home_type, 
                 rooms=rooms, 
-                bedrooms=bedrooms, 
-                features=features,
+                bedrooms=bedrooms,
+
+                pool=pool,
+                power=power,
+                temp=temp,
+                garden=garden,
+                solar_power=solar_power,
+                drain=drain,
+                cctv=cctv,
+                water=water,
+                
                 full_bathrooms=full_bathrooms, 
                 half_bathrooms=half_bathrooms, 
                 one_quarter_bathrooms=one_quarter_bathrooms, 
@@ -142,7 +150,7 @@ def addlisting(request):
                 garage=garage, 
                 lot_size=lot_size, 
                 yard_size=yard_size, 
-                images=images, 
+                header_image=header_image, 
                 description=description, 
                 built_on=built_on, 
                 video_link=video_link, 
@@ -217,12 +225,11 @@ def register_agents(request):
         user.tel = tel
         user.save()
 
-
         return redirect('my_profile')
     return render(request, 'register-agent.html')
 
 def user_single(request, id):
-    user = Userprofile.objects.get(unique_id = id)
+    user = Userprofile.objects.get(id_user = id)
     return render(request, 'agent-single.html', {'user':user})
 
 def compare(request):
@@ -244,7 +251,7 @@ def user_profile(request):
 
 def single_listing(request, id):
     listing = Property.objects.get(id = id)
-    listing.property_views=listing.property_views+1
+    listing.views=listing.views+1
     listing.save()
     if request.method == 'POST' and 'save' in request.POST:
         listing.saved.add(request.user)

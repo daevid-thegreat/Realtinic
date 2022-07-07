@@ -37,9 +37,12 @@
         <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}">
         <link type="text/css" rel="stylesheet" href="{% static 'css/color.css' %}">
         <link type="text/css" rel="stylesheet" href="{% static 'css/dashboard-style.css' %}">
+
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="/resources/demos/style.css">
         <!--  favicons  -->
         <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/thinline.css">
-        <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}">
+        <link rel="shortcut icon" href="{% static 'images/favicon.png' %}">
     </head>
     <body>
         <!--loader-->
@@ -277,9 +280,11 @@
                 </div>
                 <!--header-opt-modal end -->  
             </header>
+            <!-- header end -->
+            <!--content-->
             {% block content %}		
-            {% endblock content %}
-            <!-- header end  -->	
+            {% endblock %}
+            <!--content end-->
             <!--register form -->
             <div class="main-register-wrap modal">
                 <div class="reg-overlay"></div>
@@ -398,9 +403,9 @@
                 </div>
             </div>
             <!--secondary-nav end -->
-            <a class="to-top color-bg"><i class="fas fa-caret-up"></i></a>   
+        </div>
             <!--map-modal -->
-            <div class="map-modal-wrap">
+            <!-- <div class="map-modal-wrap">
                 <div class="map-modal-wrap-overlay"></div>
                 <div class="map-modal-item">
                     <div class="map-modal-container fl-wrap">
@@ -412,7 +417,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!--map-modal end --> 
             	 
         </div>
@@ -425,7 +430,11 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvJXSMFCgEpnfNzgCr_5NPGgL9YPxenUg&amp;libraries=places"></script>
         <script src="{% static 'js/map-single.js' %}"></script>
         <script src="{% static 'js/map-listing.js' %}"></script>
-        <script src="{% static 'js/dashboard.js' %}"></script>  
+        <script src="{% static 'js/dashboard.js' %}"></script> 
+
+        <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+        
+        
         <!-- Start of HubSpot Embed Code -->
         <script type="text/javascript" id="hs-script-loader" async defer src="//js-eu1.hs-scripts.com/25922626.js"></script>
         <!-- End of HubSpot Embed Code -->

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
             {% block content %}
-            {% block title %}{{ listing.property_name }} - Realtinic{% endblock %}
+            {% block title %}{{ listing.name }} - Realtinic{% endblock %}
             <!-- wrapper  -->	
             <div id="wrapper">
                 <!-- content -->	
@@ -87,7 +87,7 @@
                                                 <div class="list-single-header-date"><span>Date:</span>{{listing.listed_on|date:"Y-m-d"}}</div>
                                                 <div class="list-single-stats">
                                                     <ul class="no-list-style">
-                                                        <li><span class="viewed-counter"><i class="fas fa-eye"></i> Viewed -  {{ listing.property_views }} </span></li>
+                                                        <li><span class="viewed-counter"><i class="fas fa-eye"></i> Viewed -  {{ listing.views }} </span></li>
                                                         <li><span class="bookmark-counter"><i class="fas fa-heart"></i> Bookmark -  5 </span></li>
                                                     </ul>
                                                 </div>
