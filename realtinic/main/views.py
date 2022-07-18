@@ -94,6 +94,8 @@ def addlisting(request):
     if request.user.is_realtor == True:
         if request.method == 'POST':
 
+            print(request.POST)
+
             name = request.POST['name']
             location = request.POST['location']
             list_type = request.POST['list_type']
@@ -108,47 +110,49 @@ def addlisting(request):
             three_quarter_bathrooms = request.POST['three_quarter_bathrooms']
             garage = request.POST['garage']
             telephone = request.POST.get('telephone', False)
-            features = request.GET.get('features')
+            features = request.POST.get('features')
             lot_size = request.POST['lot_size']
             yard_size = request.POST['lot_size']
-            images = request.FILES.getlist('images')
+            # images = request.FILES.getlist('images')
             
-            for  image in images:
-             images = Property(
-                 images = image
-             )
-             images.save()
+            # for  image in images:
+            #  images = Property(
+            #      images = image
+            #  )
+            #  images.save()
             description = request.POST['description']
             built_on = request.POST['built_on']
             video_link = request.POST['video_link']
             agent = request.user
             
+            print(f"Name: {request.POST['name']}")
+            print(f"Features: {request.POST['features']}")
 
-            new_property = Property.objects.create(
-                name=name, 
-                city=city, 
-                telephone=telephone, 
-                location=location, 
-                list_type=list_type, 
-                price=price, 
-                home_type=home_type, 
-                rooms=rooms, 
-                bedrooms=bedrooms, 
-                features=features,
-                full_bathrooms=full_bathrooms, 
-                half_bathrooms=half_bathrooms, 
-                one_quarter_bathrooms=one_quarter_bathrooms, 
-                three_quarter_bathrooms=three_quarter_bathrooms, 
-                garage=garage, 
-                lot_size=lot_size, 
-                yard_size=yard_size, 
-                images=images, 
-                description=description, 
-                built_on=built_on, 
-                video_link=video_link, 
-                agent=agent
-            )
-            new_property.save()
+            # new_property = Property.objects.create(
+            #     name=name, 
+            #     city=city, 
+            #     telephone=telephone, 
+            #     location=location, 
+            #     list_type=list_type, 
+            #     price=price, 
+            #     home_type=home_type, 
+            #     rooms=rooms, 
+            #     bedrooms=bedrooms, 
+            #     features=features,
+            #     full_bathrooms=full_bathrooms, 
+            #     half_bathrooms=half_bathrooms, 
+            #     one_quarter_bathrooms=one_quarter_bathrooms, 
+            #     three_quarter_bathrooms=three_quarter_bathrooms, 
+            #     garage=garage, 
+            #     lot_size=lot_size, 
+            #     yard_size=yard_size, 
+            #     images=images, 
+            #     description=description, 
+            #     built_on=built_on, 
+            #     video_link=video_link, 
+            #     agent=agent
+            # )
+            # new_property.save()
             
 
         return render(request, 'dashboard-add-listing.html')
@@ -248,7 +252,7 @@ def single_listing(request, id):
     listing.save()
     if request.method == 'POST' and 'save' in request.POST:
         listing.saved.add(request.user)
-        return redirect('/listing/'+str(listing.property_id))
+        return redirect('/listing/'+str(listing.id))
 
     if request.method == 'POST' and 'review' in request.POST:
         author = request.user
@@ -258,7 +262,7 @@ def single_listing(request, id):
 
         reviews = review.objects.create(author=author, comment=comment, rating=rating, listing=listing)
         reviews.save()
-        return redirect('/listing/'+str(listing.property_id))
+        return redirect('/listing/'+str(listing.id))
 
     return render(request, 'listing-single3.html', {'listing': listing})
 
