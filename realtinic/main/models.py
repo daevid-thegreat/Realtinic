@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 import uuid
-from datetime import datetime
 
 from realtinic.settings import AUTH_USER_MODEL
 
@@ -57,7 +56,6 @@ class Userprofile(AbstractBaseUser, PermissionsMixin):
     #saved properties - many to one
 
     profilepic = models.ImageField(upload_to="agents profile image", null=True, blank=True)
-    coverpic = models.ImageField(upload_to="agents cover image", null=True, blank=True)
     bio = models.CharField(max_length=700, null=True, blank=True)
     location = models.CharField(max_length=250, null=True, blank=True)
     tel = models.BigIntegerField(null=True, blank=True)
@@ -72,6 +70,8 @@ class Userprofile(AbstractBaseUser, PermissionsMixin):
     gov_id = models.FileField(upload_to='government ids', null=True, blank=True)
     business_id = models.FileField(upload_to='business ids', null=True, blank=True)
     utility_bills = models.FileField(upload_to='utility bills', null=True, blank=True)
+    property_list = models.ManyToManyField('Property', related_name='property_list', blank=True)
+    reviews = models.ManyToManyField('Review', related_name='reviews', blank=True)
 
     verified = models.BooleanField(default=False)
 
@@ -147,6 +147,8 @@ class Property(models.Model):
     lot_size = models.IntegerField(default=0)
     yard_size = models.IntegerField(default=0)
     header_image = models.FileField(upload_to='property_header_images')
+    property_image = models.FileField(upload_to='property_images')
+    
     description = models.TextField(max_length=1000)
     complete = models.BooleanField(default=False)
     built_on = models.DateTimeField(null=True)
@@ -168,6 +170,7 @@ class Property(models.Model):
     def total_bathrooms(self):
         total_bathrooms = self.full_bathrooms + self.half_bathrooms + self.three_quarter_bathrooms + self.one_quarter_bathrooms
         return total_bathrooms
+
 
 
 

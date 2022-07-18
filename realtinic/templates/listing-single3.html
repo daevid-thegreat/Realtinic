@@ -84,7 +84,7 @@
                                             </div>
                                             <div class="list-single-header-footer fl-wrap">
                                                 <div class="list-single-header-price" data-propertyprise="{{listing.price}}"><strong>Price:</strong><span>$</span>{{listing.price}}</div>
-                                                <div class="list-single-header-date"><span>Date:</span>{{listing.listed_on|date:"Y-m-d"}}</div>
+                                                <div class="list-single-header-date"><span>Date Listed:</span>{{listing.listed_on|date:"Y-m-d"}}</div>
                                                 <div class="list-single-stats">
                                                     <ul class="no-list-style">
                                                         <li><span class="viewed-counter"><i class="fas fa-eye"></i> Viewed -  {{ listing.views }} </span></li>
@@ -133,12 +133,13 @@
                                                 <div class="swiper-button-next ssw-btn"><i class="fas fa-caret-right"></i></div>
                                             </div>
                                             <div class="single-slider-wrapper fl-wrap">
-                                                <div class="slider-nav fl-wrap">
-                                                    <div class="slick-slide-item"><img src="images/all/1.jpg" alt=""></div>
-                                                    <div class="slick-slide-item"><img src="images/all/2.jpg" alt=""></div>
-                                                    <div class="slick-slide-item"><img src="images/all/3.jpg" alt=""></div>
-                                                    <div class="slick-slide-item"><img src="images/all/4.jpg" alt=""></div>
-                                                    <div class="slick-slide-item"><img src="images/all/5.jpg" alt=""></div>
+                                                <div class="slider-nav fl-wrap" >
+                                                    <div class="slick-slide-item"><img src="{{listing.header_image.url}}"  alt=""></div>
+                                                    <div class="slick-slide-item"><img src="{{listing.property_image.url}}" alt=""></div>
+
+                                                    <!-- {% for x in listing.property_image %}
+                                                    <div class="slick-slide-item"><img src="{{x}}" alt="{{x.url}}"></div>
+                                                    {% endfor %} -->
                                                 </div>
                                             </div>
                                         </div>
@@ -223,8 +224,8 @@
                                                 </div>
                                                 <div class="list-single-main-item_content fl-wrap">
                                                     <div class="video-box fl-wrap">
-                                                        <img src="images/all/7.jpg" class="respimg" alt="">
-                                                        <a class="video-box-btn image-popup color-bg" href="https://vimeo.com/158059890"><i class="fas fa-play"></i></a>
+                                                        <iframe src="https://www.youtube.com/embed?url={{listing.video_link}}"></iframe>
+                                                        <a class="video-box-btn image-popup color-bg" href="{{listing.video_link}}"><i class="fas fa-play"></i></a>
                                                     </div>
                                                 </div>
                                             </div>

@@ -1,16 +1,13 @@
-from random import randint
+
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
-from django.conf.urls import handler404, handler500
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import login
 from .models import Userprofile, Property, review
 from django.contrib.auth import get_user_model
 from django.core.paginator import Paginator
-import time
-from django.urls import reverse
+from django.db.models import Sum
 User = get_user_model()
 
 
@@ -115,7 +112,16 @@ def addlisting(request):
 
             lot_size = request.POST['lot_size']
             yard_size = request.POST['lot_size']
-            header_image = request.FILES.getlist('header_image')
+            # upload image
+            header_image = request.FILES.get('header_image')
+
+            images = request.FILES.getlist('property_images')
+
+            for image in images:
+                Property.objects.create(
+                    prop = Property, images = image)
+                Property.save()
+            
 
             description = request.POST['description']
             built_on = request.POST['built_on']
@@ -154,7 +160,7 @@ def addlisting(request):
                 description=description, 
                 built_on=built_on, 
                 video_link=video_link, 
-                agent=agent
+                agent=agent,
             )
             new_property.save()
             
@@ -240,11 +246,69 @@ def message(request):
 
 @login_required(login_url='/')
 def dashboard(request):
-    return render(request, 'dashboard.html')
+    propertys = Property.objects.filter(agent=request.user)
+    count_list = propertys.count()
+
+    count_views = Property.objects.filter(agent=request.user).aggregate(Sum('views'))
+    if count_views['views__sum'] is None:
+        count_views = 0
+
+    count_saved = Property.objects.filter(agent=request.user).aggregate(Sum('saved'))
+    if count_saved['saved__sum'] is None:
+        count_saved = 0
+
+    return render(request, 'dashboard.html', {'list_count':count_list, 'views_count':count_views, 'saved_count':count_saved})
 
 @login_required(login_url='/')
 def user_profile(request):
     if request.user.is_realtor == True:
+        if request.method == 'POST' and 'info':
+            user_id = request.user.id_user
+            image = request.FILES.get('image')
+            first_name = request.POST['first_name']
+            last_name = request.POST['last_name']
+            email = request.POST['email']
+            tel = request.POST['tel']
+            address = request.POST['address']
+            website = request.POST['website']
+            bio = request.POST['bio']
+            user = User.objects.get(id_user = user_id)
+            user.tel = tel
+            user.first_name = first_name
+            user.last_name = last_name
+            user.email = email
+            user.address = address
+            user.website = website
+            user.bio = bio
+            user.save()
+            return redirect('my_profile')
+        if request.method == 'POST' and 'password':
+            user_id = request.user.id_user
+            password1 = request.POST['password']
+            password2 = request.POST['password2']
+            if user.check_password(request.POST['reset_password']):
+                if password1 == password2:
+                    user = User.objects.get(id_user = user_id)
+                    user.set_password(password1)
+                    user.save()
+                    return redirect('my-profile')
+                else:
+                    return render(request, 'my-profile.html', {'error':'Passwords do not match or current password incorrect'})
+        if request.method == 'POST' and 'social':
+            user_id = request.user.id_user
+            facebook = request.POST['facebook']
+            twitter = request.POST['twitter']
+            instagram = request.POST['instagram']
+            linkedin = request.POST['linkedin']
+            whatsapp = request.POST['whatsapp']
+            user = Userprofile.objects.get(id_user = user_id)
+            user.facebook = facebook
+            user.twitter = twitter
+            user.instagram = instagram
+            user.linkedin = linkedin
+            user.whatsapp = whatsapp
+            user.save()
+            return redirect('my-profile')
         return render(request, 'dashboard-myprofile.html')
     else:
         return render(request, 'user-profile.html')
@@ -253,6 +317,10 @@ def single_listing(request, id):
     listing = Property.objects.get(id = id)
     listing.views=listing.views+1
     listing.save()
+
+    reviews = review.objects.filter(listing = listing)
+    for r in reviews:
+        print(r.rating)
     if request.method == 'POST' and 'save' in request.POST:
         listing.saved.add(request.user)
         return redirect('/listing/'+str(listing.property_id))

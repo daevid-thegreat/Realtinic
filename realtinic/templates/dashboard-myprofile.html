@@ -41,15 +41,25 @@
                         <div class="dashboard-title fl-wrap">
                             <div class="dashboard-title-item"><span>Edit Profile</span></div>
                             <div class="dashbard-menu-header">
+                                {% if user.profile_image == None %}
                                 <div class="dashbard-menu-avatar fl-wrap">
-                                    <img src="images/avatar/5.jpg" alt="">
-                                    <h4>Welcome, <span> {{ user.first_name }}</span></h4>
+                                    <img src="https://avataaars.io/?avatarStyle=Circle&topType=Hat&accessoriesType=Sunglasses&facialHairType=Blank&clotheType=Hoodie&clotheColor=Pink&eyeType=Hearts&eyebrowType=Default&mouthType=Smile&skinColor=Tanned" alt="User Profile">
+                                    <h4>Welcome, <span> {{ user.first_name }} {{user.last_name }}</span></h4>
                                 </div>
-                                <a href="index.html" class="log-out-btn   tolt" data-microtip-position="bottom"  data-tooltip="Log Out"><i class="far fa-power-off"></i></a>
+                                <a href="/logout" class="log-out-btn   tolt" data-microtip-position="bottom"  data-tooltip="Log Out"><i class="far fa-power-off"></i></a>
+                                {% else %}
+                                <div class="dashbard-menu-avatar fl-wrap">
+                                    <img src="{{user.profile_pic.url}}" alt="{{user.profile_pic.url}}">
+                                    <h4>Welcome, <span> {{ user.first_name }} {{user.last_name }}</span></h4>
+                                </div>
+                                <a href="/logout" class="log-out-btn   tolt" data-microtip-position="bottom"  data-tooltip="Log Out"><i class="far fa-power-off"></i></a>
+                                {% endif %}
                             </div>					
                         </div>
                         <!-- dashboard-title end -->
                         <!-- dasboard-wrapper-->
+                        <form method="post" name="info">
+                            {% csrf_token %}
                         <div class="dasboard-wrapper fl-wrap no-pag">
                             <div class="row">
                                 <div class="col-md-7">
@@ -58,7 +68,11 @@
                                     </div>
                                     <div class="dasboard-widget-box nopad-dash-widget-box fl-wrap">
                                         <div class="edit-profile-photo">
-                                            <img src="images/avatar/5.jpg" class="respimg" alt="">
+                                            {% if user.profile_image == None %}
+                                            <img src="https://avataaars.io/?avatarStyle=Circle&topType=Hat&accessoriesType=Sunglasses&facialHairType=Blank&clotheType=Hoodie&clotheColor=Pink&eyeType=Hearts&eyebrowType=Default&mouthType=Smile&skinColor=Tanned" class="respimg" alt="">
+                                            {% else %}
+                                            <img src="{{user.profile_pic.url}}" class="respimg" alt="">
+                                            {% endif %}
                                             <div class="change-photo-btn">
                                                 <div class="photoUpload">
                                                     <span>  Upload New Photo</span>
@@ -66,14 +80,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="bg-wrap bg-parallax-wrap-gradien">
+                                        <div class="bg-wrap bg-parallax-wrap-gradien" style="background-color: purple;">
                                             <div class="bg"  data-bg="images/bg/3.jpg"></div>
-                                        </div>
-                                        <div class="change-photo-btn cpb-2  ">
-                                            <div class="photoUpload color-bg">
-                                                <span> <i class="far fa-camera"></i> Change Cover Pic </span>
-                                                <input type="file" class="upload">
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="dasboard-widget-title fl-wrap">
@@ -105,7 +113,9 @@
                                         </div>
                                     </div>
                                 </div>
+                        </form>
                                 <div class="col-md-5">
+                                    <form method="post" name="password">
                                     <div class="dasboard-widget-title dbt-mm fl-wrap">
                                         <h5><i class="fas fa-key"></i>Change Password</h5>
                                     </div>
@@ -127,12 +137,14 @@
                                                 <span class="eye"><i class="far fa-eye" aria-hidden="true"></i> </span>
                                             </div>
                                             <button class="btn    color-bg  float-btn">Save Changes</button>
+                                        </form>
                                         </div>
                                     </div>
                                     <div class="dasboard-widget-title fl-wrap" style="margin-top: 30px;">
                                         <h5><i class="fas fa-share-alt"></i>Your Socials</h5>
                                     </div>
                                     <div class="dasboard-widget-box fl-wrap">
+                                        <form method="post">
                                         <div class="custom-form">
                                             <label>Whatsapp  <span class="dec-icon"><i class="fab fa-whatsapp"></i></span></label>
                                             <input type="text" placeholder="{{ user.whatsapp }}" value=""/>
@@ -146,6 +158,7 @@
                                             <input type="text" placeholder="{{ user.linkedin }}" value=""/>	
                                             <button class="btn    color-bg  float-btn">Save Changes</button>
                                         </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

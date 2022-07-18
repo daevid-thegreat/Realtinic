@@ -236,7 +236,7 @@
                                 <article class="geodir-category-listing fl-wrap">
                                     <div class="geodir-category-img fl-wrap">
                                         <a href="listing/{{ property.id }}" class="geodir-category-img_item">
-                                            <img src="{{property.header_image.url}}" style=" max-height: 210px;" alt="">
+                                            <img src="{{property.header_image.url}}" style=" max-height: 210px;" alt="{{ property.header_image.url}}">
                                             <div class="overlay"></div>
                                         </a>
                                         <div class="geodir-category-location">
@@ -264,7 +264,7 @@
                                             </ul>
                                         </div>
                                         <div class="geodir-category-footer fl-wrap">
-                                            <a href="agent-single.html" class="gcf-company"><img src="images/avatar/2.jpg" alt=""><span>By {{ property.agent.first_name }} {{ property.agent.last_name}}</span></a>
+                                            <a href="agent-single.html" class="gcf-company"><img src="{{ property.agent.profilepic.url }}" alt=""><span>By {{ property.agent.first_name }} {{ property.agent.last_name}}</span></a>
                                             <div class="listing-rating card-popup-rainingvis tolt" data-microtip-position="top" data-tooltip="Good" data-starrating2="4"></div>
                                         </div>
                                     </div>
