@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-import django_heroku
+# import django_heroku
 import os
 from pathlib import Path
 
@@ -88,16 +88,16 @@ DATABASES={
 #       'ENGINE':'django.db.backends.postgresql_psycopg2',
 #       'NAME':'realtinic',
 #       'USER':'postgres',
-#       'PASSWORD':'',
+#       'PASSWORD':'password',
 #       'HOST':'localhost',
 #       'PORT':'5432',
 #    },
       'default':{
       'ENGINE':'django.db.backends.postgresql_psycopg2',
-      'NAME':'d5snloel2a9pd4',
-      'USER':'pdqujliqiivaym',
-      'PASSWORD':'13d5b5bbaaceeb007cc5c52c4f42700d89a7abb05e75ca316a21936eaf784358',
-      'HOST':'ec2-52-72-56-59.compute-1.amazonaws.com',
+      'NAME':'ddfd9jhpl67moq',
+      'USER':'ztxrkscwtcygxk',
+      'PASSWORD':'21904b0a2e9a3e9f14ea7c9d5b183051fa0e648bac6df18b3797db8cc77c63f7',
+      'HOST':'ec2-52-3-60-53.compute-1.amazonaws.com',
       'PORT':'5432',
    }
 }
@@ -140,10 +140,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT =  os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
 
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 

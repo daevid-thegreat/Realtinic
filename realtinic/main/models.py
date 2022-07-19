@@ -1,3 +1,4 @@
+from pyexpat import model
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 import uuid
@@ -146,8 +147,8 @@ class Property(models.Model):
     agent = models.ForeignKey(User, related_name='agent', blank=True, null=True, default=None, on_delete=models.CASCADE)
     lot_size = models.IntegerField(default=0)
     yard_size = models.IntegerField(default=0)
-    header_image = models.FileField(upload_to='property_header_images')
-    property_image = models.FileField(upload_to='property_images')
+    header_image = models.ImageField(upload_to='property_header_images')
+    # property_image = models.FileField(upload_to='property_images')
     
     description = models.TextField(max_length=1000)
     complete = models.BooleanField(default=False)
@@ -190,3 +191,10 @@ class review(models.Model):
 
     def __str__(self):
         return self.comment
+
+class PropertyImage(models.Model):
+    property = models.ForeignKey(Property, related_name='images', default=None, on_delete=models.CASCADE)
+    property_image = models.ImageField(upload_to='property_images')
+
+    def __str__(self):
+        return self.property.name

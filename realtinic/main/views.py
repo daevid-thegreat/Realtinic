@@ -4,7 +4,7 @@ from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
-from .models import Userprofile, Property, review
+from .models import Userprofile, Property, review, PropertyImage
 from django.contrib.auth import get_user_model
 from django.core.paginator import Paginator
 from django.db.models import Sum
@@ -52,9 +52,6 @@ def index(request):
     properties = Property.objects.order_by('-listed_on')[:6]
     return render(request, 'index.html', {'properties':properties})
 
-
-
-
 def listing(request):
 
         if request.method == 'GET':
@@ -86,6 +83,8 @@ def addlisting(request):
     if request.user.is_realtor == True:
         if request.method == 'POST':
 
+            # print(request.POST)
+
             name = request.POST['name']
             location = request.POST['location']
             list_type = request.POST['list_type']
@@ -114,13 +113,12 @@ def addlisting(request):
             yard_size = request.POST['lot_size']
             # upload image
             header_image = request.FILES.get('header_image')
-
             images = request.FILES.getlist('property_images')
 
-            for image in images:
-                Property.objects.create(
-                    prop = Property, images = image)
-                Property.save()
+            # for image in images:
+            #     Property.objects.create(
+            #         prop = Property, images = image)
+            #     Property.save()
             
 
             description = request.POST['description']
@@ -163,6 +161,13 @@ def addlisting(request):
                 agent=agent,
             )
             new_property.save()
+
+            for image in images:
+                prop_img = PropertyImage.objects.create(
+                    property = new_property, 
+                    property_image = image
+                )
+                prop_img.save()
             
 
         return render(request, 'dashboard-add-listing.html')
@@ -323,7 +328,7 @@ def single_listing(request, id):
         print(r.rating)
     if request.method == 'POST' and 'save' in request.POST:
         listing.saved.add(request.user)
-        return redirect('/listing/'+str(listing.property_id))
+        return redirect('/listing/'+str(listing.id))
 
     if request.method == 'POST' and 'review' in request.POST:
         author = request.user
@@ -333,7 +338,7 @@ def single_listing(request, id):
 
         reviews = review.objects.create(author=author, comment=comment, rating=rating, listing=listing)
         reviews.save()
-        return redirect('/listing/'+str(listing.property_id))
+        return redirect('/listing/'+str(listing.id))
 
     return render(request, 'listing-single3.html', {'listing': listing})
 

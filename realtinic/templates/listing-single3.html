@@ -135,11 +135,10 @@
                                             <div class="single-slider-wrapper fl-wrap">
                                                 <div class="slider-nav fl-wrap" >
                                                     <div class="slick-slide-item"><img src="{{listing.header_image.url}}"  alt=""></div>
-                                                    <div class="slick-slide-item"><img src="{{listing.property_image.url}}" alt=""></div>
-
-                                                    <!-- {% for x in listing.property_image %}
-                                                    <div class="slick-slide-item"><img src="{{x}}" alt="{{x.url}}"></div>
-                                                    {% endfor %} -->
+                                                    <!-- <div class="slick-slide-item"><img src="{{listing.property_image.url}}" alt=""></div> -->
+                                                    {% for x in listing.images.all %}
+                                                        <div class="slick-slide-item"><img src="{{x.property_image.url}}" alt="{{listing.name}}"></div>
+                                                    {% endfor %}
                                                 </div>
                                             </div>
                                         </div>

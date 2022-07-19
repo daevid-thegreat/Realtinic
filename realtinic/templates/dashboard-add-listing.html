@@ -39,7 +39,7 @@
                     <div class="container dasboard-container">
                         <!-- dashboard-title -->	
                         <!-- dashboard-title end -->
-                        <form id="add-listing-form" method="POST">		
+                        <form id="add-listing-form" method="POST" enctype="multipart/form-data">		
                             {% csrf_token %}
                             <div class="dasboard-wrapper fl-wrap no-pag">
                             <div class="dasboard-scrollnav-wrap scroll-to-fixed-fixed scroll-init2 fl-wrap">
@@ -164,7 +164,7 @@
                             </div>
                             <!-- dasboard-widget-title end -->
                             <!-- dasboard-widget-box  -->
-                            <div class="dasboard-widget-box   fl-wrap">
+                            <div class="dasboard-widget-box fl-wrap">
                                 <div class="custom-form">
                                     <div class="clearfix"></div>
                                     <div class="header-image">
@@ -182,7 +182,7 @@
                                                 <span><i class="far fa-cloud-upload-alt"></i> Click here or drop files to upload</span>
                                                 <div class="photoUpload-files fl-wrap"></div>
                                             </div>
-                                            <input type="file" name="property_images"  class="upload" multiple>
+                                            <input type="file" name="property_images" class="upload" multiple>
                                         </div>
                                     </div>
                                 </div>
@@ -287,12 +287,6 @@
                                         </ul>
 
                                         </div>
-
-
-                                        
-
-
-
                                     </div>
                                 </div>
                             </div>
