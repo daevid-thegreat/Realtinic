@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
             {% block content %}
-            {% block title %}Realtinic{% endblock %}	
+            {% block title %}Realtinic - Buy, Rent, Sell and Lease.{% endblock %}	
             <div id="wrapper">
                 <!-- content -->	
                 <div class="content">
@@ -98,7 +98,7 @@
                                         <article class="geodir-category-listing fl-wrap">
                                             <div class="geodir-category-img fl-wrap">
                                                 <a href="listing-single.html" class="geodir-category-img_item">
-                                                    <img src="{{ property.images.url }}" alt="">
+                                                    <img src="{{ property.header_image.url }}" style=" max-height: 210px;" alt="">
                                                     <div class="overlay"></div>
                                                 </a>
                                                 <div class="geodir-category-location">
@@ -386,9 +386,10 @@
                                 <div class="col-md-3">
                                     <div class="footer-widget fl-wrap">
                                         <div class="footer-widget-logo fl-wrap">
-                                            <img src="images/logo.png" alt="">
+                                            <img src="{% static 'images/logo.png' %}" alt="">
                                         </div>
-                                        <p>Realtinic - Where you can find the next property to buy, or to rent, or where ever you are in the market. You can also post your home for sale or lease, or dive into our huge database of any other listings.</p>
+                                        <p>Realtinic - Get your Share of the Real Estate </p>-
+                                        <p> Find the next property to buy or rent where ever you are in the market or put the next great property for sale or lease.</p>
                                     </div>
                                 </div>
                                 <!-- footer widget end-->

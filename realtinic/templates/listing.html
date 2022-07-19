@@ -228,21 +228,22 @@
                         </div>
                         <!-- list-main-wrap-header end-->					
                         <!-- listing-item-wrap-->
-                        {% for property in propertys %}
+                        
                         <div class="listing-item-container fl-wrap">
                             <!-- listing-item -->
+                            {% for property in propertys %}
                             <div class="listing-item">
                                 <article class="geodir-category-listing fl-wrap">
                                     <div class="geodir-category-img fl-wrap">
                                         <a href="listing/{{ property.id }}" class="geodir-category-img_item">
-                                            <img src="{{property.images.url}}"style=" max-height: 250px;" alt="">
+                                            <img src="{{property.header_image.url}}" style=" max-height: 210px;" alt="{{ property.header_image.url}}">
                                             <div class="overlay"></div>
                                         </a>
                                         <div class="geodir-category-location">
                                             <a href="#1" class="map-item tolt" data-microtip-position="top-left" data-tooltip="On the map"><i class="fas fa-map-marker-alt"></i> {{ property.location }}</a>
                                         </div>
                                         <ul class="list-single-opt_header_cat">
-                                            <li><a href="#" class="cat-opt blue-bg">{{ property.get_list_type_display }}</a></li>
+                                            <li><a href="#" class="cat-opt blue-bg">{{ property.list_type }}</a></li>
                                             <li><a href="#" class="cat-opt color-bg">{{ property.home_type}}</a></li>
                                         </ul>
                                         <a href="#" class="geodir_save-btn tolt" data-microtip-position="left" data-tooltip="Save"><span><i class="fal fa-heart"></i></span></a>
@@ -263,15 +264,16 @@
                                             </ul>
                                         </div>
                                         <div class="geodir-category-footer fl-wrap">
-                                            <a href="agent-single.html" class="gcf-company"><img src="images/avatar/2.jpg" alt=""><span>By {{ property.agent.first_name }} {{ property.agent.last_name}}</span></a>
+                                            <a href="agent-single.html" class="gcf-company"><img src="{{ property.agent.profilepic.url }}" alt=""><span>By {{ property.agent.first_name }} {{ property.agent.last_name}}</span></a>
                                             <div class="listing-rating card-popup-rainingvis tolt" data-microtip-position="top" data-tooltip="Good" data-starrating2="4"></div>
                                         </div>
                                     </div>
                                 </article>
                             </div>
+                            {% endfor %}
                             <!-- listing-item end-->								
                         </div>
-                        {% endfor %}
+                        
                         <!-- listing-item-wrap end-->
                         <!-- pagination-->
                         <div class="pagination">

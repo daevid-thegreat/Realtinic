@@ -1,7 +1,7 @@
+from pyexpat import model
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 import uuid
-from datetime import datetime
 
 from realtinic.settings import AUTH_USER_MODEL
 
@@ -57,7 +57,6 @@ class Userprofile(AbstractBaseUser, PermissionsMixin):
     #saved properties - many to one
 
     profilepic = models.ImageField(upload_to="agents profile image", null=True, blank=True)
-    coverpic = models.ImageField(upload_to="agents cover image", null=True, blank=True)
     bio = models.CharField(max_length=700, null=True, blank=True)
     location = models.CharField(max_length=250, null=True, blank=True)
     tel = models.BigIntegerField(null=True, blank=True)
@@ -72,6 +71,8 @@ class Userprofile(AbstractBaseUser, PermissionsMixin):
     gov_id = models.FileField(upload_to='government ids', null=True, blank=True)
     business_id = models.FileField(upload_to='business ids', null=True, blank=True)
     utility_bills = models.FileField(upload_to='utility bills', null=True, blank=True)
+    property_list = models.ManyToManyField('Property', related_name='property_list', blank=True)
+    reviews = models.ManyToManyField('Review', related_name='reviews', blank=True)
 
     verified = models.BooleanField(default=False)
 
@@ -83,27 +84,6 @@ class Userprofile(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.username
-
-
-# class Agency(models.Model):
-#     agency_name = models.CharField(max_length=250)
-#     agency_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
-#     agency_bio = models.CharField(max_length=700)
-#     agency_displayname = models.CharField(max_length=150)
-#     agency_tel = models.IntegerField(default=000000000)
-#     agency_profilepic = models.ImageField(upload_to="agency profile image")
-#     agency_email = models.EmailField()
-#     agency_website = models.URLField()
-#     agency_address = models.CharField(max_length=500)
-#     agency_rating = models.DecimalField(max_digits=5, decimal_places=1)
-#     agency_whatsapp = models.IntegerField()
-#     agency_facebook =models.URLField()
-#     agency_instagram =models.URLField()
-#     agency_twitter =models.URLField()
-#     agency_linkedin =models.URLField()
-
-#     def __str__(self):
-#         return self.agency_displayname
         
 class Property(models.Model):
     
@@ -125,8 +105,8 @@ class Property(models.Model):
     )
 
     list_types = (
-        ('for_sale', 'For Sale'),
-        ('for_rent','For Rent'),
+        ('For Sale', 'For Sale'),
+        ('For Rent','For Rent'),
     )
 
     currency = (
@@ -134,9 +114,14 @@ class Property(models.Model):
         ('Dollar','Dollar'),
     )
 
+    true_false = (
+        ('yes', 'yes'),
+        ('no','no'),
+    )
+
     name = models.CharField(max_length=500)
     location = models.CharField(max_length=500)
-    list_type = models.CharField(max_length=25, choices=list_types)#, default= 'For Sale'
+    list_type = models.CharField(max_length=25, choices=list_types)
     city = models.CharField(max_length=25, choices=property_city, default= 'Abuja')
     price= models.DecimalField(max_digits=13, decimal_places=2)
     home_type = models.CharField(max_length=50, choices=home_types, default= 'Single-family')
@@ -149,11 +134,22 @@ class Property(models.Model):
     one_quarter_bathrooms = models.IntegerField(default=0)
     telephone = models.BigIntegerField(default=000000000000)
     garage = models.IntegerField(default=0)
-    features = models.JSONField(blank=True)
+    
+    pool = models.CharField(max_length=25, choices=true_false, default= 'no')
+    power = models.CharField(max_length=25, choices=true_false, default= 'no')
+    temp = models.CharField(max_length=25, choices=true_false, default= 'no')
+    garden = models.CharField(max_length=25, choices=true_false, default= 'no')
+    solar_power = models.CharField(max_length=25, choices=true_false, default= 'no')
+    cctv = models.CharField(max_length=25, choices=true_false, default= 'no')
+    drain = models.CharField(max_length=25, choices=true_false, default= 'no')
+    water = models.CharField(max_length=25, choices=true_false, default= 'no')
+
     agent = models.ForeignKey(User, related_name='agent', blank=True, null=True, default=None, on_delete=models.CASCADE)
     lot_size = models.IntegerField(default=0)
     yard_size = models.IntegerField(default=0)
-    images = models.FileField(upload_to='property_header_images')
+    header_image = models.ImageField(upload_to='property_header_images')
+    # property_image = models.FileField(upload_to='property_images')
+    
     description = models.TextField(max_length=1000)
     complete = models.BooleanField(default=False)
     built_on = models.DateTimeField(null=True)
@@ -178,6 +174,7 @@ class Property(models.Model):
 
 
 
+
 class review(models.Model):
     ratings = (
         ('Bad', 'Bad'),
@@ -194,3 +191,10 @@ class review(models.Model):
 
     def __str__(self):
         return self.comment
+
+class PropertyImage(models.Model):
+    property = models.ForeignKey(Property, related_name='images', default=None, on_delete=models.CASCADE)
+    property_image = models.ImageField(upload_to='property_images')
+
+    def __str__(self):
+        return self.property.name

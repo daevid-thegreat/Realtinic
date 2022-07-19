@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-{% block title %} {{ user.first_name }}'s Profile - Realtinic{% endblock %}
+{% block title %} {{ user.first_name }}'s Dashboard - Realtinic{% endblock %}
             <div id="wrapper">
                 <!-- dashbard-menu-wrap -->
                 <div class="dashbard-menu-overlay"></div>
@@ -12,8 +12,8 @@
                         <div class="user-profile-menu">
                             <h3>Main</h3>
                             <ul class="no-list-style">
-                                <li><a href="my-dashboard"><i class="fal fa-chart-line"></i>Dashboard</a></li>
-                                <li><a href="my-profile" class="user-profile-act"><i class="fal fa-user-edit"></i> Edit profile</a></li>
+                                <li><a href="my-dashboard" class="user-profile-act"><i class="fal fa-chart-line"></i>Dashboard</a></li>
+                                <li><a href="my-profile" ><i class="fal fa-user-edit"></i> Edit profile</a></li>
                                 <li><a href="my-messages"><i class="fal fa-envelope"></i> Messages <span>3</span></a></li>
                             </ul>
                         </div>
@@ -42,8 +42,8 @@
                             <div class="dashboard-title-item"><span>Dashboard</span></div>
                             <div class="dashbard-menu-header">
                                 <div class="dashbard-menu-avatar fl-wrap">
-                                    <img src="images/avatar/5.jpg" alt="">
-                                    <h4>Welcome, <span>Alica Noory</span></h4>
+                                    <img src="https://avataaars.io/?avatarStyle=Circle&topType=Hat&accessoriesType=Sunglasses&facialHairType=Blank&clotheType=Hoodie&clotheColor=Pink&eyeType=Hearts&eyebrowType=Default&mouthType=Smile&skinColor=Tanned" alt="">
+                                    <h4>Welcome, <span>{{ user.first_name }} {{user.last_name}}</span></h4>
                                 </div>
                                 <a href="index.html" class="log-out-btn   tolt" data-microtip-position="bottom"  data-tooltip="Log Out"><i class="far fa-power-off"></i></a>
                             </div>
@@ -66,7 +66,9 @@
                                         <div class="dashboard-stats fl-wrap">
                                             <i class="fal fa-map-marked"></i>
                                             <h4>Active Listings</h4>
-                                            <div class="dashboard-stats-count">124</div>
+                                            
+                                            <div class="dashboard-stats-count">{{ list_count }}</div>
+                                            
                                         </div>
                                     </div>
                                     <!-- dashboard-stats end -->
@@ -75,25 +77,25 @@
                                         <div class="dashboard-stats fl-wrap">
                                             <i class="fal fa-chart-bar"></i>
                                             <h4>Listing Views</h4>
-                                            <div class="dashboard-stats-count">1056<span>(<strong>+356</strong> this week)</span></div>
+                                            <div class="dashboard-stats-count">{{views_count}}<!-- <span>(<strong>+356</strong> this week)--></span></div> 
                                         </div>
                                     </div>
                                     <!-- dashboard-stats end -->
                                     <!--dashboard-stats-->
-                                    <div class="col-md-3">
+                                    <!-- <div class="col-md-3">
                                         <div class="dashboard-stats fl-wrap">
                                             <i class="fal fa-comments-alt"></i>
                                             <h4>Your Reviews</h4>
-                                            <div class="dashboard-stats-count">357<span>(<strong>+12</strong> this week)</span></div>
+                                            <div class="dashboard-stats-count">{{reviews_count}} <span>(<strong>+12</strong> this week)</span> </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <!-- dashboard-stats end -->
                                     <!--dashboard-stats-->
                                     <div class="col-md-3">
                                         <div class="dashboard-stats fl-wrap">
                                             <i class="fal fa-heart"></i>
                                             <h4>Times Bookmarked</h4>
-                                            <div class="dashboard-stats-count">2329<span>(<strong>+234</strong> this week)</span></div>
+                                            <div class="dashboard-stats-count">{{saved_count}} <!-- <span>(<strong>+234</strong> this week)</span> --> </div>
                                         </div>
                                     </div>
                                     <!-- dashboard-stats end -->		
@@ -101,14 +103,14 @@
                             </div>
                             <div class="clearfix"></div>
                             <div class="row">
-                                <div class="col-md-8">
+                                <div class="col-md-10">
                                     <div class="notification success-notif  fl-wrap">
                                         <p>Your listing <a href="#">Family house in Brooklyn</a> has been approved!</p>
                                         <a class="notification-close" href="#"><i class="fal fa-times"></i></a>
                                     </div>
-                                    <div class="dashboard-widget-title fl-wrap">Your  Statistic</div>
+                                    <!-- <div class="dashboard-widget-title fl-wrap">Your  Statistic</div>
                                     <div class="dasboard-content fl-wrap">
-                                        <!-- chart-wra-->
+                                        
                                         <div class="chart-wrap   fl-wrap">
                                             <div class="chart-header fl-wrap">
                                                 <div class="listsearch-input-item">
@@ -122,8 +124,8 @@
                                             </div>
                                             <canvas id="canvas-chart"></canvas>
                                         </div>
-                                        <!--chart-wrap end-->									
-                                    </div>
+                                        								
+                                    </div> -->
                                     <div class="dashboard-widget-title fl-wrap">Last Activites</div>
                                     <div class="dashboard-list-box  fl-wrap">
                                         <!-- dashboard-list end-->
@@ -164,14 +166,14 @@
                                         <!-- dashboard-list end-->
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <!--box-widget-->
+                           <!--     <div class="col-md-4">
+                                    
                                     <div class="dasboard-widget fl-wrap">
                                         <div class="dasboard-widget-title fl-wrap">
                                             <h5><i class="fas fa-comment-alt"></i>Last Messages</h5>
                                         </div>
                                         <div class="chat-contacts fl-wrap">
-                                            <!-- chat-contacts-item-->
+                                            
                                             <a class="chat-contacts-item" href="#">
                                                 <div class="dashboard-message-avatar">
                                                     <img src="images/avatar/2.jpg" alt="">
@@ -183,8 +185,7 @@
                                                     <p>Vivamus lobortis vel nibh nec maximus. Donec dolor erat, rutrum ut feugiat sed, ornare vitae nunc. Donec massa nisl, bibendum id ultrices sed, accumsan sed dolor.</p>
                                                 </div>
                                             </a>
-                                            <!-- chat-contacts-item -->
-                                            <!-- chat-contacts-item-->
+                                            
                                             <a class="chat-contacts-item" href="#">
                                                 <div class="dashboard-message-avatar">
                                                     <img src="images/avatar/1.jpg" alt="">
@@ -196,8 +197,7 @@
                                                     <p>Vivamus lobortis vel nibh nec maximus. Donec dolor erat, rutrum ut feugiat sed, ornare vitae nunc. Donec massa nisl, bibendum id ultrices sed, accumsan sed dolor.</p>
                                                 </div>
                                             </a>
-                                            <!-- chat-contacts-item -->
-                                            <!-- chat-contacts-item-->
+                                            
                                             <a class="chat-contacts-item chat-contacts-item_active" href="#">
                                                 <div class="dashboard-message-avatar">
                                                     <img src="images/avatar/3.jpg" alt="">
@@ -209,8 +209,7 @@
                                                     <p>Vivamus lobortis vel nibh nec maximus. Donec dolor erat, rutrum ut feugiat sed, ornare vitae nunc. Donec massa nisl, bibendum id ultrices sed, accumsan sed dolor.</p>
                                                 </div>
                                             </a>
-                                            <!-- chat-contacts-item -->
-                                            <!-- chat-contacts-item-->
+                                           
                                             <a class="chat-contacts-item" href="#">
                                                 <div class="dashboard-message-avatar">
                                                     <img src="images/avatar/5.jpg" alt="">
@@ -222,8 +221,7 @@
                                                     <p>Vivamus lobortis vel nibh nec maximus. Donec dolor erat, rutrum ut feugiat sed, ornare vitae nunc. Donec massa nisl, bibendum id ultrices sed, accumsan sed dolor.</p>
                                                 </div>
                                             </a>
-                                            <!-- chat-contacts-item -->
-                                            <!-- chat-contacts-item-->
+                                            
                                             <a class="chat-contacts-item" href="#">
                                                 <div class="dashboard-message-avatar">
                                                     <img src="images/avatar/4.jpg" alt="">
@@ -234,8 +232,7 @@
                                                     <p>Vivamus lobortis vel nibh nec maximus. Donec dolor erat, rutrum ut feugiat sed, ornare vitae nunc. Donec massa nisl, bibendum id ultrices sed, accumsan sed dolor.</p>
                                                 </div>
                                             </a>
-                                            <!-- chat-contacts-item -->
-                                            <!-- chat-contacts-item-->
+                                            
                                             <a class="chat-contacts-item" href="#">
                                                 <div class="dashboard-message-avatar">
                                                     <img src="images/avatar/6.jpg" alt="">
@@ -246,11 +243,10 @@
                                                     <p>Vivamus lobortis vel nibh nec maximus. Donec dolor erat, rutrum ut feugiat sed, ornare vitae nunc. Donec massa nisl, bibendum id ultrices sed, accumsan sed dolor.</p>
                                                 </div>
                                             </a>
-                                            <!-- chat-contacts-item -->
+                                            
                                         </div>
                                     </div>
-                                    <!--box-widget end -->								
-                                    <!--box-widget-->
+                                   
                                     <div class="box-widget fl-wrap">
                                         <div class="banner-widget fl-wrap">
                                             <div class="bg-wrap bg-parallax-wrap-gradien">
@@ -262,6 +258,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                -->
                                     <!--box-widget end --> 								
                                 </div>
                             </div>

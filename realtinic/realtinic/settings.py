@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-import django_heroku
+# import django_heroku
 import os
 from pathlib import Path
 
@@ -84,22 +84,22 @@ DATABASES={
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     # }
-   'default':{
-      'ENGINE':'django.db.backends.postgresql_psycopg2',
-      'NAME':'realtinic',
-      'USER':'postgres',
-      'PASSWORD':'password',
-      'HOST':'localhost',
-      'PORT':'5432',
-   },
-#       'default':{
+#    'default':{
 #       'ENGINE':'django.db.backends.postgresql_psycopg2',
-#       'NAME':'ddfd9jhpl67moq',
-#       'USER':'ztxrkscwtcygxk',
-#       'PASSWORD':'21904b0a2e9a3e9f14ea7c9d5b183051fa0e648bac6df18b3797db8cc77c63f7',
-#       'HOST':'ec2-52-3-60-53.compute-1.amazonaws.com',
+#       'NAME':'realtinic',
+#       'USER':'postgres',
+#       'PASSWORD':'password',
+#       'HOST':'localhost',
 #       'PORT':'5432',
-#    }
+#    },
+      'default':{
+      'ENGINE':'django.db.backends.postgresql_psycopg2',
+      'NAME':'ddfd9jhpl67moq',
+      'USER':'ztxrkscwtcygxk',
+      'PASSWORD':'21904b0a2e9a3e9f14ea7c9d5b183051fa0e648bac6df18b3797db8cc77c63f7',
+      'HOST':'ec2-52-3-60-53.compute-1.amazonaws.com',
+      'PORT':'5432',
+   }
 }
 
 
@@ -140,10 +140,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT =  os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
 
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
@@ -153,3 +153,6 @@ MEDIA_URL ='/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = 'main.UserProfile'
+
+
+
