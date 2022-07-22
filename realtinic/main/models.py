@@ -63,9 +63,9 @@ class Userprofile(AbstractBaseUser, PermissionsMixin):
     website = models.URLField(null=True, blank=True)
     whatsapp = models.IntegerField(null=True, blank=True)
     facebook =models.URLField(null=True, blank=True)
-    instagram =models.URLField(null=True, blank=True)
-    twitter =models.URLField(null=True, blank=True)
-    linkedin =models.URLField(null=True, blank=True)
+    instagram =models.CharField(max_length=50, null=True, blank=True)
+    twitter =models.CharField(max_length=50, null=True, blank=True)
+    linkedin =models.CharField(max_length=50, null=True, blank=True)
 
     in_business_since = models.DateTimeField(null=True, blank=True)
     gov_id = models.FileField(upload_to='government ids', null=True, blank=True)

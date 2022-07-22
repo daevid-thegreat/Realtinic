@@ -36,7 +36,10 @@ def index(request):
             user = User.objects.create_user(first_name=first_name, last_name=last_name, email=email, username=email, password=password)
             user = auth.authenticate(username=email, password=password)
             login(request, user)
-            return redirect('/my-profile')
+            if user.is_realtor == True:
+                return redirect('/my_dashboard')
+            else:
+                return redirect('/my_profile')
 
     if request.method == 'POST' and 'signin' in request.POST : 
          email = request.POST['email']
@@ -241,7 +244,10 @@ def register_agents(request):
 
 def user_single(request, id):
     user = Userprofile.objects.get(id_user = id)
-    return render(request, 'agent-single.html', {'user':user})
+    if user.is_realtor == True:
+        return render(request, 'agent-single.html', {'user':user})
+    else:
+        return render(request, 'user_single.html', {'user':user})
 
 def compare(request):
     return render(request, 'compare.html')
@@ -324,20 +330,34 @@ def user_profile(request):
                     return redirect('my-profile')
                 else:
                     return render(request, 'my-profile.html', {'error':'Passwords do not match or current password is incorrect'})
-        if request.method == 'POST' and 'social':
+
+        if request.method == 'POST' and 'socials':
             user_id = request.user.id_user
             facebook = request.POST['facebook']
+            if facebook != '':
+                user = Userprofile.objects.get(id_user=user_id)
+                user.facebook = facebook
+                user.save()
             twitter = request.POST['twitter']
+            if twitter != '':
+                user = Userprofile.objects.get(id_user=user_id)
+                user.twitter = twitter
+                user.save()
             instagram = request.POST['instagram']
+            if instagram != '':
+                user = Userprofile.objects.get(id_user=user_id)
+                user.instagram = instagram
+                user.save()
             linkedin = request.POST['linkedin']
+            if linkedin != '':
+                user = Userprofile.objects.get(id_user=user_id)
+                user.linkedin = linkedin
+                user.save()
             whatsapp = request.POST['whatsapp']
-            user = Userprofile.objects.get(id_user = user_id)
-            user.facebook = facebook
-            user.twitter = twitter
-            user.instagram = instagram
-            user.linkedin = linkedin
-            user.whatsapp = whatsapp
-            user.save()
+            if whatsapp != '':
+                user = Userprofile.objects.get(id_user=user_id)
+                user.whatsapp = whatsapp
+                user.save()
             return redirect('my-profile')
         return render(request, 'dashboard-myprofile.html')
     else:

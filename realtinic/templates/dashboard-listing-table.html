@@ -37,27 +37,26 @@
                 <div class="dashboard-content">
                     <div class="dashboard-menu-btn color-bg"><span><i class="fas fa-bars"></i></span>Dasboard Menu</div>
                     <div class="container dasboard-container">
-                        <!-- dashboard-title -->	
-                        <div class="dashboard-title fl-wrap">
-                            <div class="dashboard-title-item"><span>Your Listings</span></div>
-                            <div class="dashbard-menu-header">
-                                <div class="dashbard-menu-avatar fl-wrap">
-                                    <img src="https://avataaars.io/?avatarStyle=Circle&topType=Hat&accessoriesType=Sunglasses&facialHairType=Blank&clotheType=Hoodie&clotheColor=Pink&eyeType=Hearts&eyebrowType=Default&mouthType=Smile&skinColor=Tanned" alt="">
-                                    <h4>Welcome, <span>{{user.first_name}} {{user.last_name}}</span></h4>
-                                </div>
-                                <a href="index.html" class="log-out-btn   tolt" data-microtip-position="bottom"  data-tooltip="Log Out"><i class="far fa-power-off"></i></a>
+                      <!-- dashboard-title -->	
+                      <div class="dashboard-title fl-wrap">
+                        <div class="dashboard-title-item"><span>My Listings</span></div>
+                        <div class="dashbard-menu-header">
+                            {% if user.profilepic.url == '' %}
+                            <div class="dashbard-menu-avatar fl-wrap">
+                                <img src="https://avataaars.io/?avatarStyle=Circle&topType=Hat&accessoriesType=Sunglasses&facialHairType=Blank&clotheType=Hoodie&clotheColor=Pink&eyeType=Hearts&eyebrowType=Default&mouthType=Smile&skinColor=Tanned" alt="User Profile">
+                                <h4>Welcome, <span> {{ user.first_name }} {{user.last_name }}</span></h4>
                             </div>
-                            <!--Tariff Plan menu-->
-                            <div class="tfp-det-container">
-                                <div   class="tfp-btn"><span>Your Tariff Plan : </span> <strong>Extended</strong></div>
-                                <div class="tfp-det">
-                                    <p>You Are on <a href="#">Extended</a> . Use link bellow to view details or upgrade. </p>
-                                    <a href="#" class="tfp-det-btn color-bg">Details</a>
-                                </div>
+                            <a href="/logout" class="log-out-btn   tolt" data-microtip-position="bottom"  data-tooltip="Log Out"><i class="far fa-power-off"></i></a>
+                            {% else %}
+                            <div class="dashbard-menu-avatar fl-wrap">
+                                <img src="{{user.profilepic.url}}" alt="{{user.profile_pic.url}}">
+                                <h4>Welcome, <span> {{ user.first_name }} {{user.last_name }}</span></h4>
                             </div>
-                            <!--Tariff Plan menu end-->						
-                        </div>
-                        <!-- dashboard-title end -->		
+                            <a href="/logout" class="log-out-btn   tolt" data-microtip-position="bottom"  data-tooltip="Log Out"><i class="far fa-power-off"></i></a>
+                            {% endif %}
+                        </div>					
+                    </div>
+                    <!-- dashboard-title end -->		
                         <div class="dasboard-wrapper fl-wrap">
                             <div class="dasboard-listing-box fl-wrap">
                                 <div class="dasboard-opt sl-opt fl-wrap">
