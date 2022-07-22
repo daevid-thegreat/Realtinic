@@ -4,7 +4,7 @@ from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
-from .models import Userprofile, Property, review, PropertyImage
+from .models import Userprofile, Property, review, PropertyImage,Booking
 from django.contrib.auth import get_user_model
 from django.core.paginator import Paginator
 from django.db.models import Sum
@@ -262,7 +262,7 @@ def dashboard(request):
     if count_saved['saved__sum'] is None:
         count_saved = 0
 
-    return render(request, 'dashboard.html', {'list_count':count_list, 'views_count':count_views, 'saved_count':count_saved})
+    return render(request, 'dashboard.html', {'list_count':count_list, 'views_count':count_views['views__sum'], 'saved_count':count_saved['saved__sum']})
 
 @login_required(login_url='/')
 def user_profile(request):
@@ -270,35 +270,60 @@ def user_profile(request):
         if request.method == 'POST' and 'info':
             user_id = request.user.id_user
             image = request.FILES.get('image')
-            first_name = request.POST['first_name']
-            last_name = request.POST['last_name']
-            email = request.POST['email']
-            tel = request.POST['tel']
-            address = request.POST['address']
-            website = request.POST['website']
-            bio = request.POST['bio']
-            user = User.objects.get(id_user = user_id)
-            user.tel = tel
-            user.first_name = first_name
-            user.last_name = last_name
-            user.email = email
-            user.address = address
-            user.website = website
-            user.bio = bio
-            user.save()
+            if image != '':
+                user = Userprofile.objects.get(id_user=user_id)
+                user.image = image
+                user.save()
+            first_name = request.POST.get('first_name')
+            if first_name != '':
+                user = Userprofile.objects.get(id_user=user_id)
+                user.first_name = first_name
+                user.save()
+            last_name = request.POST.get('last_name')
+            if last_name != '':
+                user = Userprofile.objects.get(id_user=user_id)
+                user.last_name = last_name
+                user.save()
+            email = request.POST.get('email')
+            if email != '':
+                user = Userprofile.objects.get(id_user=user_id)
+                user.email = email
+                user.save()
+            tel = request.POST.get('tel')
+            if tel != '':
+                user = Userprofile.objects.get(id_user=user_id)
+                user.tel = tel
+                user.save()
+            address = request.POST.get('address')
+            if address != '':
+                user = Userprofile.objects.get(id_user=user_id)
+                user.location = address
+                user.save()
+            website = request.POST.get('website')
+            if website != '':
+                user = Userprofile.objects.get(id_user=user_id)
+                user.website = website
+                user.save()
+            bio = request.POST.get('bio')
+            if bio != '':
+                user = Userprofile.objects.get(id_user=user_id)
+                user.bio = bio
+                user.save()
             return redirect('my_profile')
+
+            
         if request.method == 'POST' and 'password':
             user_id = request.user.id_user
             password1 = request.POST['password']
             password2 = request.POST['password2']
-            if user.check_password(request.POST['reset_password']):
+            if user.check_password(request.POST['main_password']):
                 if password1 == password2:
                     user = User.objects.get(id_user = user_id)
                     user.set_password(password1)
                     user.save()
                     return redirect('my-profile')
                 else:
-                    return render(request, 'my-profile.html', {'error':'Passwords do not match or current password incorrect'})
+                    return render(request, 'my-profile.html', {'error':'Passwords do not match or current password is incorrect'})
         if request.method == 'POST' and 'social':
             user_id = request.user.id_user
             facebook = request.POST['facebook']
@@ -329,6 +354,23 @@ def single_listing(request, id):
     if request.method == 'POST' and 'save' in request.POST:
         listing.saved.add(request.user)
         return redirect('/listing/'+str(listing.id))
+
+    if request.method == 'POST' and 'booking' in request.POST:
+        tour_type = request.POST['tour_type']
+        tour_date = request.POST['datepicker-here']
+        tour_time = request.POST['time']
+
+        booking = Booking.objects.create(
+            listing = listing,
+            user = request.user,
+            tour_type = tour_type,
+            tour_date = tour_date,
+            tour_time = tour_time,
+        )
+        print(booking)
+        booking.save()
+        return redirect('/listing/'+str(listing.id))
+
 
     if request.method == 'POST' and 'review' in request.POST:
         author = request.user

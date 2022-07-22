@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Property, Userprofile, review, PropertyImage
+from .models import Property, Userprofile, review, PropertyImage, Booking
 
 class PropertyImageInline(admin.StackedInline):
     model = PropertyImage
@@ -12,3 +12,4 @@ admin.site.register(Userprofile)
 admin.site.register(Property, PropertyAdmin)
 admin.site.register(review)
 admin.site.register(PropertyImage)
+admin.site.register(Booking)
