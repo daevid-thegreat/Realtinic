@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div id="wrapper">
+    <!-- dashbard-menu-wrap -->
+    <div class="dashbard-menu-overlay"></div>
+    <div class="dashbard-menu-wrap">
+        <div class="dashbard-menu-close"><i class="fal fa-times"></i></div>
+        <div class="dashbard-menu-container">
+            <!-- user-profile-menu-->
+            <div class="user-profile-menu">
+                <h3>Main</h3>
+                <ul class="no-list-style">
+                    <li><a href="my-dashboard"><i class="fal fa-chart-line"></i>Dashboard</a></li>
+                    <li><a href="my-profile"><i class="fal fa-user-edit"></i> Edit profile</a></li>
+                    <li><a href="my-messages"><i class="fal fa-envelope"></i> Messages <span>3</span></a></li>
+                </ul>
+            </div>
+            <!-- user-profile-menu end-->
+            <!-- user-profile-menu-->
+            <div class="user-profile-menu">
+                <h3>Listings</h3>
+                <ul  class="no-list-style">
+                    <li><a href="my-listings"><i class="fal fa-th-list"></i> My listings  </a></li>
+                    <li><a href="my-bookings"> <i class="fal fa-calendar-check"></i> Bookings <span>2</span></a></li>
+                    <li><a href="my-reviews"><i class="fal fa-comments-alt"></i> Reviews </a></li>
+                    <li><a href="add-listing" class="user-profile-act"><i class="fal fa-file-plus"></i> Add New</a></li>
+                </ul>
+            </div>
+            <!-- user-profile-menu end--> 
+        </div>
+        <div class="dashbard-menu-footer"> &#169;  Realtinic 2022 .  All rights reserved.</div>
+    </div>
+    <!-- dashbard-menu-wrap end  -->
+    {% block page%} {% endblock %}
+</div>
+{% endblock %}

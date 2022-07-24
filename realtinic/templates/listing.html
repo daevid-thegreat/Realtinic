@@ -31,7 +31,7 @@
                     </div>
                     <!-- categoties-column end -->
                     <!-- Map -->
-                    <div class="map-container column-map   hid-mob-map">
+                    <div class="map-container column-map hid-mob-map">
                         <div id="map-main"></div>
                         <ul class="mapnavigation no-list-style">
                             <li><a href="#" class="prevmap-nav mapnavbtn"><span><i class="fas fa-caret-left"></i></span></a></li>
@@ -41,7 +41,9 @@
                         <div class="location-btn geoLocation tolt" data-microtip-position="top-left" data-tooltip="Your location"><span><i class="fal fa-location"></i></span></div>
                         <div class="map-close"><i class="fas fa-times"></i></div>
                     </div>
-                    <!-- Map end -->					
+                    <!-- Map end -->	
+                    
+                    <form method="GET" action=''>
                     <!-- top-search-content -->
                     <div class="top-search-content">
                         <div class="top-search-dec color-bg"><i class="far fa-sliders-h"></i></div>
@@ -52,14 +54,15 @@
                                 <!-- listsearch-input-item -->
                                 <div class="col-sm-3">
                                     <div class="listsearch-input-item">
-                                        <input type="text" onClick="this.select()" placeholder="Address , Street , State..." value=""/>										
+                                        <input type="text" onClick="this.select()" name="query" placeholder="Address , Street , State..." value=""/>										
                                     </div>
                                 </div>
                                 <!-- listsearch-input-item -->
                                 <!-- listsearch-input-item -->
                                 <div class="col-sm-2">
                                     <div class="listsearch-input-item">
-                                        <select data-placeholder="Status" class="chosen-select on-radius no-search-select" >
+                                        <select data-placeholder="Status" name="list_type" class="chosen-select on-radius no-search-select" >
+                                            <option value=''>List Type</option>
                                             <option>For Sale</option>
                                             <option>For Rent</option>
                                         </select>
@@ -69,8 +72,8 @@
                                 <!-- listsearch-input-item -->
                                 <div class="col-sm-2">
                                     <div class="listsearch-input-item">
-                                        <select data-placeholder="Choose City" class="chosen-select on-radius no-search-select" >
-                                                <option>All Cities</option>
+                                        <select data-placeholder="Choose City" name="city" class="chosen-select on-radius no-search-select" >
+                                                <option value=''>All Cities</option>
                                                 <option>Abuja</option>
                                                 <option>Lagos</option>
                                                 <option>Ibadan</option>
@@ -82,16 +85,16 @@
                                 <!-- listsearch-input-item -->
                                 <div class="col-sm-2">
                                     <div class="listsearch-input-item">
-                                        <select data-placeholder="Property Type" class="chosen-select on-radius no-search-select" >
-                                            <option>All Categories</option>
-                                                    <option>Single-family</option>
-                                                    <option>Semi-detached</option>
-                                                    <option>Apartment</option>
-                                                    <option>Townhomes</option>
-                                                    <option>Multi-family</option>
-                                                    <option>Mobile/Manufactured</option>
-                                                    <option>Condo</option>
-                                                </select>
+                                        <select data-placeholder="Property Type" name="home_type" class="chosen-select on-radius no-search-select" >
+                                            <option value=''>All Categories</option>
+                                            <option>Single-family</option>
+                                            <option>Semi-detached</option>
+                                            <option>Apartment</option>
+                                            <option>Townhomes</option>
+                                            <option>Multi-family</option>
+                                            <option>Mobile/Manufactured</option>
+                                            <option>Condo</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <!-- listsearch-input-item -->								
@@ -100,7 +103,7 @@
                                     <div class="listsearch-input-item">
                                         <div class="price-rage-item fl-wrap">
                                             <span class="pr_title">Price:</span>                            
-                                            <input type="text" class="price-range-double" data-min="10000" data-max="1000000000"  name="price-range2"  data-step="100" value="1" data-prefix="$">
+                                            <input type="text" class="price-range-double" data-min="10000" data-max="10000000"  name="price-range2"  data-step="10000" value="1" data-prefix="$">
                                         </div>
                                     </div>
                                 </div>
@@ -118,7 +121,8 @@
                                 <div class="col-sm-3">
                                     <div class="listsearch-input-item">
                                         <label>Bedrooms</label>
-                                        <select data-placeholder="Bedrooms" class="chosen-select on-radius no-search-select" >
+                                        <select data-placeholder="Bedrooms" name="bedrooms" class="chosen-select on-radius no-search-select" >
+                                            <option value=''>Select Number</option>
                                             <option>1</option>
                                             <option>2</option>
                                             <option>3</option>
@@ -132,12 +136,13 @@
                                 <div class="col-sm-3">
                                     <div class="listsearch-input-item">
                                         <label>Bathrooms</label>
-                                        <select data-placeholder="Bathrooms" class="chosen-select on-radius no-search-select" >
+                                        {% comment %} <select data-placeholder="Bathrooms" name="bathrooms" class="chosen-select on-radius no-search-select" >
+                                            <option value=''>Select Number</option>
                                             <option>1</option>
                                             <option>2</option>
                                             <option>3</option>
                                             <option>4</option>
-                                        </select>
+                                        </select> {% endcomment %}
                                     </div>
                                 </div>
                                 <!-- listsearch-input-item end-->
@@ -150,7 +155,7 @@
                                     <div class="listsearch-input-item">
                                         <label>Area Sq/ft</label>
                                         <div class="price-rage-item pr-it-nopad fl-wrap">
-                                            <input type="text" class="price-range-double" data-min="1" data-max="1000000"  name="price-range2"  data-step="1" value="1" data-prefix="">
+                                            <input type="text" class="price-range-double" data-min="1" data-max="1000000"  name="area-range2"  data-step="1" value="1" data-prefix="">
                                         </div>
                                     </div>
                                 </div>
@@ -163,28 +168,30 @@
                                 <div class=" fl-wrap filter-tags">
                                     <ul class="no-list-style">
                                         <li>
-                                            <input id="check-aa" type="checkbox" name="check">
+                                            <input id="check-aa" type="checkbox" name="pool">
                                             <label for="check-aa">Has Pool</label>
                                         </li>
                                         <li>
-                                            <input id="check-b" type="checkbox" name="check">
+                                            <input id="check-b" type="checkbox" name="garage">
                                             <label for="check-b"> Has Garage</label>
                                         </li>
                                         <li>
-                                            <input id="check-c" type="checkbox" name="check" checked>
+                                            <input id="check-c" type="checkbox" name="basement">
                                             <label for="check-c">Has Basement</label>
                                         </li>
                                 </div>
                             </div>
                             <!-- listsearch-input-item end--> 							
                             <div class="msotw_footer">
-                                <a href="#" class="btn small-btn float-btn color-bg">Search</a>
+                                <button type="submit" class="btn small-btn float-btn color-bg">Search</button>
                                 <div class="reset-form reset-btn"> <i class="far fa-sync-alt"></i> Reset Filters</div>
                             </div>
                         </div>
                         <!-- more-search-opt-wrap end -->
                     </div>
-                    <!-- top-search-content end -->					
+                    <!-- top-search-content end -->	
+                    </form>
+
                     <!-- col-list-wrap -->
                     <div class="col-list-wrap gray-bg ">
                         <div class="col-list-wrap_opt fl-wrap">
@@ -265,7 +272,7 @@
                                         </div>
                                         <div class="geodir-category-footer fl-wrap">
                                             <a href="agent-single.html" class="gcf-company"><img src="{{ property.agent.profilepic.url }}" alt=""><span>By {{ property.agent.first_name }} {{ property.agent.last_name}}</span></a>
-                                            <div class="listing-rating card-popup-rainingvis tolt" data-microtip-position="top" data-tooltip="Good" data-starrating2="4"></div>
+                                            <div class="listing-rating card-popup-rainingvis tolt" data-microtip-position="top" data-tooltip="Good" data-starrating2="3.9"></div>
                                         </div>
                                     </div>
                                 </article>
