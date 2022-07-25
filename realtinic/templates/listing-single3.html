@@ -96,38 +96,23 @@
                                         <div class="list-single-main-media fl-wrap">
                                             <div class="single-slider-wrapper carousel-wrap fl-wrap">
                                                 <div class="slider-for fl-wrap carousel lightgallery"  >
+
+                                                    <div class="slick-slide-item">
+                                                        <div class="box-item">
+                                                            <a href="{{listing.header_image.url}}" class="gal-link popup-image"><i class="fal fa-search"  ></i></a>
+                                                            <img src="{{listing.header_image.url}}" alt="">
+                                                        </div>
+                                                    </div>
+                                                    {% for x in listing.images.all %}
                                                     <!--  slick-slide-item -->
                                                     <div class="slick-slide-item">
                                                         <div class="box-item">
-                                                            <a href="images/all/1.jpg" class="gal-link popup-image"><i class="fal fa-search"  ></i></a>
-                                                            <img src="images/all/1.jpg" alt="">
+                                                            <a href="{{x.property_image.url}}" class="gal-link popup-image"><i class="fal fa-search"  ></i></a>
+                                                            <img src="{{x.property_image.url}}" alt="">
                                                         </div>
                                                     </div>
                                                     <!--  slick-slide-item end -->
-                                                    <!--  slick-slide-item -->
-                                                    <div class="slick-slide-item">
-                                                        <div class="box-item">
-                                                            <a href="images/all/2.jpg" class="gal-link popup-image"><i class="fal fa-search"  ></i></a>
-                                                            <img src="images/all/2.jpg" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <!--  slick-slide-item end -->
-                                                    <!--  slick-slide-item -->
-                                                    <div class="slick-slide-item">
-                                                        <div class="box-item">
-                                                            <a href="images/all/3.jpg" class="gal-link popup-image"><i class="fal fa-search"  ></i></a>
-                                                            <img src="images/all/3.jpg" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <!--  slick-slide-item end -->
-                                                    <!--  slick-slide-item -->
-                                                    <div class="slick-slide-item">
-                                                        <div class="box-item">
-                                                            <a href="images/all/4.jpg" class="gal-link popup-image"><i class="fal fa-search"  ></i></a>
-                                                            <img src="images/all/4.jpg" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <!--  slick-slide-item end -->
+                                                    {% endfor %}
                                                 </div>
                                                 <div class="swiper-button-prev ssw-btn"><i class="fas fa-caret-left"></i></div>
                                                 <div class="swiper-button-next ssw-btn"><i class="fas fa-caret-right"></i></div>
@@ -390,12 +375,12 @@
                                             <div class="profile-widget-content fl-wrap">
                                                 <div class="contats-list fl-wrap">
                                                     <ul class="no-list-style">
-                                                        {% if listing.user_agent.tel != None %}
-                                                        <li><span><i class="fal fa-phone"></i> Phone :</span> <a href="#">{{listing.user_agent.tel}}</a></li>
+                                                        {% if listing.agent.tel != None %}
+                                                        <li><span><i class="fal fa-phone"></i> Phone :</span> <a href="#">{{listing.agent.tel}}</a></li>
                                                         {% endif %}
-                                                        <li><span><i class="fal fa-envelope"></i> Mail :</span> <a href="#">{{listing.user_agent.email}}</a></li>
-                                                        {% if listing.user_agent.website != None %}
-                                                        <li><span><i class="fal fa-browser"></i> Website :</span> <a href="{{listing.user_agent.website}}">{{listing.user_agent.website}}</a></li>
+                                                        <li><span><i class="fal fa-envelope"></i> Mail :</span> <a href="#">{{listing.agent.email}}</a></li>
+                                                        {% if listing.agent.website != '' %}
+                                                        <li><span><i class="fal fa-browser"></i> Website :</span> <a href="{{listing.agent.website}}">{{listing.agent.website}}</a></li>
                                                         {% endif %}
                                                     </ul>
                                                 </div>
@@ -408,10 +393,11 @@
                                     </div>
                                     <!--box-widget end -->
                                     <!--box-widget-->
-                                    <div class="box-widget fl-wrap">
+
+                                    <!-- <div class="box-widget fl-wrap">
                                         <div class="box-widget-title fl-wrap">Featured Properties</div>
                                         <div class="box-widget-content fl-wrap">
-                                            <!--widget-posts-->
+                                            
                                             <div class="widget-posts  fl-wrap">
                                                 <ul class="no-list-style">
                                                     <li>
@@ -452,10 +438,10 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <!-- widget-posts end-->                                                           
+                                                                                                      
                                             <a href="listing.html" class="btn float-btn color-bg small-btn">View All Properties</a>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <!--box-widget end --> 
                                     <!--box-widget-->
                                     <div class="box-widget fl-wrap hidden-section" style="margin-top: 30px">
@@ -498,12 +484,12 @@
                                             <div class="box-widget-title fl-wrap box-widget-title-color color-bg">Take a Tour</div>
                                             <div class="box-widget-content fl-wrap">
                                                 <div class="custom-form">
-                                                    <form method="post"  name="contact-property-form"> 
-                                                          
+                                                    <form method="post"  name="booking"> 
+                                                          {% csrf_token %}
                                                         <div class="row">
                                                             <div class="col-sm-12">
                                                                 <label>Tour Type  </label>
-                                                                <select data-placeholder="Online Tour" name="time" class="chosen-select on-radius no-search-select" >
+                                                                <select data-placeholder="Online Tour" name="tour_type" class="chosen-select on-radius no-search-select" >
                                                                     <option>Online Tour</option>
                                                                     <option>Physical Tour</option>
                                                                 </select>
@@ -517,14 +503,16 @@
                                                             <div class="col-sm-6">
                                                                 <label>Time  </label>
                                                                 <select data-placeholder="9 AM" name="time" class="chosen-select on-radius no-search-select" >
+                                                                    <option>7 PM</option>
+                                                                    <option>8 PM</option>
                                                                     <option>9 AM</option>
                                                                     <option>10 AM</option>
                                                                     <option>11 AM</option>
                                                                     <option>12 AM</option>
-                                                                    <option>13 PM</option>
-                                                                    <option>14 PM</option>
-                                                                    <option>15 PM</option>
-                                                                    <option>16 PM</option>
+                                                                    <option>1 PM</option>
+                                                                    <option>2 PM</option>
+                                                                    <option>3 PM</option>
+                                                                    <option>4 PM</option>
                                                                 </select>
                                                             </div>
                                                         </div>

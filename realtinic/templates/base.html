@@ -94,7 +94,7 @@
                 <!--  cart-btn end -->
                 <!--  login btn -->
                 {% if user.is_authenticated %}
-                <div class="show-reg-form"><i class="fas fa-user"></i><a href="my-profile"><span>{{ user.first_name }}</a></span>
+                <div class="show-reg-form"><i class="fas fa-user"></i><a href="/my-profile"><span>{{ user.first_name }}</a></span>
                     </div>
                 {% else %}
                 <div class="show-reg-form modal-open"><i class="fas fa-user"></i><span>Sign In</span></div>
@@ -112,7 +112,7 @@
                                 <a href="/add-listing">Sell or Lease</i></a>                               
                             </li>
                             <li>
-                                <a href="manager.realtinic.com" target="_blank">Property Management</i></a>
+                                <a href="https://manager.realtinic.com" target="_blank">Property Management</i></a>
                             </li>
                             <li>
                                 <a href="/find-agent">Find Agents</i></a>                               
@@ -312,7 +312,7 @@
                                     <!--tab -->
                                     <div id="tab-1" class="tab-content first-tab">
                                         <div class="custom-form">
-                                            <form method="post" action="" name="loginform">
+                                            <form method="post" action="{% url 'index' %}" name="loginform">
                                                 {% csrf_token %}
                                                 {% for message in messages %}
                                           <h4 style="color: red;">{{message}}</h4>
