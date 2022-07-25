@@ -1,5 +1,4 @@
-
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -7,9 +6,8 @@ from django.contrib.auth import login
 from .models import Userprofile, Property, review, PropertyImage,Booking
 from django.contrib.auth import get_user_model
 from django.core.paginator import Paginator
-from django.db.models import Sum
+from django.db.models import Sum, Q
 User = get_user_model()
-
 
 # Create your views here.
 
@@ -19,7 +17,6 @@ def handler404(request, exception=None):
 def handler500(request, exception=None):
     return render(request, '500.html')
 
-
 def index(request):
     if request.method == 'POST' and 'signup' in request.POST:
         first_name = request.POST['first_name']
@@ -27,12 +24,10 @@ def index(request):
         email = request.POST['email']
         password = request.POST['password']
 
-
         if User.objects.filter(email=email).exists():
             messages.info(request, 'Email is taken')
             return redirect('/')
         else:
-
             user = User.objects.create_user(first_name=first_name, last_name=last_name, email=email, username=email, password=password)
             user = auth.authenticate(username=email, password=password)
             login(request, user)
@@ -56,29 +51,62 @@ def index(request):
     return render(request, 'index.html', {'properties':properties})
 
 def listing(request):
+    
+    properties = Property.objects.all()
+    search =  request.GET.get('keyword')
+    query = request.GET.get('query')
+    list_type =  request.GET.get('list_type')
+    city =  request.GET.get('city')
+    home_type = request.GET.get('home_type')
+    price_range = request.GET.get('price-range2')
+    area_range = request.GET.get('area-range2')
+    bedrooms = request.GET.get('bedrooms')
+    bathrooms = request.GET.get('bathrooms')
+    pool = request.GET.get('pool')
+    garage = request.GET.get('garage')
+    basement = request.GET.get('basement')
 
-        if request.method == 'GET':
-            search =  request.GET.get('search')
-            list_type =  request.GET.get('list_type')
-            city =  request.GET.get('city')
-            if search:       
-                propertys = Paginator(Property.objects.filter(name__icontains =search).order_by('-listed_on')
-                |Property.objects.filter(description__icontains =search).order_by('-listed_on'), 2)
-                page = request.GET.get('page')
-                propertys = propertys.get_page(page)
-                nums = "p" * propertys.paginator.num_pages
-                return render(request,'listing.html',{"propertys":propertys, "nums": nums, 'search':search})
-            else:
-                p = Paginator(Property.objects.order_by('-listed_on'), 2)
-                page = request.GET.get('page')
-                propertys = p.get_page(page)
-                nums = "p" * propertys.paginator.num_pages
-                return render(request, 'listing.html', {"propertys":propertys, "nums": nums})
-        p = Paginator(Property.objects.order_by('-listed_on'), 2)
-        page = request.GET.get('page')
-        propertys = p.get_page(page)
-        nums = "p" * propertys.paginator.num_pages
-        return render(request, 'listing.html', {"propertys":propertys, "nums": nums})
+    context = {}
+
+    if search:
+        properties = properties.filter(
+            Q(name__icontains=search) |
+            Q(description__icontains=search)
+        )
+        context['search'] = search
+    if query:
+        properties = properties.filter(location__icontains=query)
+    if list_type:
+        properties = properties.filter(list_type__icontains=list_type)
+    if city:
+        properties = properties.filter(city__icontains=city)
+    if home_type:
+        properties = properties.filter(home_type__icontains=home_type)
+    if price_range:
+        price_range = price_range.split(';')
+        properties = properties.filter(
+            Q(price__gte=price_range[0]) &
+            Q(price__lte=price_range[1])
+        )
+    if area_range:
+        area_range = area_range.split(';')
+        properties = properties.filter(
+            Q(yard_size__gte=area_range[0]) &
+            Q(yard_size__lte=area_range[1])
+        )
+    if bedrooms:
+        properties = properties.filter(bedrooms=bedrooms)
+
+    page = request.GET.get('page')
+    props = Paginator(properties.order_by('-listed_on'), 2).get_page(page)
+    nums = "p" * props.paginator.num_pages
+
+    context = {
+        "propertys": props,
+        "nums" : nums
+    }
+
+    return render(request, 'listing.html', context)
 
 
 @login_required(login_url='/')
@@ -129,7 +157,6 @@ def addlisting(request):
             video_link = request.POST['video_link']
             agent = request.user
             
-
             new_property = Property.objects.create(
                 name=name, 
                 city=city, 
@@ -226,7 +253,6 @@ def agency_single(request):
 def agents(request,):
     return redirect(request, 'find-agents')
 
-
 def register_agents(request):
     if request.method == 'POST':
         first_name = request.POST['first_name']
@@ -268,7 +294,8 @@ def dashboard(request):
     if count_saved['saved__sum'] is None:
         count_saved = 0
 
-    return render(request, 'dashboard.html', {'list_count':count_list, 'views_count':count_views['views__sum'], 'saved_count':count_saved['saved__sum']})
+    return render(request, 'dashboard.html', {'list_count':count_list, 'views_count':count_views['views__sum'], 'saved_count':count_saved})
+
 
 @login_required(login_url='/')
 def user_profile(request):
@@ -317,7 +344,6 @@ def user_profile(request):
                 user.save()
             return redirect('my_profile')
 
-            
         if request.method == 'POST' and 'password':
             user_id = request.user.id_user
             password1 = request.POST['password']
@@ -329,9 +355,11 @@ def user_profile(request):
                     user.save()
                     return redirect('my-profile')
                 else:
+
                     return render(request, 'my-profile.html', {'error':'Passwords do not match or current password is incorrect'})
 
         if request.method == 'POST' and 'socials':
+
             user_id = request.user.id_user
             facebook = request.POST['facebook']
             if facebook != '':
@@ -365,14 +393,18 @@ def user_profile(request):
 
 def single_listing(request, id):
     listing = Property.objects.get(id = id)
-    listing.views=listing.views+1
+    listing = get_object_or_404(Property, id=id)
+    listing.views += 1
     listing.save()
 
-    reviews = review.objects.filter(listing = listing)
-    for r in reviews:
-        print(r.rating)
+    # reviews = listing.reviews.all()
+    
     if request.method == 'POST' and 'save' in request.POST:
-        listing.saved.add(request.user)
+        if listing in request.user.saved_property.all():
+            listing.saved.add(request.user)
+            print('do')
+        else: 
+            listing.saved.remove(request.user)
         return redirect('/listing/'+str(listing.id))
 
     if request.method == 'POST' and 'booking' in request.POST:
@@ -393,13 +425,18 @@ def single_listing(request, id):
 
 
     if request.method == 'POST' and 'review' in request.POST:
-        author = request.user
-        comment = request.POST['comment']
-        rating = request.POST['rating']
-        listing = listing
+        listing.reviews.create(
+            author=request.user,
+            comment=request.POST['comment'],
+            rating=request.POST['rating'],
+        )
+        # author = request.user
+        # comment = request.POST['comment']
+        # rating = request.POST['rating']
+        # listing = listing
 
-        reviews = review.objects.create(author=author, comment=comment, rating=rating, listing=listing)
-        reviews.save()
+        # reviews = review.objects.create(author=author, comment=comment, rating=rating, listing=listing)
+        # reviews.save()
         return redirect('/listing/'+str(listing.id))
 
     return render(request, 'listing-single3.html', {'listing': listing})

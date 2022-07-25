@@ -1,7 +1,6 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block content %}
+{% extends 'base-dashboard.html' %}
 {% block title %} {{ user.first_name }}'s Listings - Realtinic{% endblock %}
+{% block page %}
             <div id="wrapper">
                 <!-- dashbard-menu-wrap -->
                 <div class="dashbard-menu-overlay"></div>
@@ -83,6 +82,7 @@
                                 <!-- dashboard-listings-wrap-->
                                 <div class="dashboard-listings-wrap fl-wrap">
                                     <div class="row">
+                                        {% for listing in user.properties.all %}
                                         <!-- dashboard-listings-item-->
                                         <div class="col-md-11">
                                             <div class="dashboard-listings-item fl-wrap">
@@ -94,14 +94,14 @@
                                                     <a href="listing-single.html" class="color-bg">View</a>
                                                 </div>
                                                 <div class="dashboard-listings-item_content">
-                                                    <h4><a href="listing-single.html">Gorgeous House For Sale</a></h4>
+                                                    <h4><a href="listing-single.html">{{ listing.name }}</a></h4>
                                                     <div class="geodir-category-location">
-                                                        <a href="#"><i class="fas fa-map-marker-alt"></i> <span>  70 Bright St New York, USA</span></a>
+                                                        <a href="#"><i class="fas fa-map-marker-alt"></i> <span>  {{ listing.location }}</span></a>
                                                     </div>
                                                     <div class="clearfix"></div>
                                                     <div class="listing-rating card-popup-rainingvis tolt" data-microtip-position="right" data-tooltip="Good" data-starrating2="4"></div>
                                                     <div class="dashboard-listings-item_opt">
-                                                        <span class="viewed-counter"><i class="fas fa-eye"></i> Viewed -  645 </span>
+                                                        <span class="viewed-counter"><i class="fas fa-eye"></i> Viewed -  {{ listing.views }} </span>
                                                         <ul>
                                                             <li><a href="#" class="tolt" data-microtip-position="top-left"  data-tooltip="Edit"><i class="far fa-edit"></i></a></li>
                                                             <li><a href="#" class="tolt" data-microtip-position="top-left"  data-tooltip="Disable"><i class="far fa-signal-alt-slash"></i></a></li>
@@ -111,6 +111,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        {% endfor %}
                                         <!-- dashboard-listings-item end--> 									
                                         <!-- dashboard-listings-item-->
                                         <!-- <div class="col-md-6">
@@ -178,5 +179,4 @@
                 <div class="dashbard-bg gray-bg"></div>
             </div>
             <!-- wrapper end -->
-        </div>
-        {% endblock %}
+            {% endblock %}

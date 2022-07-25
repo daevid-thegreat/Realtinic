@@ -62,21 +62,23 @@ class Userprofile(AbstractBaseUser, PermissionsMixin):
     tel = models.BigIntegerField(null=True, blank=True)
     website = models.URLField(null=True, blank=True)
     whatsapp = models.IntegerField(null=True, blank=True)
+
     facebook =models.URLField(null=True, blank=True)
     instagram =models.CharField(max_length=50, null=True, blank=True)
     twitter =models.CharField(max_length=50, null=True, blank=True)
     linkedin =models.CharField(max_length=50, null=True, blank=True)
 
+
     in_business_since = models.DateTimeField(null=True, blank=True)
     gov_id = models.FileField(upload_to='government ids', null=True, blank=True)
     business_id = models.FileField(upload_to='business ids', null=True, blank=True)
     utility_bills = models.FileField(upload_to='utility bills', null=True, blank=True)
-    property_list = models.ManyToManyField('Property', related_name='property_list', blank=True)
-    reviews = models.ManyToManyField('Review', related_name='reviews', blank=True)
+    # property_list = models.ManyToManyField('Property', related_name='property_list', blank=True)
+    # reviews = models.ManyToManyField('Review', related_name='reviews', blank=True)
 
     verified = models.BooleanField(default=False)
 
-    password = models.CharField(max_length=250)
+    password = models.CharField(max_length=250, editable=False)
     objects = UserprofileManager()
 
     USERNAME_FIELD = 'email'
@@ -144,7 +146,7 @@ class Property(models.Model):
     drain = models.CharField(max_length=25, choices=true_false, default= 'no')
     water = models.CharField(max_length=25, choices=true_false, default= 'no')
 
-    agent = models.ForeignKey(User, related_name='agent', blank=True, null=True, default=None, on_delete=models.CASCADE)
+    agent = models.ForeignKey(User, related_name='properties', blank=True, null=True, default=None, on_delete=models.CASCADE)
     lot_size = models.IntegerField(default=0)
     yard_size = models.IntegerField(default=0)
     header_image = models.ImageField(upload_to='property_header_images')
@@ -153,7 +155,7 @@ class Property(models.Model):
     description = models.TextField(max_length=1000)
     complete = models.BooleanField(default=False)
     built_on = models.DateTimeField(null=True)
-    listed_on =models.DateTimeField(auto_now_add=False, auto_now=True)
+    listed_on = models.DateTimeField(auto_now_add=False, auto_now=True)
     last_updated = models.DateTimeField(auto_now=True, null=True)
     video_link = models.URLField(max_length=350, null=True, blank=True)
     views = models.IntegerField(default = 0, null=True, blank=True, editable=False)
@@ -165,14 +167,29 @@ class Property(models.Model):
 
     def __str__(self):
         return self.name
-    
 
     @property
     def total_bathrooms(self):
         total_bathrooms = self.full_bathrooms + self.half_bathrooms + self.three_quarter_bathrooms + self.one_quarter_bathrooms
         return total_bathrooms
 
-
+    def average_review(self):
+        stars = []
+        for review in self.reviews.all():
+            if review.rating == 'Excellent':
+                stars.append(5)
+            elif review.rating == 'Good':
+                stars.append(4)
+            elif review.rating == 'Average':
+                stars.append(3)
+            elif review.rating == 'Fair':
+                stars.append(2)
+            elif review.rating == 'Bad':
+                stars.append(1)
+            
+        if not stars: return 0.0
+        avg = sum(stars)/len(stars)
+        return round(avg, 2)   
 
 
 class review(models.Model):
@@ -185,7 +202,7 @@ class review(models.Model):
     )
     author = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
     comment = models.CharField(blank= True, null=True, max_length=500)
-    listing = models.ForeignKey(Property, default=None, on_delete=models.CASCADE)
+    listing = models.ForeignKey(Property, related_name='reviews', default=None, on_delete=models.CASCADE)
     rating = models.CharField(choices=ratings, default = 'Fair', max_length=200)
     date_created = models.DateTimeField(auto_now_add=False, auto_now=True)
 
