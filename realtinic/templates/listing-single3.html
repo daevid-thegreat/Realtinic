@@ -286,27 +286,6 @@
                                                                 <div class="listing-rating card-popup-rainingvis" data-starrating2="{%if review.rating == 'Excellent'%} 5 {%elif review.rating == 'Good'%} 4 {%elif review.rating == 'Average'%} 3 {%elif review.rating == 'Fair'%} 2 {%elif review.rating == 'Bad'%} 1 {%endif%}">
                                                                     <span class="re_stars-title">{{ review.rating }}</span>
                                                                 </div>
-                                                                {% comment %} {% if review.rating == 'Excellent' %}
-                                                                <div class="listing-rating card-popup-rainingvis" data-starrating2="5">
-                                                                    <span class="re_stars-title">{{ review.rating }}</span>
-                                                                </div>
-                                                                {%elif review.rating=='Good'%}
-                                                                <div class="listing-rating card-popup-rainingvis" data-starrating2="4">
-                                                                    <span class="re_stars-title">{{ review.rating }}</span>
-                                                                </div>
-                                                                {%elif review.rating=='Average'%}
-                                                                <div class="listing-rating card-popup-rainingvis" data-starrating2="3">
-                                                                    <span class="re_stars-title">{{ review.rating }}</span>
-                                                                </div>
-                                                                {%elif review.rating=='Fair'%}
-                                                                <div class="listing-rating card-popup-rainingvis" data-starrating2="2">
-                                                                    <span class="re_stars-title">{{ review.rating }}</span>
-                                                                </div>
-                                                                {%elif review.rating=='Bad'%}
-                                                                <div class="listing-rating card-popup-rainingvis" data-starrating2="1">
-                                                                    <span class="re_stars-title">{{ review.rating }}</span>
-                                                                </div>
-                                                                {%endif%} {% endcomment %}
                                                                 <div class="clearfix"></div>
                                                                 <p>" {{ review.comment }} "</p>
                                                                 <div class="reviews-comments-item-date"><span class="reviews-comments-item-date-item"><i class="far fa-calendar-check"></i>{{ review.date_created|date:"d F Y" }}</span><a href="#" class="rate-review"><i class="fal fa-thumbs-up"></i>  Helpful Review  <span>6</span> </a></div>
@@ -338,18 +317,18 @@
                                                             <label for="rating-3" class="fal fa-star"></label>
                                                             <input type="radio" data-ratingtext="Fair" name="rating" id="rating-4" value="Fair"/>
                                                             <label for="rating-4" class="fal fa-star"></label>
-                                                            <input type="radio" data-ratingtext=" Bad "   name="rating" id="rating-5" value="Bad"/>
-                                                            <label for="rating-5"    class="fal fa-star"></label>
+                                                            <input type="radio" data-ratingtext=" Bad " name="rating" id="rating-5" value="Bad"/>
+                                                            <label for="rating-5" class="fal fa-star"></label>
                                                         </div>
                                                         <div class="count-radio-wrapper">
-                                                            <span id="count-checked-radio" name="rating">Your Rating</span>  
+                                                            <span id="count-checked-radio" name="rating" required>Your Rating</span>  
                                                         </div>
                                                     </div>
                                                     </div>
                                                     <!-- Review Comment -->
                                                     <div   class="add-comment custom-form">
                                                         <fieldset>
-                                                            <textarea cols="40" rows="3" placeholder="Your Review:" name="comment"></textarea>
+                                                            <textarea cols="40" rows="3" placeholder="Your Review:" name="comment" required></textarea>
                                                         </fieldset>
                                                         <button class="btn big-btn color-bg float-btn" type="submit" name="review">Submit Review <i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
                                                     </div>

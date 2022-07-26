@@ -6,3 +6,5 @@ class add_property_form(ModelForm):
     class Meta:
         model = Property
         fields = '__all__'
+
+
