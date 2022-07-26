@@ -62,10 +62,12 @@ class Userprofile(AbstractBaseUser, PermissionsMixin):
     tel = models.BigIntegerField(null=True, blank=True)
     website = models.URLField(null=True, blank=True)
     whatsapp = models.IntegerField(null=True, blank=True)
-    facebook = models.URLField(null=True, blank=True)
-    instagram = models.URLField(null=True, blank=True)
-    twitter = models.URLField(null=True, blank=True)
-    linkedin = models.URLField(null=True, blank=True)
+
+    facebook =models.URLField(null=True, blank=True)
+    instagram =models.CharField(max_length=50, null=True, blank=True)
+    twitter =models.CharField(max_length=50, null=True, blank=True)
+    linkedin =models.CharField(max_length=50, null=True, blank=True)
+
 
     in_business_since = models.DateTimeField(null=True, blank=True)
     gov_id = models.FileField(upload_to='government ids', null=True, blank=True)
@@ -213,3 +215,14 @@ class PropertyImage(models.Model):
 
     def __str__(self):
         return self.property.name
+
+class Booking(models.Model):
+    property = models.ForeignKey(Property, related_name='bookings', default=None, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='bookings', default=None, on_delete=models.CASCADE)
+    tour_type = models.CharField(max_length=50, default=None)
+    start_date = models.DateField(default=None)
+    time = models.CharField(max_length=50, default=None)
+    date_created = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    def __str__(self):
+        return self.time
