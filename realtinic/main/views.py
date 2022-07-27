@@ -3,7 +3,7 @@ from django.contrib.auth.models import User, auth
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
-from .models import Userprofile, Property, review, PropertyImage,Booking
+from .models import *
 from django.contrib.auth import get_user_model
 from django.core.paginator import Paginator
 from django.db.models import Sum, Q
@@ -426,10 +426,11 @@ def single_listing(request, id):
 
     if request.method == 'POST' and 'review' in request.POST:
         listing.reviews.create(
-            author=request.user,
+            user=request.user,
             comment=request.POST['comment'],
             rating=request.POST['rating'],
         )
+        
         # author = request.user
         # comment = request.POST['comment']
         # rating = request.POST['rating']
