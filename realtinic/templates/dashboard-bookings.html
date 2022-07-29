@@ -69,8 +69,8 @@
                                         <span class="price-opt-title">Sort   by:</span>
                                         <div class="listsearch-input-item">
                                             <select data-placeholder="Lastes" class="chosen-select no-search-select" >
-                                                <option>Lastes</option>
-                                                <option>Oldes</option>
+                                                <option>Lastest</option>
+                                                <option>Oldest</option>
                                             </select>
                                         </div>
                                     </div>
@@ -79,23 +79,23 @@
                                 <div class="row">
                                     <!-- bookings-item -->  
                                     <div class="col-md-6">
+                                        {% for booking in bookings %}
                                         <div class="bookings-item fl-wrap">
                                             <div class="bookings-item-header fl-wrap">
-                                                <img src="images/all/2.jpg" alt="">
-                                                <h4>For <a href="listing-single.html" target="_blank">Gorgeous house for sale</a></h4>
+                                                <img src="{{booking.property.header_image.url}}" alt="">
+                                                <h4>For <a href="/listing/{{booking.property.id}}" target="_blank">{{booking.property.name}}</a></h4>
                                                 <span class="new-bookmark">New</span>
                                             </div>
                                             <div class="bookings-item-content fl-wrap">
                                                 <ul>
-                                                    <li>Name: <span>Andy Smith</span></li>
-                                                    <li>Phone: <span>+7(123)987654</span></li>
-                                                    <li>Date: <span>18.05.2021</span></li>
-                                                    <li>Time: <span>12 AM</span></li>
+                                                    <li>Name: <span>{{booking.user.first_name}} {{booking.user.last_name}}</span></li>
+                                                    <li>Phone: <span>{{booking.user.tel}}</span></li>
+                                                    <li>Date: <span>{{booking.start_date}}</span></li>
+                                                    <li>Time: <span>{{booking.time}}</span></li>
                                                 </ul>
-                                                <p>Morbi varius, nulla sit amet rutrum elementum, est elit finibus tellus, ut tristique elit risus at metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
                                             </div>
                                             <div class="bookings-item-footer fl-wrap">
-                                                <span class="message-date">12 December 2020</span>
+                                                <span class="message-date">{{booking.date_created}}</span>
                                                 <ul>
                                                     <li><a href="#" class="tolt" data-microtip-position="top-left"  data-tooltip="Write"><i class="far fa-envelope"></i></a></li>
                                                     <li><a href="#" class="tolt" data-microtip-position="top-left"  data-tooltip="Call"><i class="far fa-phone"></i></a></li>
@@ -103,91 +103,10 @@
                                                 </ul>
                                             </div>
                                         </div>
+                                        {% endfor %}
                                     </div>
-                                    <!--bookings-item end--> 
-                                    <!-- bookings-item -->  
-                                    <div class="col-md-6">
-                                        <div class="bookings-item fl-wrap">
-                                            <div class="bookings-item-header fl-wrap">
-                                                <img src="images/all/1.jpg" alt="">
-                                                <h4>For <a href="listing-single.html" target="_blank">Luxury Family Home</a></h4>
-                                                <span class="new-bookmark">New</span>
-                                            </div>
-                                            <div class="bookings-item-content fl-wrap">
-                                                <ul>
-                                                    <li>Name: <span>Adam Forser</span></li>
-                                                    <li>Phone: <span>+7(123)987654</span></li>
-                                                    <li>Date: <span>28.05.2020</span></li>
-                                                    <li>Time: <span>10 AM</span></li>
-                                                </ul>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc posuere convallis purus non cursus. Cras metus neque, gravida sodales massa ut.</p>
-                                            </div>
-                                            <div class="bookings-item-footer fl-wrap">
-                                                <span class="message-date">05 October 2020</span>
-                                                <ul>
-                                                    <li><a href="#" class="tolt" data-microtip-position="top-left"  data-tooltip="Write"><i class="far fa-envelope"></i></a></li>
-                                                    <li><a href="#" class="tolt" data-microtip-position="top-left"  data-tooltip="Call"><i class="far fa-phone"></i></a></li>
-                                                    <li><a href="#" class="tolt" data-microtip-position="top-left"  data-tooltip="Delete"><i class="far fa-trash"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--bookings-item end-->												
-                                    <!-- bookings-item -->  
-                                    <div class="col-md-6">
-                                        <div class="bookings-item fl-wrap">
-                                            <div class="bookings-item-header fl-wrap">
-                                                <img src="images/all/4.jpg" alt="">
-                                                <h4>For <a href="listing-single.html" target="_blank">Kayak Point House</a></h4>
-                                            </div>
-                                            <div class="bookings-item-content fl-wrap">
-                                                <ul>
-                                                    <li>Name: <span>Jessie Wilcox</span></li>
-                                                    <li>Phone: <span>+7(123)987654</span></li>
-                                                    <li>Date: <span>14.05.2020</span></li>
-                                                    <li>Time: <span>5 PM</span></li>
-                                                </ul>
-                                                <p>Consectetur adipiscing elit. Nunc posuere convallis purus non cursus. Cras metus neque, gravida sodales massa ut.</p>
-                                            </div>
-                                            <div class="bookings-item-footer fl-wrap">
-                                                <span class="message-date">25 May 2020</span>
-                                                <ul>
-                                                    <li><a href="#" class="tolt" data-microtip-position="top-left"  data-tooltip="Write"><i class="far fa-envelope"></i></a></li>
-                                                    <li><a href="#" class="tolt" data-microtip-position="top-left"  data-tooltip="Call"><i class="far fa-phone"></i></a></li>
-                                                    <li><a href="#" class="tolt" data-microtip-position="top-left"  data-tooltip="Delete"><i class="far fa-trash"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--bookings-item end-->
-                                    <!-- bookings-item -->  
-                                    <div class="col-md-6">
-                                        <div class="bookings-item fl-wrap">
-                                            <div class="bookings-item-header fl-wrap">
-                                                <img src="images/all/3.jpg" alt="">
-                                                <h4>For <a href="listing-single.html" target="_blank">Urban House</a></h4>
-                                                <span class="new-bookmark">New</span>
-                                            </div>
-                                            <div class="bookings-item-content fl-wrap">
-                                                <ul>
-                                                    <li>Name: <span>Adam Forser</span></li>
-                                                    <li>Phone: <span>+7(123)987654</span></li>
-                                                    <li>Date: <span>28.05.2020</span></li>
-                                                    <li>Time: <span>10 AM</span></li>
-                                                </ul>
-                                                <p>Morbi varius, nulla sit amet rutrum elementum, est elit finibus tellus, ut tristique elit risus at metus. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                            </div>
-                                            <div class="bookings-item-footer fl-wrap">
-                                                <span class="message-date">12 December 2020</span>
-                                                <ul>
-                                                    <li><a href="#" class="tolt" data-microtip-position="top-left"  data-tooltip="Write"><i class="far fa-envelope"></i></a></li>
-                                                    <li><a href="#" class="tolt" data-microtip-position="top-left"  data-tooltip="Call"><i class="far fa-phone"></i></a></li>
-                                                    <li><a href="#" class="tolt" data-microtip-position="top-left"  data-tooltip="Delete"><i class="far fa-trash"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--bookings-item end-->													
+                                    <!--bookings-item end-->  
+                                    							
                                 </div>
                             </div>
                             <!-- pagination-->

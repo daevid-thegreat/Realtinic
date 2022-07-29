@@ -415,11 +415,12 @@ def single_listing(request, id):
         tour_time = request.POST['time']
 
         booking = Booking.objects.create(
-            listing = listing,
+            property = listing,
+            property_agent = listing.agent,
             user = request.user,
             tour_type = tour_type,
-            tour_date = tour_date,
-            tour_time = tour_time,
+            start_date = tour_date,
+            time = tour_time,
         )
         print(booking)
         booking.save()
@@ -443,4 +444,5 @@ def reviews(request):
     return render(request, 'dashboard-review.html')
 
 def bookings(request):
-    return render(request, 'dashboard-bookings.html')
+    bookings = Booking.objects.filter(property_agent=request.user)
+    return render(request, 'dashboard-bookings.html', {'bookings':bookings})

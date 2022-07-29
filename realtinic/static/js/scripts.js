@@ -661,13 +661,13 @@ initIsotope();
         }
     });
     $('input[name="datepicker-here-time"]').on('apply.daterangepicker', function (ev, picker) {
-        $(this).val(picker.startDate.format('MM-DD-YYYY hh:mm A'));
+        $(this).val(picker.startDate.format('YYYY-MM-DD hh:mm A'));
     });
     $('input[name="datepicker-here-time"]').on('cancel.daterangepicker', function (ev, picker) {
         $(this).val('');
     });
     $('input[name="datepicker-here"]').on('apply.daterangepicker', function (ev, picker) {
-        $(this).val(picker.startDate.format('MM-DD-YYYY'));
+        $(this).val(picker.startDate.format('YYYY-MM-DD'));
     });
     $('input[name="datepicker-here"]').on('cancel.daterangepicker', function (ev, picker) {
         $(this).val('');
@@ -680,7 +680,7 @@ initIsotope();
         }
     });
     $('input[name="dates"]').on('apply.daterangepicker', function (ev, picker) {
-        $(this).val(picker.startDate.format('MM-DD-YYYY') + ' - ' + picker.endDate.format('MM-DD-YYYY'));
+        $(this).val(picker.startDate.format('YYYY-MM-DD') + ' - ' + picker.endDate.format('YYYY-MM-DD'));
     });
     $('input[name="dates"]').on('cancel.daterangepicker', function (ev, picker) {
         $(this).val('');
