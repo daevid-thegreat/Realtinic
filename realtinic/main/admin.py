@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Property, Userprofile, review, PropertyImage, Booking
+from .models import *
 
 class PropertyImageInline(admin.StackedInline):
     model = PropertyImage
@@ -12,7 +12,7 @@ class UserPropertyInline(admin.StackedInline):
     can_delete = False
 
 class ReviewInline(admin.StackedInline):
-    model = review
+    model = Review 
     fields = ['rating']
     extra = 0 
     can_delete = False
@@ -36,11 +36,11 @@ class PropertyAdmin(admin.ModelAdmin):
         'city',
         'price',
         'home_type',
-        'agent',
+        # 'agent',
         'average_review'
     ]
     inlines = [PropertyImageInline, ReviewInline]
 
-admin.site.register(review)
+admin.site.register(Review)
 admin.site.register(PropertyImage)
 admin.site.register(Booking)
