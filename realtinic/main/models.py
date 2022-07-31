@@ -235,6 +235,7 @@ class PropertyImage(models.Model):
 
 class Booking(models.Model):
     property = models.ForeignKey(Property, related_name='bookings', default=None, on_delete=models.CASCADE)
+    property_agent = models.ForeignKey(User, related_name='agents', default=None, on_delete=models.CASCADE)
     user = models.ForeignKey(User, related_name='bookings', default=None, on_delete=models.CASCADE)
     tour_type = models.CharField(max_length=50, default=None)
     start_date = models.DateField(default=None)

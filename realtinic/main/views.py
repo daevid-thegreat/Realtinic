@@ -32,9 +32,9 @@ def index(request):
             user = auth.authenticate(username=email, password=password)
             login(request, user)
             if user.is_realtor == True:
-                return redirect('/my_dashboard')
+                return redirect('/my-dashboard')
             else:
-                return redirect('/my_profile')
+                return redirect('/my-profile')
 
     if request.method == 'POST' and 'signin' in request.POST : 
          email = request.POST['email']
@@ -61,7 +61,6 @@ def listing(request):
     price_range = request.GET.get('price-range2')
     area_range = request.GET.get('area-range2')
     bedrooms = request.GET.get('bedrooms')
-    bathrooms = request.GET.get('bathrooms')
     pool = request.GET.get('pool')
     garage = request.GET.get('garage')
     basement = request.GET.get('basement')
@@ -98,7 +97,7 @@ def listing(request):
         properties = properties.filter(bedrooms=bedrooms)
 
     page = request.GET.get('page')
-    props = Paginator(properties.order_by('-listed_on'), 2).get_page(page)
+    props = Paginator(properties.order_by('-listed_on'), 12).get_page(page)
     nums = "p" * props.paginator.num_pages
 
     context = {
@@ -279,7 +278,11 @@ def compare(request):
     return render(request, 'compare.html')
 
 def message(request):
-    return render(request, 'dashboard-messages.html')
+
+    if request.user.is_realtor == True:
+        return render(request, 'dashboard-messages.html')
+    else:
+        return render(request, 'user-messages.html')
 
 @login_required(login_url='/')
 def dashboard(request):
@@ -294,7 +297,7 @@ def dashboard(request):
     if count_saved['saved__sum'] is None:
         count_saved = 0
 
-    return render(request, 'dashboard.html', {'list_count':count_list, 'views_count':count_views['views__sum'], 'saved_count':count_saved})
+    return render(request, 'dashboard.html', {'list_count':count_list, 'views_count':count_views['views__sum'], 'saved_count':count_saved['saved__sum']})
 
 
 @login_required(login_url='/')
@@ -342,7 +345,7 @@ def user_profile(request):
                 user = Userprofile.objects.get(id_user=user_id)
                 user.bio = bio
                 user.save()
-            return redirect('my_profile')
+            return redirect('my-profile')
 
         if request.method == 'POST' and 'password':
             user_id = request.user.id_user
@@ -386,7 +389,6 @@ def user_profile(request):
                 user = Userprofile.objects.get(id_user=user_id)
                 user.whatsapp = whatsapp
                 user.save()
-            return redirect('my-profile')
         return render(request, 'dashboard-myprofile.html')
     else:
         return render(request, 'user-profile.html')
@@ -413,11 +415,12 @@ def single_listing(request, id):
         tour_time = request.POST['time']
 
         booking = Booking.objects.create(
-            listing = listing,
+            property = listing,
+            property_agent = listing.agent,
             user = request.user,
             tour_type = tour_type,
-            tour_date = tour_date,
-            tour_time = tour_time,
+            start_date = tour_date,
+            time = tour_time,
         )
         print(booking)
         booking.save()
@@ -430,14 +433,7 @@ def single_listing(request, id):
             comment=request.POST['comment'],
             rating=request.POST['rating'],
         )
-        
-        # author = request.user
-        # comment = request.POST['comment']
-        # rating = request.POST['rating']
-        # listing = listing
 
-        # reviews = review.objects.create(author=author, comment=comment, rating=rating, listing=listing)
-        # reviews.save()
         return redirect('/listing/'+str(listing.id))
 
     return render(request, 'listing-single3.html', {'listing': listing})
@@ -449,4 +445,5 @@ def reviews(request):
     return render(request, 'dashboard-review.html')
 
 def bookings(request):
-    return render(request, 'dashboard-bookings.html')
+    bookings = Booking.objects.filter(property_agent=request.user)
+    return render(request, 'dashboard-bookings.html', {'bookings':bookings})
