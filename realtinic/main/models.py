@@ -209,23 +209,6 @@ class Review(models.Model):
     def __str__(self):
         return self.comment
 
-# class Comment(models.Model):
-#     ratings = (
-#         ('Bad', 'Bad'),
-#         ('Fair','Fair'),
-#         ('Average','Average'),
-#         ('Good','Good'),
-#         ('Excellent','Excellent'),
-#     )
-#     user = models.ForeignKey(User, related_name='comments', default=None, on_delete=models.CASCADE)
-#     content = models.CharField(blank= True, null=True, max_length=500)
-#     property = models.ForeignKey(Property, related_name='comments', default=None, on_delete=models.CASCADE)
-#     rating = models.CharField(choices=ratings, default = 'Fair', max_length=200)
-#     date_created = models.DateTimeField(auto_now_add=False, auto_now=True)
-
-#     def __str__(self):
-#         return self.content
-
 class PropertyImage(models.Model):
     property = models.ForeignKey(Property, related_name='images', default=None, on_delete=models.CASCADE)
     property_image = models.ImageField(upload_to='property_images')
@@ -244,3 +227,11 @@ class Booking(models.Model):
 
     def __str__(self):
         return self.time
+
+class Chat(models.Model):
+    user = models.ForeignKey(User, related_name='chats', default=None, on_delete=models.CASCADE)
+    message = models.CharField(max_length=500)
+    date_created = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    def __str__(self):
+        return self.message

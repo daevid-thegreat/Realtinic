@@ -284,6 +284,9 @@ def message(request):
     else:
         return render(request, 'user-messages.html')
 
+def chat(request, id_user):
+    return render(request, 'chat.html', {'member':id_user})
+
 @login_required(login_url='/')
 def dashboard(request):
     propertys = Property.objects.filter(agent=request.user)
@@ -422,7 +425,6 @@ def single_listing(request, id):
             start_date = tour_date,
             time = tour_time,
         )
-        print(booking)
         booking.save()
         return redirect('/listing/'+str(listing.id))
 
