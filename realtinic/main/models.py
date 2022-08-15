@@ -200,9 +200,9 @@ class Review(models.Model):
         ('Good','Good'),
         ('Excellent','Excellent'),
     )
-    user = models.ForeignKey(User, related_name='reviews', default=None, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, related_name='reviews', default=None, on_delete=models.CASCADE)
     comment = models.CharField(blank= True, null=True, max_length=500)
-    property = models.ForeignKey(Property, related_name='reviews', default=None, on_delete=models.CASCADE)
+    listing = models.ForeignKey(Property, related_name='reviews', default=None, on_delete=models.CASCADE)
     rating = models.CharField(choices=ratings, default = 'Fair', max_length=200)
     date_created = models.DateTimeField(auto_now_add=False, auto_now=True)
 

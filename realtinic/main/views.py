@@ -426,7 +426,7 @@ def single_listing(request, id):
 
     if request.method == 'POST' and 'review' in request.POST:
         listing.reviews.create(
-            user=request.user,
+            author=request.user,
             comment=request.POST['comment'],
             rating=request.POST['rating'],
         )
