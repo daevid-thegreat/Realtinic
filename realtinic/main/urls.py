@@ -3,8 +3,8 @@ from . import views
 # from django.conf.urls import handler500, handler404
 
 
-# handler404 = views.handler404
-# handler500 = views.handler500
+handler404 = views.handler404
+handler500 = views.handler500
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -33,6 +33,7 @@ urlpatterns = [
     path('my-reviews', views.reviews, name='My Reviews'),
     path('my-bookings', views.bookings, name='My Bookings'),
     path('logout', views.logout, name='Log Out'),
+    path('my-messages/<str:id_user>', views.chat, name='chat'),
     # path('agent-signin', views.agent_signin, name='Sign In Agent'),
 ]
 

@@ -10,8 +10,8 @@
                     <section class="parallax-section single-par color-bg">
                         <div class="container">
                             <div class="section-title center-align big-title">
-                                <h2><span>List of Our Agents</span></h2>
-                                <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nec tincidunt arcu, sit amet fermentum sem.</h4>
+                                <h2><span>Find an Agent to do the hassle</span></h2>
+                                <h4>Search through our database to find a suiting agent.</h4>
                             </div>
                         </div>
                         <div class="pwh_bg"></div>
@@ -23,7 +23,7 @@
                     <div class="breadcrumbs fw-breadcrumbs sp-brd fl-wrap">
                         <div class="container">
                             <div class="breadcrumbs-list">
-                                <a href="#">Home</a><a href="#">Agency</a> <span>Agents</span>
+                                <a href="/">Home</a><span>Agents</span>
                             </div>
                             <div class="share-holder hid-share">
                                 <a href="#" class="share-btn showshare sfcs">  <i class="fas fa-share-alt"></i>  Share   </a>
@@ -40,9 +40,9 @@
                                     <!-- list-main-wrap-header-->
                                     <div class="list-main-wrap-header box-list-header fl-wrap">
                                         <!-- list-main-wrap-title-->
-                                        <div class="list-main-wrap-title">
+                                        <!-- <div class="list-main-wrap-title">
                                             <h2>Results For : <span>New York Agents </span><strong>26</strong></h2>
-                                        </div>
+                                        </div> -->
                                         <!-- list-main-wrap-title end-->
                                         <!-- list-main-wrap-opt-->
                                         <div class="list-main-wrap-opt">
@@ -64,14 +64,15 @@
                                     </div>
                                     <!-- list-main-wrap-header end-->						
                                     <!-- listing-item-wrap-->
-                                    {% for agent in agents %}
+                                    
                                     <div class="listing-item-container  box-list_ic fl-wrap">
                                         <!--  agent card item -->
+                                        {% for agent in agents %}
                                         <div class="listing-item">
                                             <article class="geodir-category-listing fl-wrap">
                                                 <div class="geodir-category-img fl-wrap  agent_card">
                                                     <a href="agent-single.html" class="geodir-category-img_item">
-                                                        <img src="{% static 'images/agency/agent/4.jpg' %}" alt="">
+                                                        <img src="{{agent.profilepic.url}}" alt="{{agent.profilepic.url}}">
                                                         <ul class="list-single-opt_header_cat">
                                                             <li><span class="cat-opt color-bg">4 listings</span></li>
                                                         </ul>
@@ -94,9 +95,12 @@
                                                     {% endif %}
                                                     <div class="agent_card-title fl-wrap">
                                                         <h4><a href="agent-single.html" >{{agent.first_name}} {{agent.last_name}}</a></h4>
-                                                        <h5><a href="agency-single.html">Mavers RealEstate agency</a></h5>
                                                     </div>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla.</p>
+                                                    {% if agent.bio == None %}
+                                                    <p>No Bio</p>
+                                                    {% else %}
+                                                    <p>{{agent.bio}}</p>
+                                                    {% endif %}
                                                     <div class="geodir-category-footer fl-wrap">
                                                         <a href="agents/{{agent.id_user}}" class="btn float-btn color-bg small-btn">View Profile</a>
                                                         <a href="mailto:yourmail@email.com" class="tolt ftr-btn" data-microtip-position="left" data-tooltip="Write Message"><i class="fal fa-envelope"></i></a>
@@ -128,10 +132,10 @@
                                     <div class="list-searh-input-wrap-title fl-wrap"><i class="far fa-sliders-h"></i><span>Search Agent</span></div>
                                     <div class="block-box fl-wrap search-sb" id="filters-column">
                                         <!-- listsearch-input-item -->
-                                        <div class="listsearch-input-item">
+                                        <!-- <div class="listsearch-input-item">
                                             <label>Keywords</label>
                                             <input type="text" onClick="this.select()" placeholder="Name , agency..." value=""/>										
-                                        </div>
+                                        </div> -->
                                         <!-- listsearch-input-item end-->
                                         <!-- listsearch-input-item -->
                                         <div class="listsearch-input-item">
@@ -142,10 +146,6 @@
                                                 <option>London</option>
                                                 <option>Paris</option>
                                                 <option>Kiev</option>
-                                                <option>Moscow</option>
-                                                <option>Dubai</option>
-                                                <option>Rome</option>
-                                                <option>Beijing</option>
                                             </select>
                                         </div>
                                         <!-- listsearch-input-item end-->											
@@ -163,10 +163,13 @@
                                         </div>
                                     </div>
                                     <!--box-widget-->
+
+
+                                   <!-- 
                                     <div class="box-widget fl-wrap">
                                         <div class="box-widget-title fl-wrap">Featured Agents</div>
                                         <div class="box-widget-content fl-wrap">
-                                            <!--widget-posts-->
+                                         
                                             <div class="widget-posts  fl-wrap">
                                                 <ul class="no-list-style">
                                                     <li>
@@ -215,16 +218,18 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <!-- widget-posts end-->                                                           
+                                                                                                     
                                             <a href="listing.html" class="btn float-btn color-bg small-btn">View All Agents</a>
                                         </div>
-                                    </div>
+                                    </div> 
+                                
+                                -->
                                     <!--box-widget end --> 
                                     <!--box-widget-->
                                     <div class="box-widget fl-wrap">
                                         <div class="banner-widget fl-wrap">
                                             <div class="bg-wrap bg-parallax-wrap-gradien">
-                                                <div class="bg  "  data-bg="images/all/blog/1.jpg"></div>
+                                                <div class="bg  "  data-bg="{% static 'images/all/blog/1.jpg' %}"></div>
                                             </div>
                                             <div class="banner-widget_content">
                                                 <h5>Do you want to join our real estate network?</h5>
@@ -287,7 +292,7 @@
                                                 <div class="col-md-3">
                                                     <div class="footer-widget fl-wrap">
                                                         <div class="footer-widget-logo fl-wrap">
-                                                            <img src="images/logo.png" alt="">
+                                                            <img src="{% static 'images/logo.png' %}" alt="">
                                                         </div>
                                                         <p>Realtinic - Where you can find the next property to buy, or to rent, or where ever you are in the market. You can also post your home for sale or lease, or dive into our huge database of any other listings.</p>
                                                     </div>
@@ -352,8 +357,8 @@
                                             <div class="copyright"> &#169; Realtinic 2022 .  All rights reserved.</div>
                                             <div class="subfooter-nav">
                                                 <ul class="no-list-style">
-                                                    <li><a href="terms">Terms of use</a></li>
-                                                    <li><a href="privacy_policy">Privacy Policy</a></li>
+                                                    <!-- <li><a href="terms">Terms of use</a></li>
+                                                    <li><a href="privacy_policy">Privacy Policy</a></li> -->
                                                     <li><a href="blog">Blog</a></li>
                                                 </ul>
                                             </div>

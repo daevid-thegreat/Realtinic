@@ -12,11 +12,11 @@
             <div class="user-profile-menu">
                 <h3>Main</h3>
                 <ul class="no-list-style">
-                    <li><a href="dashboard.html"><i class="fal fa-chart-line"></i>Messages</a></li>
-                    <li><a href="dashboard-myprofile.html" class="user-profile-act"><i class="fal fa-user-edit"></i> Edit profile</a></li>
-                    <li><a href="dashboard-messages.html"><i class="fal fa-envelope"></i> Favourites <span>3</span></a></li>
-                    <li><a href="dashboard-agents.html"><i class="fal fa-users-cog"></i> Tenant Mode</a></li>
-                    <li><a href="logout"><i class="fal fa-power-off"></i> Log Out</a></li>
+                    <li><a href="/my-messages"><i class="fal fa-chart-line"></i>Messages</a></li>
+                    <li><a href="/my-profile" class="user-profile-act"><i class="fal fa-user-edit"></i> Edit profile</a></li>
+                    <li><a href="/favorites"><i class="fal fa-envelope"></i> Favourites <span>3</span></a></li>
+                    <li><a href="http://tenant.realtinic.com" target="_blank"><i class="fal fa-users-cog"></i> Tenant Mode</a></li>
+                    <li><a href="/logout"><i class="fal fa-power-off"></i> Log Out</a></li>
                     <li style="padding-top:150px;"><a href="/register-agent"><i class="fal fa-users-cog"></i> Become an Agent</a></li>
                 </ul>
             </div>
@@ -36,7 +36,7 @@
                         <img src="{% static 'images\avatar.jpg' %}" alt="">
                         <h4>Welcome, <span> {{ user.first_name }}</span></h4>
                     </div>
-                    <a href="index.html" class="log-out-btn   tolt" data-microtip-position="bottom"  data-tooltip="Log Out"><i class="fal fa-power-off"></i></a>
+                    <a href="/logout" class="log-out-btn   tolt" data-microtip-position="bottom"  data-tooltip="Log Out"><i class="fal fa-power-off"></i></a>
                 </div>					
             </div>
             <!-- dashboard-title end -->
