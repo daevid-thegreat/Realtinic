@@ -1,6 +1,7 @@
 from pyexpat import model
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
+from cloudinary.models import CloudinaryField
 import uuid
 
 from realtinic.settings import AUTH_USER_MODEL
@@ -56,7 +57,8 @@ class Userprofile(AbstractBaseUser, PermissionsMixin):
     last_login = models.DateTimeField(auto_now_add=True)
     #saved properties - many to one
 
-    profilepic = models.ImageField(upload_to="agents profile image", null=True, blank=True)
+    # profilepic = CloudinaryField(upload_to="agents profile image", null=True, blank=True)
+    profilepic = CloudinaryField()
     bio = models.CharField(max_length=700, null=True, blank=True)
     location = models.CharField(max_length=250, null=True, blank=True)
     tel = models.BigIntegerField(null=True, blank=True)
@@ -149,7 +151,8 @@ class Property(models.Model):
     agent = models.ForeignKey(User, related_name='properties', default=None, on_delete=models.CASCADE)
     lot_size = models.IntegerField(default=0)
     yard_size = models.IntegerField(default=0)
-    header_image = models.ImageField(upload_to='property_header_images')
+    header_image = CloudinaryField()
+    # header_image = CloudinaryField(upload_to='property_header_images')
     # property_image = models.FileField(upload_to='property_images')
     
     description = models.TextField(max_length=1000)
@@ -211,7 +214,8 @@ class Review(models.Model):
 
 class PropertyImage(models.Model):
     property = models.ForeignKey(Property, related_name='images', default=None, on_delete=models.CASCADE)
-    property_image = models.ImageField(upload_to='property_images')
+    property_image = CloudinaryField()
+    # property_image = CloudinaryField(upload_to='property_images')
 
     def __str__(self):
         return self.property.name

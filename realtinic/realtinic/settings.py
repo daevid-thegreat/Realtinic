@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import django_heroku
 import os
+import cloudinary
 from pathlib import Path
 
 
@@ -40,8 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+    'cloudinary',
     'django_filters',
-    'channels',
+    # 'channels',
 ]
 
 
@@ -156,5 +158,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = 'main.Userprofile'
 
-
-
+cloudinary.config(
+  cloud_name = 'horllameeday',
+  api_key = '188183338574315',
+  api_secret = 'EhiM_owDDrmqxcPP60ecpZ5SWDs',
+  secure = True
+)
