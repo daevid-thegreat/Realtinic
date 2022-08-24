@@ -7,6 +7,15 @@ from realtinic.settings import AUTH_USER_MODEL
 
 User = AUTH_USER_MODEL
 
+def upload_header_image(instance, filename):
+    return f'Header images/{instance.name}/{filename}'
+
+def upload_property_image(instance, filename):
+    return f'Property images/{instance.property.name}/{filename}'
+
+def upload_agent_image(instance, filename):
+    return f'Agent images/{instance.username}/{filename}'
+
 class UserprofileManager(BaseUserManager):
 
     def create_user(self, first_name, last_name, username, email, password, **other_fields ):
@@ -56,7 +65,7 @@ class Userprofile(AbstractBaseUser, PermissionsMixin):
     last_login = models.DateTimeField(auto_now_add=True)
     #saved properties - many to one
 
-    profilepic = models.ImageField(upload_to="agents profile image", null=True, blank=True)
+    profilepic = models.ImageField(upload_to='upload_agent_image', null=True, blank=True)
     bio = models.CharField(max_length=700, null=True, blank=True)
     location = models.CharField(max_length=250, null=True, blank=True)
     tel = models.BigIntegerField(null=True, blank=True)
@@ -149,7 +158,7 @@ class Property(models.Model):
     agent = models.ForeignKey(User, related_name='properties', default=None, on_delete=models.CASCADE)
     lot_size = models.IntegerField(default=0)
     yard_size = models.IntegerField(default=0)
-    header_image = models.ImageField(upload_to='property_header_images')
+    header_image = models.ImageField(upload_to=upload_header_image)
     # property_image = models.FileField(upload_to='property_images')
     
     description = models.TextField(max_length=1000)
@@ -200,9 +209,9 @@ class Review(models.Model):
         ('Good','Good'),
         ('Excellent','Excellent'),
     )
-    user = models.ForeignKey(User, related_name='reviews', default=None, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, related_name='reviews', default=None, on_delete=models.CASCADE)
     comment = models.CharField(blank= True, null=True, max_length=500)
-    property = models.ForeignKey(Property, related_name='reviews', default=None, on_delete=models.CASCADE)
+    listing = models.ForeignKey(Property, related_name='reviews', default=None, on_delete=models.CASCADE)
     rating = models.CharField(choices=ratings, default = 'Fair', max_length=200)
     date_created = models.DateTimeField(auto_now_add=False, auto_now=True)
 
@@ -211,7 +220,8 @@ class Review(models.Model):
 
 class PropertyImage(models.Model):
     property = models.ForeignKey(Property, related_name='images', default=None, on_delete=models.CASCADE)
-    property_image = models.ImageField(upload_to='property_images')
+    # property_image = CloudinaryField('Realtinic')
+    property_image = models.ImageField(upload_to=upload_property_image)
 
     def __str__(self):
         return self.property.name
