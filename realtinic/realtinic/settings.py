@@ -26,7 +26,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-skmjtv#)pn5978nss_x9)#nl7&%k%frr96-z&ho14e(^i$rf_3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
+# DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'realtinic.com', 'realtinic.herokuapp.com', 'www.realtinic.com']
 
@@ -148,19 +149,19 @@ django_heroku.settings(locals())
 
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_URL ='/media/'
+MEDIA_URL ='/Realtinic/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = 'main.Userprofile'
 
-cloudinary.config(
-  cloud_name = 'horllameeday',
-  api_key = '188183338574315',
-  api_secret = 'EhiM_owDDrmqxcPP60ecpZ5SWDs',
-  secure = True
-)
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'horllameeday',
+    'API_KEY': '188183338574315',
+    'API_SECRET': 'EhiM_owDDrmqxcPP60ecpZ5SWDs'
+}

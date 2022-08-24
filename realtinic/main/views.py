@@ -309,7 +309,7 @@ def user_profile(request):
         if request.method == 'POST' and 'info':
             user_id = request.user.id_user
             image = request.FILES.get('image')
-            if image != '':
+            if image:
                 user = Userprofile.objects.get(id_user=user_id)
                 user.image = image
                 user.save()
