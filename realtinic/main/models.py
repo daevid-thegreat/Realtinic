@@ -209,7 +209,7 @@ class Review(models.Model):
     def __str__(self):
         return self.comment
 
-class PropertyImage(models.Model):
+class PropertyImage(models.Model): 
     property = models.ForeignKey(Property, related_name='images', default=None, on_delete=models.CASCADE)
     property_image = models.ImageField(upload_to='property_images')
 
@@ -228,9 +228,18 @@ class Booking(models.Model):
     def __str__(self):
         return self.time
 
+class Room(models.Model):
+    room_name = models.CharField(max_length=255, default=None)
+    user1 = models.ForeignKey(User, related_name='user1', default=None, on_delete=models.CASCADE)
+    user2 = models.ForeignKey(User, related_name='user2', default=None, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.room_name
+
 class Chat(models.Model):
-    user = models.ForeignKey(User, related_name='chats', default=None, on_delete=models.CASCADE)
-    message = models.CharField(max_length=500)
+    room = models.ForeignKey(Room, related_name='room', default=None, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='user', default=None, on_delete=models.CASCADE)
+    message = models.CharField(max_length=500, default=None)
     date_created = models.DateTimeField(auto_now_add=False, auto_now=True)
 
     def __str__(self):

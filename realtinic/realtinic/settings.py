@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-skmjtv#)pn5978nss_x9)#nl7&%k%frr96-z&ho14e(^i$rf_3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'realtinic.com', 'realtinic.herokuapp.com', 'www.realtinic.com']
 
@@ -76,6 +76,15 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'realtinic.wsgi.application'
 ASGI_APPLICATION = 'realtinic.asgi.application'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
 
 
 # Database

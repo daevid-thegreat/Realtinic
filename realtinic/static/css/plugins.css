@@ -1275,22 +1275,18 @@ canvas {
   }
 }
 .fa-rotate-90 {
-  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
   -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
 }
 .fa-rotate-180 {
-  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
 }
 .fa-rotate-270 {
-  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
   -webkit-transform: rotate(270deg);
   transform: rotate(270deg);
 }
 .fa-flip-horizontal {
-  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
 }
@@ -1300,9 +1296,6 @@ canvas {
 }
 .fa-flip-both,
 .fa-flip-horizontal.fa-flip-vertical,
-.fa-flip-vertical {
-  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
-}
 .fa-flip-both,
 .fa-flip-horizontal.fa-flip-vertical {
   -webkit-transform: scale(-1);
@@ -8044,17 +8037,16 @@ source {
 * Copyright (c) 2016 Sachin N; Licensed Apache 2.0 */
 @font-face {
   font-family: "lg";
-  src: url("../fonts/lgd641.eot?n1z373");
-  src: url("../fonts/lgd41d.eot?#iefixn1z373") format("embedded-opentype"),
-    url("../fonts/lgd641.woff?n1z373") format("woff"),
-    url("../fonts/lgd641.ttf?n1z373") format("truetype"),
-    url("../fonts/lgd641.svg?n1z373#lg") format("svg");
+  src: url("../fonts/lgd641.eot"); /* ?n1z373 */
+  src: url("../fonts/lgd41d.eot") format("embedded-opentype"), /*?#iefixn1z373 */
+    url("../fonts/lgd641.woff") format("woff"), /* ?n1z373 */
+    url("../fonts/lgd641.ttf") format("truetype"), /* ?n1z373 */
+    url("../fonts/lgd641.svg") format("svg"); /* ?n1z373#lg */
   font-weight: normal;
   font-style: normal;
 }
 .lg-icon {
   font-family: "lg";
-  speak: none;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -9582,7 +9574,6 @@ body .pac-container {
   position: relative;
   z-index: 5;
 }
-,
 #autocomplete-input a {
   z-index: 101;
 }

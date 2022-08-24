@@ -44,3 +44,5 @@ class PropertyAdmin(admin.ModelAdmin):
 admin.site.register(Review)
 admin.site.register(PropertyImage)
 admin.site.register(Booking)
+admin.site.register(Room)
+admin.site.register(Chat)
