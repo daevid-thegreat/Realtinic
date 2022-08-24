@@ -51,7 +51,6 @@ def index(request):
     return render(request, 'index.html', {'properties':properties})
 
 def listing(request):
-    
     properties = Property.objects.all()
     search =  request.GET.get('keyword')
     query = request.GET.get('query')
@@ -269,8 +268,18 @@ def register_agents(request):
 
 def user_single(request, id):
     user = Userprofile.objects.get(id_user = id)
+    a = str(request.user.id_user)
+    b = str(user.id_user)
+    room = a[0:13] + "-" + b[0:13]
+    room1 = b[0:13] + "-" + a[0:13]
+
     if user.is_realtor == True:
-        return render(request, 'agent-single.html', {'user':user})
+        if not Room.objects.filter(room_name=room).exists() or not Room.objects.filter(room_name=room1).exists():
+            Room.objects.create(room_name=room, user1 = request.user, user2 = user)
+        room = Room.objects.get(room_name=room) or Room.objects.get(room_name=room1)
+        # if request.user != room.user1 and request.user != room.user2:
+        #     return redirect('/my-messages')
+        return render(request, 'agent-single.html', {'user':user, 'room':room})
     else:
         return render(request, 'user_single.html', {'user':user})
 
@@ -284,8 +293,17 @@ def message(request):
     else:
         return render(request, 'user-messages.html')
 
-def chat(request, id_user):
-    return render(request, 'chat.html', {'member':id_user})
+def chat(request, room_name):
+    # if not Room.objects.filter(room_name=room_name).exists():
+    #      Room.objects.create(room_name=room_name, user1=request.user, user2=listing.agent)
+    user = Userprofile.objects.get(id_user=request.user.id_user)
+    room = Room.objects.get(room_name=room_name)
+    chat = []
+    chats = Chat.objects.filter(room=room)
+
+    if request.user != room.user1 and request.user != room.user2:
+            return redirect('/my-messages')
+    return render(request, 'chat.html', {'room_name':room_name, 'user':user, 'room':room, 'chats':chats})
 
 @login_required(login_url='/')
 def dashboard(request):
@@ -301,7 +319,6 @@ def dashboard(request):
         count_saved = 0
 
     return render(request, 'dashboard.html', {'list_count':count_list, 'views_count':count_views['views__sum'], 'saved_count':count_saved['saved__sum']})
-
 
 @login_required(login_url='/')
 def user_profile(request):
@@ -402,43 +419,70 @@ def single_listing(request, id):
     listing.views += 1
     listing.save()
 
-    # reviews = listing.reviews.all()
+    if request.user.is_authenticated:
+        a = str(request.user.id_user)
+        b = str(listing.agent.id_user)
+
+        room = a[0:13] + "-" + b[0:13]
+        room1 = b[0:13] + "-" + a[0:13]
     
-    if request.method == 'POST' and 'save' in request.POST:
-        if listing in request.user.saved_property.all():
-            listing.saved.add(request.user)
-            print('do')
-        else: 
-            listing.saved.remove(request.user)
-        return redirect('/listing/'+str(listing.id))
+        if request.method == 'POST' and 'save' in request.POST:
+            if listing in request.user.saved_property.all():
+                listing.saved.add(request.user)
+                print('do')
+            else: 
+                listing.saved.remove(request.user)
+            return redirect('/listing/'+str(listing.id))
+        if request.method == 'POST' and 'booking' in request.POST:
+            tour_type = request.POST['tour_type']
+            tour_date = request.POST['datepicker-here']
+            tour_time = request.POST['time']
 
-    if request.method == 'POST' and 'booking' in request.POST:
-        tour_type = request.POST['tour_type']
-        tour_date = request.POST['datepicker-here']
-        tour_time = request.POST['time']
-
-        booking = Booking.objects.create(
-            property = listing,
-            property_agent = listing.agent,
-            user = request.user,
-            tour_type = tour_type,
-            start_date = tour_date,
-            time = tour_time,
-        )
-        booking.save()
-        return redirect('/listing/'+str(listing.id))
+            booking = Booking.objects.create(
+                property = listing,
+                property_agent = listing.agent,
+                user = request.user,
+                tour_type = tour_type,
+                start_date = tour_date,
+                time = tour_time,
+            )
+            booking.save()
+            return redirect('/listing/'+str(listing.id))
 
 
-    if request.method == 'POST' and 'review' in request.POST:
-        listing.reviews.create(
-            author=request.user,
-            comment=request.POST['comment'],
-            rating=request.POST['rating'],
-        )
+        if request.method == 'POST' and 'review' in request.POST:
+            listing.reviews.create(
+                author=request.user,
+                comment=request.POST['comment'],
+                rating=request.POST['rating'],
+            )
+            return redirect('/listing/'+str(listing.id))
 
-        return redirect('/listing/'+str(listing.id))
+        if request.method == 'POST' and 'booking' in request.POST:
+            tour_type = request.POST['tour_type']
+            tour_date = request.POST['datepicker-here']
+            tour_time = request.POST['time']
 
-    return render(request, 'listing-single3.html', {'listing': listing})
+            booking = Booking.objects.create(
+                property = listing,
+                property_agent = listing.agent,
+                user = request.user,
+                tour_type = tour_type,
+                start_date = tour_date,
+                time = tour_time,
+            )
+            booking.save()
+            return redirect('/listing/'+str(listing.id))
+    
+        if not Room.objects.filter(room_name=room).exists() and not Room.objects.filter(room_name=room1).exists():
+            Room.objects.create(room_name=room, user1 = request.user, user2 = listing.agent)
+            return redirect('/my-messages/' + room)
+        room = Room.objects.get(room_name=room) or Room.objects.get(room_name=room1)
+        if request.user != room.user1 and request.user != room.user2:
+            return redirect('/my-messages')
+        return render(request, 'listing-single3.html', {'listing': listing,'room':room})
+    else:
+        return render(request, 'listing-single3.html', {'listing': listing})
 
 def my_listings(request):
     return render(request, 'dashboard-listing-table.html')

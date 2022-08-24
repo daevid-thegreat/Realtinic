@@ -364,8 +364,13 @@
                                                     </ul>
                                                 </div>
                                                 <div class="profile-widget-footer fl-wrap">
-                                                    <a href="/profile/{{listing.user_agent.unique_id}}" class="btn float-btn color-bg small-btn">View Profile</a>
-                                                    <a href="#sec-contact" class="custom-scroll-link tolt" data-microtip-position="left"  data-tooltip="Viewing Property"><i class="fal fa-paper-plane"></i></a>
+                                                    <a href="/profile/{{listing.user_agent.unique_id}}" class="btn float-btn color-bg small-btn">View Profile</a>         
+                                                    <a href="/my-messages/{{room}}" class="btn float-btn color-bg small-btn">Message</a>
+                                                
+                                                    <!-- <form method="post">
+                                                        {% csrf_token %}
+                                                        <input type="submit" class="btn  color-bg float-btn" name="chat" >
+                                                    </form> -->
                                                 </div>
                                             </div>
                                         </div>
