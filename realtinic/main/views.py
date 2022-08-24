@@ -326,7 +326,7 @@ def user_profile(request):
         if request.method == 'POST' and 'info':
             user_id = request.user.id_user
             image = request.FILES.get('image')
-            if image != '':
+            if image:
                 user = Userprofile.objects.get(id_user=user_id)
                 user.image = image
                 user.save()
@@ -434,9 +434,32 @@ def single_listing(request, id):
                 listing.saved.remove(request.user)
             return redirect('/listing/'+str(listing.id))
 
+<<<<<<< HEAD
         if request.method == 'POST' and 'review' in request.POST:
             listing.reviews.create(
             user=request.user,
+=======
+    if request.method == 'POST' and 'booking' in request.POST:
+        tour_type = request.POST['tour_type']
+        tour_date = request.POST['datepicker-here']
+        tour_time = request.POST['time']
+
+        booking = Booking.objects.create(
+            property = listing,
+            property_agent = listing.agent,
+            user = request.user,
+            tour_type = tour_type,
+            start_date = tour_date,
+            time = tour_time,
+        )
+        booking.save()
+        return redirect('/listing/'+str(listing.id))
+
+
+    if request.method == 'POST' and 'review' in request.POST:
+        listing.reviews.create(
+            author=request.user,
+>>>>>>> 7cdae264171b25a3cae087afbeda98a8bb14fe06
             comment=request.POST['comment'],
             rating=request.POST['rating'],
         )
