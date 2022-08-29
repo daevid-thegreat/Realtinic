@@ -247,7 +247,7 @@
                                             <!-- list-single-main-item -->
                                             <div class="list-single-main-item fl-wrap" id="sec6">
                                                 <div class="list-single-main-item-title">
-                                                    <h3>Reviews <span>{{ listing.reviews.count }}</span></h3>
+                                                    <h3>Reviews <span> listing.reviews.count </span></h3>
                                                 </div>
                                                 <div class="list-single-main-item_content fl-wrap">
                                                     <div class="reviews-comments-wrap fl-wrap">
@@ -256,7 +256,7 @@
                                                             <div class="listing-rating card-popup-rainingvis" data-starrating2="4"><span class="re_stars-title">Good</span></div>
                                                         </div>
                                                         <!-- reviews-comments-item --> 
-                                                        {% for review in listing.reviews.all %} 
+                                                        {% for review in reviews %} 
                                                         <div class="reviews-comments-item">
                                                             <div class="review-comments-avatar">
                                                                 <img src="{% if review.author.profilepic %} {{ review.author.profilepic.url }} {% else %} images/avatar/2.jpg {% endif %}" alt=""> 

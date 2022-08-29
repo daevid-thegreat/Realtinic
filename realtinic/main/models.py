@@ -2,7 +2,6 @@ from pyexpat import model
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 import uuid
-
 from realtinic.settings import AUTH_USER_MODEL
 
 User = AUTH_USER_MODEL
@@ -82,8 +81,6 @@ class Userprofile(AbstractBaseUser, PermissionsMixin):
     gov_id = models.FileField(upload_to='government ids', null=True, blank=True)
     business_id = models.FileField(upload_to='business ids', null=True, blank=True)
     utility_bills = models.FileField(upload_to='utility bills', null=True, blank=True)
-    # property_list = models.ManyToManyField('Property', related_name='property_list', blank=True)
-    # reviews = models.ManyToManyField('Review', related_name='reviews', blank=True)
 
     verified = models.BooleanField(default=False)
 

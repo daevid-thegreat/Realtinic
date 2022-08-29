@@ -418,13 +418,13 @@ def single_listing(request, id):
     listing = get_object_or_404(Property, id=id)
     listing.views += 1
     listing.save()
+    reviews = Review.objects.filter(listing=listing)
 
     if request.user.is_authenticated:
         a = str(request.user.id_user)
         b = str(listing.agent.id_user)
 
         room = a[0:13] + "-" + b[0:13]
-        room1 = b[0:13] + "-" + a[0:13]
     
         if request.method == 'POST' and 'save' in request.POST:
             if listing in request.user.saved_property.all():
@@ -474,15 +474,15 @@ def single_listing(request, id):
             booking.save()
             return redirect('/listing/'+str(listing.id))
     
-        if not Room.objects.filter(room_name=room).exists() and not Room.objects.filter(room_name=room1).exists():
+        if not Room.objects.filter(room_name=room).exists():
             Room.objects.create(room_name=room, user1 = request.user, user2 = listing.agent)
             return redirect('/my-messages/' + room)
-        room = Room.objects.get(room_name=room) or Room.objects.get(room_name=room1)
+        room = Room.objects.get(room_name=room)
         if request.user != room.user1 and request.user != room.user2:
             return redirect('/my-messages')
         return render(request, 'listing-single3.html', {'listing': listing,'room':room})
     else:
-        return render(request, 'listing-single3.html', {'listing': listing})
+        return render(request, 'listing-single3.html', {'listing': listing, 'reviews': reviews})
 
 def my_listings(request):
     return render(request, 'dashboard-listing-table.html')

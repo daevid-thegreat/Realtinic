@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import django_heroku
 import os
 import cloudinary
+
 from pathlib import Path
 
 
@@ -27,10 +28,6 @@ SECRET_KEY = 'django-insecure-skmjtv#)pn5978nss_x9)#nl7&%k%frr96-z&ho14e(^i$rf_3
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-<<<<<<< HEAD
-=======
-# DEBUG = False
->>>>>>> 7cdae264171b25a3cae087afbeda98a8bb14fe06
 
 ALLOWED_HOSTS = ['127.0.0.1', 'realtinic.com', 'realtinic.herokuapp.com', 'www.realtinic.com']
 
@@ -177,3 +174,6 @@ CLOUDINARY_STORAGE = {
     'API_KEY': '188183338574315',
     'API_SECRET': 'EhiM_owDDrmqxcPP60ecpZ5SWDs'
 }
+
+import cloudinary.uploader
+import cloudinary.api
