@@ -50,7 +50,6 @@ class UserprofileManager(BaseUserManager):
 
         return self.create_user(first_name, last_name, username, email, password, **other_fields)
 
-
 class Userprofile(AbstractBaseUser, PermissionsMixin):
     id_user = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
     first_name = models.CharField(max_length=250)
@@ -130,7 +129,7 @@ class Property(models.Model):
     name = models.CharField(max_length=500)
     location = models.CharField(max_length=500)
     list_type = models.CharField(max_length=25, choices=list_types)
-    city = models.CharField(max_length=25, choices=property_city, default= 'Abuja')
+    city = models.CharField(max_length=25, choices=property_city)
     price= models.DecimalField(max_digits=13, decimal_places=2)
     home_type = models.CharField(max_length=50, choices=home_types, default= 'Single-family')
     property_id = models.UUIDField(unique=True, default=uuid.uuid4)
@@ -196,7 +195,6 @@ class Property(models.Model):
         if not stars: return 0.0
         avg = sum(stars)/len(stars)
         return round(avg, 2)   
-
 
 class Review(models.Model):
     ratings = (

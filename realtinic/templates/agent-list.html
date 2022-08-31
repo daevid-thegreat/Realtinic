@@ -71,8 +71,12 @@
                                         <div class="listing-item">
                                             <article class="geodir-category-listing fl-wrap">
                                                 <div class="geodir-category-img fl-wrap  agent_card">
-                                                    <a href="agent-single.html" class="geodir-category-img_item">
+                                                    <a href="/agents/{{agent.id_user}}" class="geodir-category-img_item">
+                                                        {% if agent.profilepic %}
                                                         <img src="{{agent.profilepic.url}}" alt="{{agent.profilepic.url}}">
+                                                        {% else %}
+                                                        <img src="https://avataaars.io/?avatarStyle=Circle&topType=Hat&accessoriesType=Sunglasses&facialHairType=Blank&clotheType=Hoodie&clotheColor=Pink&eyeType=Hearts&eyebrowType=Default&mouthType=Smile&skinColor=Tanned" height="" alt="">
+                                                        {% endif %}
                                                         <ul class="list-single-opt_header_cat">
                                                             <li><span class="cat-opt color-bg">4 listings</span></li>
                                                         </ul>

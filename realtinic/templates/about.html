@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
             {% block content %}
-            {% block title %}Browse Properties - Realtinic{% endblock %}
+            {% block title %}About Us - Realtinic{% endblock %}
             <!-- wrapper  -->	
             <div id="wrapper">
                 <!-- content -->	
@@ -9,12 +9,12 @@
                     <!--  section  -->
                     <section class="hidden-section single-par2  " data-scrollax-parent="true">
                         <div class="bg-wrap bg-parallax-wrap-gradien">
-                            <div class="bg par-elem "  data-bg="images/bg/11.jpg" data-scrollax="properties: { translateY: '30%' }"></div>
+                            <div class="bg par-elem "  data-bg="{% static 'images/bg/17.jpg' %}" data-scrollax="properties: { translateY: '30%' }"></div>
                         </div>
                         <div class="container">
                             <div class="section-title center-align big-title">
                                 <h2><span>About Us</span></h2>
-                                <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nec tincidunt arcu, sit amet fermentum sem.</h4>
+                                <h4>We are a Nigerian property listing company built to help movers find a house to buy easier and to help real estate proffesionals make your home sales or leases happen.</h4>
                             </div>
                             <div class="scroll-down-wrap">
                                 <div class="mousey">
@@ -47,8 +47,7 @@
                                     <div class="services-item fl-wrap">
                                         <i class="fal fa-headset"></i>
                                         <h4>24 Hours Support <span>01</span></h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar.</p>
-                                        <a href="#" class="serv-link">Read more</a>
+                                        <p>Are you having issues, maybe a possible fraudster?, a glitch or a bug? hit us up we always ready to help.</p>
                                     </div>
                                 </div>
                                 <!-- services-item  end-->
@@ -57,8 +56,7 @@
                                     <div class="services-item fl-wrap">
                                         <i class="fal fa-users-cog"></i>
                                         <h4>For All <span>02</span></h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar.</p>
-                                        <a href="#" class="serv-link">Read more</a>
+                                        <p>Our website is open to everyone, whether you are buying a property, renting a property, selling a property or leasing a property.</p>
                                     </div>
                                 </div>
                                 <!-- services-item  end-->
@@ -67,8 +65,7 @@
                                     <div class="services-item fl-wrap">
                                         <i class="fal fa-phone-laptop"></i>
                                         <h4>User Friendly <span>03</span></h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar.</p>
-                                        <a href="#" class="serv-link">Read more</a>
+                                        <p>Our website is easy to use, with great user interface and user experience we wish you a good time on our website.</p>
                                     </div>
                                 </div>
                                 <!-- services-item  end-->								
@@ -85,22 +82,22 @@
                                     <div class="col-md-5">
                                         <div class="about-title fl-wrap">
                                             <h2>Our Company <span>Story</span></h2>
-                                            <h4>Check video presentation to find   out more about us .</h4>
+                                        
                                         </div>
-                                        <p>Ut euismod ultricies sollicitudin. Curabitur sed dapibus nulla. Nulla eget iaculis lectus. Mauris ac maximus neque. Nam in mauris quis libero sodales eleifend. Morbi varius, nulla sit amet rutrum elementum, est elit finibus tellus, ut tristique elit risus at metus.</p>
+                                        <p>Realtinic is a cutting-edge platform to facilitate real estate purchases and property sales in Nigeria, we are a revolutionary real estate website that will change the way people buy and sell properties..</p>
                                         <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra.
+                                            Our goal is to offer home sellers a unique platform that helps them sell their property quickly, while providing home seekers with real estate listings they can trust, Realtinic is keen to list all kinds of properties for rent or for sale in Lagos, Abuja and other cities all over Nigeria.
                                         </p>
-                                        <a href="#" class="btn small-btn float-btn color-bg">Read More</a>
+                                        <!-- <a href="#" class="btn small-btn float-btn color-bg">Read More</a> -->
                                     </div>
                                     <div class="col-md-1"></div>
                                     <div class="col-md-6">
                                         <div class="about-img fl-wrap">
                                             <img src="images/all/18.jpg" class="respimg" alt="">
                                             <div class="about-img-hotifer color-bg">
-                                                <p>Your website is fully responsive so visitors can view your content from their choice of device.</p>
-                                                <h4>Mark Antony</h4>
-                                                <h5>Homeradar CEO</h5>
+                                                <p>Realtinic is the most comprehensive real estate listing website in Nigeria.</p>
+                                                <h4>Makinde David</h4>
+                                                <h5>Realtinic Founder</h5>
                                             </div>
                                         </div>
                                     </div>
@@ -111,10 +108,10 @@
                     </section>
                     <!-- section end-->	
                     <!-- section -->
-                    <section class="color-bg small-padding">
+                    <!-- <section class="color-bg small-padding">
                         <div class="container">
                             <div class="main-facts fl-wrap">
-                                <!-- inline-facts  -->
+                                
                                 <div class="inline-facts-wrap">
                                     <div class="inline-facts">
                                         <div class="milestone-counter">
@@ -125,8 +122,7 @@
                                         <h6>Agents and Agencys</h6>
                                     </div>
                                 </div>
-                                <!-- inline-facts end -->
-                                <!-- inline-facts  -->
+                                
                                 <div class="inline-facts-wrap">
                                     <div class="inline-facts">
                                         <div class="milestone-counter">
@@ -137,8 +133,7 @@
                                         <h6>Happy Customers Every Year</h6>
                                     </div>
                                 </div>
-                                <!-- inline-facts end -->
-                                <!-- inline-facts  -->
+                                
                                 <div class="inline-facts-wrap">
                                     <div class="inline-facts">
                                         <div class="milestone-counter">
@@ -149,8 +144,7 @@
                                         <h6>Won Awards</h6>
                                     </div>
                                 </div>
-                                <!-- inline-facts end -->
-                                <!-- inline-facts  -->
+                               
                                 <div class="inline-facts-wrap">
                                     <div class="inline-facts">
                                         <div class="milestone-counter">
@@ -161,7 +155,7 @@
                                         <h6>New Listing Every Week</h6>
                                     </div>
                                 </div>
-                                <!-- inline-facts end -->
+                               
                             </div>
                         </div>
                         <div class="svg-bg">
@@ -200,6 +194,7 @@
                             </svg>
                         </div>
                     </section>
+                -->
                     <!-- section end-->						
                     <!-- section -->
                     <section >
@@ -360,12 +355,13 @@
                     </section>
                     <!-- section end-->					
                     <!--section  -->  
+                    <!---
                     <section class="parallax-section ps-bg video-section" data-scrollax-parent="true" id="sec2">
                         <div class="bg-wrap">
-                            <div class="bg par-elem "  data-bg="images/bg/5.jpg" data-scrollax="properties: { translateY: '30%' }"></div>
+                            <div class="bg par-elem "  data-bg="{% static 'images/bg/5.jpg' %}" data-scrollax="properties: { translateY: '30%' }"></div>
                         </div>
                         <div class="overlay"></div>
-                        <!--container-->
+
                         <div class="container">
                             <div class="video_section-title fl-wrap">
                                 <h2>Our Story Video</h2>
@@ -373,7 +369,7 @@
                             </div>
                             <a href="https://vimeo.com/158059890" class="promo-link big_prom color-bg   image-popup"><i class="fas fa-play"></i></a>
                         </div>
-                    </section>
+                    </section> -->
                     <!--section end-->  					
                     <!-- section -->
                     <section class="gray-bg ">
@@ -493,7 +489,7 @@
                                 <div class="col-md-3">
                                     <div class="footer-widget fl-wrap">
                                         <div class="footer-widget-logo fl-wrap">
-                                            <img src="images/logo.png" alt="">
+                                            <img src="{% static 'images/logo.png' %}" alt="">
                                         </div>
                                         <p>Realtinic - Where you can find the next property to buy, or to rent, or where ever you are in the market. You can also post your home for sale or lease, or dive into our huge database of any other listings.</p>
                                     </div>

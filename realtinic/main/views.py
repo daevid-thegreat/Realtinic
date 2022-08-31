@@ -106,7 +106,6 @@ def listing(request):
 
     return render(request, 'listing.html', context)
 
-
 @login_required(login_url='/')
 def addlisting(request):
     if request.user.is_realtor == True:
@@ -414,11 +413,11 @@ def user_profile(request):
         return render(request, 'user-profile.html')
 
 def single_listing(request, id):
-    listing = Property.objects.get(id = id)
+    #listing = Property.objects.get(id = id)
     listing = get_object_or_404(Property, id=id)
     listing.views += 1
     listing.save()
-    reviews = Review.objects.filter(listing=listing)
+    reviews = Review.objects.filter(listing_id=listing)
 
     if request.user.is_authenticated:
         a = str(request.user.id_user)
