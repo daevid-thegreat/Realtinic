@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'main',
     'cloudinary',
     'django_filters',
-    'channels',
     'django.contrib.sitemaps',
 ]
 
