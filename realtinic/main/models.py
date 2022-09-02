@@ -249,3 +249,10 @@ class Chat(models.Model):
 
     def __str__(self):
         return self.message
+
+class SavedProperty(models.Model):
+    user = models.ForeignKey(User, related_name='saved_properties', default=None, on_delete=models.CASCADE)
+    property = models.ForeignKey(Property, related_name='saved_properties', default=None, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.property.name

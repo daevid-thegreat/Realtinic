@@ -46,6 +46,13 @@ def index(request):
          else:
             messages.info(request, 'Sorry we cannot find this user')
             return redirect('index')
+    # save property
+    if request.user.is_authenticated:
+        if request.method == 'POST' and 'save' in request.POST:
+            property_id = request.POST['property_id']
+            property = Property.objects.get(id=property_id)
+            property.save()
+            return redirect('index')
 
     properties = Property.objects.order_by('-listed_on')[:6]
     return render(request, 'index.html', {'properties':properties})
@@ -208,9 +215,7 @@ def logout(request):
 
 def findagents(request):
     agents= Userprofile.objects.all().filter(is_realtor = True)
-    print(agents)
-    q = Paginator(agents, 2)
-
+    q = Paginator(agents, 10)
     page = request.GET.get('page')
     agents = q.get_page(page)
     nums = "p" * agents.paginator.num_pages
@@ -267,20 +272,20 @@ def register_agents(request):
 
 def user_single(request, id):
     user = Userprofile.objects.get(id_user = id)
-    a = str(request.user.id_user)
-    b = str(user.id_user)
-    room = a[0:13] + "-" + b[0:13]
-    room1 = b[0:13] + "-" + a[0:13]
+    user1 = str(request.user.id_user)
+    user2 = str(user.id_user)
+    room = user1[0:13] + "-" + user2[0:13]
 
     if user.is_realtor == True:
-        if not Room.objects.filter(room_name=room).exists() or not Room.objects.filter(room_name=room1).exists():
+        if not Room.objects.filter(room_name = room).exists():
             Room.objects.create(room_name=room, user1 = request.user, user2 = user)
-        room = Room.objects.get(room_name=room) or Room.objects.get(room_name=room1)
-        # if request.user != room.user1 and request.user != room.user2:
-        #     return redirect('/my-messages')
+        room = Room.objects.get(room_name=room)
         return render(request, 'agent-single.html', {'user':user, 'room':room})
     else:
-        return render(request, 'user_single.html', {'user':user})
+        if not Room.objects.filter().exists(room_name = room):
+            Room.objects.create(room_name=room, user2 = request.user, user1 = user2)
+        room = Room.objects.get(room_name=room)
+        return render(request, 'user_single.html', {'user':user, 'room':room})
 
 def compare(request):
     return render(request, 'compare.html')
@@ -413,7 +418,6 @@ def user_profile(request):
         return render(request, 'user-profile.html')
 
 def single_listing(request, id):
-    #listing = Property.objects.get(id = id)
     listing = get_object_or_404(Property, id=id)
     listing.views += 1
     listing.save()
@@ -472,23 +476,47 @@ def single_listing(request, id):
             )
             booking.save()
             return redirect('/listing/'+str(listing.id))
-    
-        if not Room.objects.filter(room_name=room).exists():
-            Room.objects.create(room_name=room, user1 = request.user, user2 = listing.agent)
-            return redirect('/my-messages/' + room)
-        room = Room.objects.get(room_name=room)
-        if request.user != room.user1 and request.user != room.user2:
-            return redirect('/my-messages')
+        if request.user.is_realtor:
+            if not Room.objects.filter(room_name=room).exists():
+                Room.objects.create(room_name=room, user1 = request.user, user2 = listing.agent)
+            room = Room.objects.get(room_name=room)
+        else:
+            if not Room.objects.filter(room_name=room).exists():
+                Room.objects.create(room_name=room, user1 = listing.agent, user2 = request.user)
+            room = Room.objects.get(room_name=room)
+            if request.user != room.user1 and request.user != room.user2:
+                return redirect('/my-messages')
         return render(request, 'listing-single3.html', {'listing': listing,'room':room})
     else:
         return render(request, 'listing-single3.html', {'listing': listing, 'reviews': reviews})
 
 def my_listings(request):
-    return render(request, 'dashboard-listing-table.html')
+    listings = request.user.properties.all()
+    q = Paginator(listings, 12)
+    page = request.GET.get('page')
+    listings = q.get_page(page)
+    nums = "p" * listings.paginator.num_pages
+    return render(request, 'dashboard-listing-table.html', {'listings': listings, 'nums': nums})
 
 def reviews(request):
-    return render(request, 'dashboard-review.html')
+    reviews = request.user.reviews.all()
+    q = Paginator(reviews, 12)
+    page = request.GET.get('page')
+    reviews = q.get_page(page)
+    nums = "p" * reviews.paginator.num_pages
+    return render(request, 'dashboard-review.html', {'reviews': reviews, 'nums': nums})
 
 def bookings(request):
     bookings = Booking.objects.filter(property_agent=request.user)
     return render(request, 'dashboard-bookings.html', {'bookings':bookings})
+
+def saved_homes(request):
+    if request.user.is_authenticated:
+        saved_properties = request.user.saved_property.all()
+        q = Paginator(saved_properties, 12)
+        page = request.GET.get('page')
+        saved_properties = q.get_page(page)
+        nums = "p" * saved_properties.paginator.num_pages
+        return render(request, 'dashboard-saved-homes.html', {'saved_properties': saved_properties, 'nums': nums})
+    else:
+        return render(request, 'login.html')
