@@ -9,15 +9,6 @@
                 <div class="content">
                     <!-- categoties-column -->
                     <div class="categoties-column">
-                        <!-- <div class="categoties-column_container cat-list">
-                            <ul>
-                                <li><a href="#" class="act-category"><i class="fal fa-city"></i><span>Apartments</span></a></li>
-                                <li><a href="#"><i class="fal fa-car-building"></i><span>Offices</span></a></li>
-                                <li><a href="#"><i class="fal fa-home"></i><span>House</span></a></li>
-                                <li><a href="#"><i class="fal fa-hotel"></i><span>Hotel</span></a></li>
-                                <li><a href="#"><i class="fal fa-warehouse-alt"></i><span>Villa</span></a></li>
-                            </ul>
-                        </div> -->
                         <div class="progress-indicator">
                             <svg xmlns="http://www.w3.org/2000/svg"
                                 viewBox="-1 -1 34 34">
@@ -253,14 +244,16 @@
                                             <li><a href="#" class="cat-opt blue-bg">{{ property.list_type }}</a></li>
                                             <li><a href="#" class="cat-opt color-bg">{{ property.home_type}}</a></li>
                                         </ul>
-                                        <a href="#" class="geodir_save-btn tolt" data-microtip-position="left" data-tooltip="Save"><span><i class="fal fa-heart"></i></span></a>
-                                        <a href="#" class="compare-btn tolt" data-microtip-position="left" data-tooltip="Compare"><span><i class="fal fa-random"></i></span></a>
+                                        <form method="post">
+                                            {% csrf_token %}
+                                        <button name="save"class="geodir_save-btn tolt" data-microtip-position="left" data-tooltip="Save" value="{{property.id}}"><span><i class="fal fa-heart"></i></span></button>
+                                        </form>
                                         <div class="geodir-category-listing_media-list">
                                             <span><i class="fas fa-camera"></i> 8</span>
                                         </div>
                                     </div>
                                     <div class="geodir-category-content fl-wrap">
-                                        <h3><a href="listing-single.html">{{ property.name }}</a></h3>
+                                        <h3><a href="{{property.id}}">{{ property.name }}</a></h3>
                                         <div class="geodir-category-content_price">$ {{ property.price }}</div>
                                         <p>{{ property.description }}</p>
                                         <div class="geodir-category-content-details">
@@ -271,7 +264,13 @@
                                             </ul>
                                         </div>
                                         <div class="geodir-category-footer fl-wrap">
-                                            <a href="agent-single.html" class="gcf-company"><img src="{{ property.agent.profilepic.url }}" alt=""><span>By {{ property.agent.first_name }} {{ property.agent.last_name}}</span></a>
+                                            <a href="agent-single.html" class="gcf-company">
+                                                {% if property.agent.profilepic %}
+                                                <img src="{{ property.agent.profilepic.url }}" alt="">
+                                                {% else %}
+                                                <img src="https://avataaars.io/?avatarStyle=Circle&topType=Hat&accessoriesType=Sunglasses&facialHairType=Blank&clotheType=Hoodie&clotheColor=Pink&eyeType=Hearts&eyebrowType=Default&mouthType=Smile&skinColor=Tanned" alt="">
+                                                {% endif %}
+                                                <span>By {{ property.agent.first_name }} {{ property.agent.last_name}}</span></a>
                                             <div class="listing-rating card-popup-rainingvis tolt" data-microtip-position="top" data-tooltip="Good" data-starrating2="3.9"></div>
                                         </div>
                                     </div>

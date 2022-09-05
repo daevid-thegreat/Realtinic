@@ -69,7 +69,7 @@
                                         <span class="price-opt-title">Sort   by:</span>
                                         <div class="listsearch-input-item">
                                             <select data-placeholder="Lastes" class="chosen-select no-search-select" >
-                                                <option>Lastes</option>
+                                                <option>Lastest</option>
                                                 <option>Oldes</option>
                                                 <option>Average rating</option>
                                             </select>
@@ -78,9 +78,10 @@
                                     <!-- price-opt end-->
                                 </div>
                                 <!-- reviews-comments-item -->  
+                                {% for review in reviews %}
                                 <div class="reviews-comments-item">
                                     <div class="review-comments-avatar">
-                                        <img src="images/avatar/2.jpg" alt=""> 
+                                        <img src="{{review.listing.header_image.url}}" alt=""> 
                                         <div class="review-notifer">New</div>
                                     </div>
                                     <div class="reviews-comments-item-text smpar">
@@ -89,63 +90,37 @@
                                             <a href="#"> <i class="fas fa-reply"></i> Reply</a>
                                             <a href="#"> <i class="fas fa-exclamation-triangle"></i> Report </a>
                                         </div>
-                                        <h4><a href="#">Liza Rose <span>For Luxury Family Home </span></a></h4>
-                                        <div class="listing-rating card-popup-rainingvis" data-starrating2="3"><span class="re_stars-title">Average</span></div>
+                                        <h4><a href="">Liza Rose <span>{{review.listing.name}}</span></a></h4>
+                                        <div class="listing-rating card-popup-rainingvis" data-starrating2="3"><span class="re_stars-title">{{review.rating}}</span></div>
                                         <div class="clearfix"></div>
-                                        <p>" Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. "</p>
-                                        <div class="reviews-comments-item-date"><span class="reviews-comments-item-date-item"><i class="far fa-calendar-check"></i>12 April 2020</span><a href="#" class="rate-review"><i class="fal fa-thumbs-up"></i>  Helpful Review  <span>6</span> </a></div>
+                                        <p>" {{review.comment}}"</p>
+                                        <div class="reviews-comments-item-date"><span class="reviews-comments-item-date-item"><i class="far fa-calendar-check"></i>{{review.date_created}}</span><a href="#" class="rate-review"><i class="fal fa-thumbs-up"></i>  Helpful Review  <span>6</span> </a></div>
                                     </div>
                                 </div>
-                                <!--reviews-comments-item end--> 
-                                <!-- reviews-comments-item -->  
-                                <div class="reviews-comments-item">
-                                    <div class="review-comments-avatar">
-                                        <img src="images/avatar/3.jpg" alt="">
-                                        <div class="review-notifer">New</div>
-                                    </div>
-                                    <div class="reviews-comments-item-text smpar">
-                                        <div class="box-widget-menu-btn smact"><i class="far fa-ellipsis-h"></i></div>
-                                        <div class="show-more-snopt-tooltip bxwt">
-                                            <a href="#"> <i class="fas fa-reply"></i> Reply</a>
-                                            <a href="#"> <i class="fas fa-exclamation-triangle"></i> Report </a>
-                                        </div>
-                                        <h4><a href="#">Adam Koncy <span>Kayak Point House</span></a></h4>
-                                        <div class="listing-rating card-popup-rainingvis" data-starrating2="5"><span class="re_stars-title">Excellent</span></div>
-                                        <div class="clearfix"></div>
-                                        <p>" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc posuere convallis purus non cursus. Cras metus neque, gravida sodales massa ut. "</p>
-                                        <div class="reviews-comments-item-date"><span class="reviews-comments-item-date-item"><i class="far fa-calendar-check"></i>03 December 2019</span><a href="#" class="rate-review"><i class="fal fa-thumbs-up"></i>  Helpful Review  <span>2</span> </a></div>
-                                    </div>
-                                </div>
-                                <!--reviews-comments-item end-->  										
-                                <!-- reviews-comments-item -->  
-                                <div class="reviews-comments-item">
-                                    <div class="review-comments-avatar">
-                                        <img src="images/avatar/4.jpg" alt=""> 
-                                    </div>
-                                    <div class="reviews-comments-item-text smpar">
-                                        <div class="box-widget-menu-btn smact"><i class="far fa-ellipsis-h"></i></div>
-                                        <div class="show-more-snopt-tooltip bxwt">
-                                            <a href="#"> <i class="fas fa-reply"></i> Reply</a>
-                                            <a href="#"> <i class="fas fa-exclamation-triangle"></i> Report </a>
-                                        </div>
-                                        <h4><a href="#">Mark Rose <span>For Gorgeous House For Sale </span></a></h4>
-                                        <div class="listing-rating card-popup-rainingvis" data-starrating2="5"><span class="re_stars-title">Excellent</span></div>
-                                        <div class="clearfix"></div>
-                                        <p>" Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. "</p>
-                                        <div class="reviews-comments-item-date"><span class="reviews-comments-item-date-item"><i class="far fa-calendar-check"></i>06 December 2018</span><a href="#" class="rate-review"><i class="fal fa-thumbs-up"></i>  Helpful Review  <span>2</span> </a></div>
-                                    </div>
-                                </div>
+                                {% endfor %}
                                 <!--reviews-comments-item end--> 										
                             </div>
                             <!-- pagination-->
-                            <div class="pagination float-pagination">
-                                <a href="#" class="prevposts-link"><i class="fa fa-caret-left"></i></a>
-                                <a href="#" >1</a>
-                                <a href="#" class="current-page">2</a>
-                                <a href="#">3</a>
-                                <a href="#">4</a>
-                                <a href="#" class="nextposts-link"><i class="fa fa-caret-right"></i></a>
-                            </div>
+                             <!-- pagination-->
+                        <div class="pagination">
+                            {% if reviews.has_previous %}
+                            <a href="?page=1" class="prevposts-link"><i class="fa fa-caret-left"></i></a>
+                            <a href="?page={{reviews.previous_page_number}}" >Prev</a>
+                            {% endif %} 
+                            {% for x in nums %}
+                                {% if reviews.number == x %}
+                            <a href="?page={{forloop.counter}}" class="current-page" disabled>{{ forloop.counter }}</a>
+                                {% else %}
+                            <a href="?page={{forloop.counter}}">{{ forloop.counter }}</a>
+                                {% endif %}
+                            {% endfor %}
+                            {% if reviews.has_next %}
+                            <a href="?page={{reviews.next_page_number}}">Next</a>
+                            <a href="?page={{reviews.paginator.num_pages}}" class="nextposts-link"><i class="fa fa-caret-right"></i></a>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- pagination end-->
                             <!-- pagination end-->	
                         </div>
                     </div>
@@ -153,12 +128,11 @@
                         <div class="dashboard-footer-links fl-wrap">
                             <span>Helpfull Links:</span>
                             <ul>
-                                <li><a href="about">About  </a></li>
-                                <li><a href="blog">Blog</a></li>
-                                <!-- <li><a href="terms">Terms of use</a></li>
-                                <li><a href="privacy_policy">Privacy Policy</a></li> -->
-                                <li><a href="contacts">Contact Us</a></li>
-                                <li><a href="help">Help Center</a></li>
+                                <li><a href="/about">About  </a></li>
+                                <li><a href="/blog">Blog</a></li>
+                                <li><a href="/terms">Terms of use</a></li>
+                                <li><a href="/privacy_policy">Privacy Policy</a></li>
+                                <li><a href="/help">Help Center</a></li>
                             </ul>
                         </div>
                         <a href="#main" class="dashbord-totop  custom-scroll-link"><i class="fas fa-caret-up"></i></a>

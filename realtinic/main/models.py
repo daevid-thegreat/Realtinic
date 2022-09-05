@@ -2,7 +2,6 @@ from pyexpat import model
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
 import uuid
-
 from realtinic.settings import AUTH_USER_MODEL
 
 User = AUTH_USER_MODEL
@@ -51,7 +50,6 @@ class UserprofileManager(BaseUserManager):
 
         return self.create_user(first_name, last_name, username, email, password, **other_fields)
 
-
 class Userprofile(AbstractBaseUser, PermissionsMixin):
     id_user = models.UUIDField(unique=True, default=uuid.uuid4, editable=False)
     first_name = models.CharField(max_length=250)
@@ -82,8 +80,6 @@ class Userprofile(AbstractBaseUser, PermissionsMixin):
     gov_id = models.FileField(upload_to='government ids', null=True, blank=True)
     business_id = models.FileField(upload_to='business ids', null=True, blank=True)
     utility_bills = models.FileField(upload_to='utility bills', null=True, blank=True)
-    # property_list = models.ManyToManyField('Property', related_name='property_list', blank=True)
-    # reviews = models.ManyToManyField('Review', related_name='reviews', blank=True)
 
     verified = models.BooleanField(default=False)
 
@@ -133,7 +129,7 @@ class Property(models.Model):
     name = models.CharField(max_length=500)
     location = models.CharField(max_length=500)
     list_type = models.CharField(max_length=25, choices=list_types)
-    city = models.CharField(max_length=25, choices=property_city, default= 'Abuja')
+    city = models.CharField(max_length=25, choices=property_city)
     price= models.DecimalField(max_digits=13, decimal_places=2)
     home_type = models.CharField(max_length=50, choices=home_types, default= 'Single-family')
     property_id = models.UUIDField(unique=True, default=uuid.uuid4)
@@ -200,7 +196,6 @@ class Property(models.Model):
         avg = sum(stars)/len(stars)
         return round(avg, 2)   
 
-
 class Review(models.Model):
     ratings = (
         ('Bad', 'Bad'),
@@ -254,3 +249,10 @@ class Chat(models.Model):
 
     def __str__(self):
         return self.message
+
+class SavedProperty(models.Model):
+    user = models.ForeignKey(User, related_name='saved_properties', default=None, on_delete=models.CASCADE)
+    property = models.ForeignKey(Property, related_name='saved_properties', default=None, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.property.name
