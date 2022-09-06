@@ -34,10 +34,10 @@
                                             <div class="bg" style="background-color: purple;"></div>
                                         </div>
                                         <div class="card-info-media">
-                                            {% if user.profilepic.url == '' %}
+                                            {% if user.profilepic.url == '' or user.profilepic.url is None %}
                                             <div class="bg"  data-bg="{{user.profilepic.url}}"></div>
                                             {% else %}
-                                            <div class="bg"  data-bg="{{user.profilepic.url}}"></div>
+                                            <div class="bg"  data-bg="https://avataaars.io/?avatarStyle=Circle&topType=Hat&accessoriesType=Sunglasses&facialHairType=Blank&clotheType=Hoodie&clotheColor=Pink&eyeType=Hearts&eyebrowType=Default&mouthType=Smile&skinColor=Tanned"></div>
                                             {% endif %}
                                         </div>
                                         <div class="card-info-content">

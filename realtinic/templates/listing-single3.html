@@ -78,7 +78,11 @@
                                                 <div class="col-md-4">
                                                     <a class="host-avatar-wrap" href="agent-single.html">
                                                     <span>By {{listing.agent.first_name}}</span>
-                                                    <img src={% if listing.agent.profilepic %} "{{listing.agent.profilepic.url}}" {% else %} "images/avatar/1.jpg" {% endif %} alt="">
+                                                    {% if listing.user_agent.profilepic %}
+                                                        <img src="{{ listing.user_agent.profilepic.url }}" alt="">
+                                                    {% else %}
+                                                        <img src="https://avataaars.io/?avatarStyle=Circle&topType=Hat&accessoriesType=Sunglasses&facialHairType=Blank&clotheType=Hoodie&clotheColor=Pink&eyeType=Hearts&eyebrowType=Default&mouthType=Smile&skinColor=Tanned" alt="">
+                                                    {% endif %}
                                                     </a>
                                                 </div>
                                             </div>
@@ -247,7 +251,7 @@
                                             <!-- list-single-main-item -->
                                             <div class="list-single-main-item fl-wrap" id="sec6">
                                                 <div class="list-single-main-item-title">
-                                                    <h3>Reviews <span>{{ listing.reviews.count }}</span></h3>
+                                                    <h3>Reviews <span> {{ listing.reviews.count }} </span></h3>
                                                 </div>
                                                 <div class="list-single-main-item_content fl-wrap">
                                                     <div class="reviews-comments-wrap fl-wrap">
@@ -256,7 +260,7 @@
                                                             <div class="listing-rating card-popup-rainingvis" data-starrating2="4"><span class="re_stars-title">Good</span></div>
                                                         </div>
                                                         <!-- reviews-comments-item --> 
-                                                        {% for review in listing.reviews.all %} 
+                                                        {% for review in reviews %} 
                                                         <div class="reviews-comments-item">
                                                             <div class="review-comments-avatar">
                                                                 <img src="{% if review.author.profilepic %} {{ review.author.profilepic.url }} {% else %} images/avatar/2.jpg {% endif %}" alt=""> 
@@ -340,10 +344,14 @@
                                                 </div>
                                                 <div class="profile-widget-card">
                                                     <div class="profile-widget-image">
-                                                        <img src="images/avatar/1.jpg" alt="">
+                                                        {% if listing.user_agent.profilepic %}
+                                                            <img src="{{ listing.user_agent.profilepic.url }}" alt="">
+                                                        {% else %}
+                                                            <img src="https://avataaars.io/?avatarStyle=Circle&topType=Hat&accessoriesType=Sunglasses&facialHairType=Blank&clotheType=Hoodie&clotheColor=Pink&eyeType=Hearts&eyebrowType=Default&mouthType=Smile&skinColor=Tanned" alt="">
+                                                        {% endif %}
                                                     </div>
                                                     <div class="profile-widget-header-title">
-                                                        <h4><a href="agent-single.html">{{listing.user_agent.first_name}} {{listing.user_agent.last_name}}</a></h4>
+                                                        <h4><a href="/agents{{listing.user_agent.id_user}}">{{listing.user_agent.first_name}} {{listing.user_agent.last_name}}</a></h4>
                                                         <div class="clearfix"></div>
                                                         <div class="pwh_counter"><span>22</span>Property Listings</div>
                                                         <div class="clearfix"></div>
@@ -511,14 +519,15 @@
                                 <!--  sidebar end-->                            
                             </div>
                             <div class="fl-wrap limit-box"></div>
+                            <!--  
                             <div class="listing-carousel-wrapper carousel-wrap fl-wrap">
                                 <div class="list-single-main-item-title">
                                     <h3>Similar Properties</h3>
                                 </div>
                                 <div class="listing-carousel carousel ">
-                                    <!-- slick-slide-item -->
+                                    
                                     <div class="slick-slide-item">
-                                        <!-- listing-item -->
+                                        
                                         <div class="listing-item">
                                             <article class="geodir-category-listing fl-wrap">
                                                 <div class="geodir-category-img fl-wrap">
@@ -557,12 +566,11 @@
                                                 </div>
                                             </article>
                                         </div>
-                                        <!-- listing-item end-->							
+                                       							
                                     </div>
-                                    <!-- slick-slide-item end-->
-                                    <!-- slick-slide-item -->
+                                    
                                     <div class="slick-slide-item">
-                                        <!-- listing-item -->
+                                        
                                         <div class="listing-item">
                                             <article class="geodir-category-listing fl-wrap">
                                                 <div class="geodir-category-img fl-wrap">
@@ -601,12 +609,11 @@
                                                 </div>
                                             </article>
                                         </div>
-                                        <!-- listing-item end-->							
+                                        						
                                     </div>
-                                    <!-- slick-slide-item end-->									
-                                    <!-- slick-slide-item -->
+                                    
                                     <div class="slick-slide-item">
-                                        <!-- listing-item -->
+                                       
                                         <div class="listing-item">
                                             <article class="geodir-category-listing fl-wrap">
                                                 <div class="geodir-category-img fl-wrap">
@@ -645,12 +652,11 @@
                                                 </div>
                                             </article>
                                         </div>
-                                        <!-- listing-item end-->							
+                                       						
                                     </div>
-                                    <!-- slick-slide-item end-->									
-                                    <!-- slick-slide-item -->
+                                    
                                     <div class="slick-slide-item">
-                                        <!-- listing-item -->
+                                       
                                         <div class="listing-item">
                                             <article class="geodir-category-listing fl-wrap">
                                                 <div class="geodir-category-img fl-wrap">
@@ -690,9 +696,9 @@
                                                 </div>
                                             </article>
                                         </div>
-                                        <!-- listing-item end-->							
+                                        						
                                     </div>
-                                    <!-- slick-slide-item end-->								
+                                     								
                                 </div>
                                 <div class="swiper-button-prev lc-wbtn lc-wbtn_prev"><i class="far fa-angle-left"></i></div>
                                 <div class="swiper-button-next lc-wbtn lc-wbtn_next"><i class="far fa-angle-right"></i></div>
@@ -700,39 +706,7 @@
                         </div>
                     </div>
                 </div>
-                <!-- content end -->	
-                <!-- subscribe-wrap -->	
-                <div class="subscribe-wrap fl-wrap">
-                    <div class="container">
-                        <div class="subscribe-container fl-wrap color-bg">
-                            <div class="pwh_bg"></div>
-                            <div class="mrb_dec mrb_dec3"></div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="subscribe-header">
-                                        <h4>newsletter</h4>
-                                        <h3>Sign up for newsletter and get latest news and update</h3>
-                                    </div>
-                                </div>
-                                <div class="col-md-1"></div>
-                                <div class="col-md-5">
-                                    <div class="footer-widget fl-wrap">
-                                        <div class="subscribe-widget fl-wrap">
-                                            <div class="subcribe-form">
-                                                <form id="subscribe">
-                                                    <input class="enteremail fl-wrap" name="email" id="subscribe-email" placeholder="Enter Your Email" spellcheck="false" type="text">
-                                                    <button type="submit" id="subscribe-button" class="subscribe-button color-bg">  Subscribe</button>
-                                                    <label for="subscribe-email" class="subscribe-message"></label>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- subscribe-wrap end -->	
+                 content end -->	
                 <!-- footer -->	
                 <footer class="main-footer fl-wrap">
                     <div class="footer-inner fl-wrap">
@@ -742,13 +716,10 @@
                                 <div class="col-md-3">
                                     <div class="footer-widget fl-wrap">
                                         <div class="footer-widget-logo fl-wrap">
-                                            <img src="images/logo.png" alt="">
+                                            <img src="{% static 'images/logo.png' %}" alt="">
                                         </div>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar.</p>
-                                        <div class="fw_hours fl-wrap">
-                                            <span>Monday - Friday:<strong> 8am - 6pm</strong></span>
-                                            <span>Saturday - Sunday:<strong> 9am - 3pm</strong></span>
-                                        </div>
+                                        <p>Realtinic - Get your Share of the Real Estate </p>-
+                                        <p> Find the next property to buy or rent where ever you are in the Nigerian market or put the next great property in Nigeria for sale or lease.</p>
                                     </div>
                                 </div>
                                 <!-- footer widget end-->
@@ -759,11 +730,10 @@
                                             <h4>Helpful links</h4>
                                         </div>
                                         <ul class="footer-list fl-wrap">
-                                            <li><a href="about.html">About Our Company</a></li>
-                                            <li><a href="blog.html">Our last News</a></li>
-                                            <li><a href="pricing.html">Pricing Plans</a></li>
-                                            <li><a href="contacts.html">Contacts</a></li>
-                                            <li><a href="help.html">Help Center</a></li>
+                                            <li><a href="/about">About Our Company</a></li>
+                                            <li><a href="/blog">News and Blog</a></li>
+                                            <li><a href="/download">Download</a></li>
+                                            <li><a href="/help">Help Center</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -775,32 +745,31 @@
                                             <h4>Contacts Info</h4>
                                         </div>
                                         <ul  class="footer-contacts fl-wrap">
-                                            <li><span><i class="fal fa-envelope"></i> Mail :</span><a href="#" target="_blank">yourmail@domain.com</a></li>
-                                            <li> <span><i class="fal fa-map-marker"></i> Adress :</span><a href="#" target="_blank">USA 27TH Brooklyn NY</a></li>
-                                            <li><span><i class="fal fa-phone"></i> Phone :</span><a href="#">+7(111)123456789</a></li>
+                                            <li><span><i class="fal fa-envelope"></i> Mail :</span><a href="mailto:support@realtinic.com" target="_blank">support@realtinic.com</a></li>
+                                            <li><span><i class="fal fa-phone"></i> Phone :</span><a href="tel:+2349037817373">+234(0)9037817373</a></li>
                                         </ul>
                                         <div class="footer-social fl-wrap">
                                             <ul>
-                                                <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                                                <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
-                                                <li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
-                                                <li><a href="#" target="_blank"><i class="fab fa-vk"></i></a></li>
+                                                <li><a href="https://web.facebook.com/realtinic" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                                <li><a href="https://twitter.com/realtinic" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                                                <li><a href="https://www.instagram.com/realtinic_/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                                                <li><a href="https://www.linkedin.com/company/realtinic" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+                                                <li><a href="https://youtube.com/channel/UCMb2WLOZova9ykm1WzE0spQ" target="_blank"><i class="fab fa-youtube"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
-                                </div>
+                                 </div>
                                 <!-- footer widget end-->   
                                 <!-- footer widget-->
                                 <div class="col-md-3">
                                     <div class="footer-widget fl-wrap">
                                         <div class="footer-widget-title fl-wrap">
-                                            <h4>Download our API</h4>
+                                            <h4>Affliates and Subsidiaries</h4>
                                         </div>
-                                        <p>Start working with Homeradar that can provide everything you need </p>
-                                        <div class="api-links fl-wrap">
-                                            <a href="#" class="api-btn color-bg"><i class="fab fa-apple"></i> App Store</a>  
-                                            <a href="#" class="api-btn color-bg"><i class="fab fa-google-play"></i> Play Market</a>
-                                        </div>
+                                        <ul class="footer-list fl-wrap">
+                                            <li><a href="https://manager.realtinic.com" target="_blank">Realtinic Rental Manager</a></li>
+                                            <!-- <li><a href="https://www.guvenrealty.com" target="_blank">Guven Realty</a></li> -->
+                                        </ul>
                                     </div>
                                 </div>
                                 <!-- footer widget end-->                                     
@@ -810,12 +779,12 @@
                     <!--sub-footer-->
                     <div class="sub-footer gray-bg fl-wrap">
                         <div class="container">
-                            <div class="copyright"> &#169; Homeradar 2022 .  All rights reserved.</div>
+                            <div class="copyright"> &#169; Realtinic 2022 .  All rights reserved.</div>
                             <div class="subfooter-nav">
                                 <ul class="no-list-style">
-                                    <li><a href="#">Terms of use</a></li>
-                                    <li><a href="#">Privacy Policy</a></li>
-                                    <li><a href="#">Blog</a></li>
+                                    <!-- <li><a href="terms">Terms of use</a></li>
+                                    <li><a href="privacy_policy">Privacy Policy</a></li> -->
+                                    <li><a href="/blog">Blog</a></li>
                                 </ul>
                             </div>
                         </div>

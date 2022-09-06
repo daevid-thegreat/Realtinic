@@ -41,7 +41,7 @@
                         <div class="dashboard-title fl-wrap">
                             <div class="dashboard-title-item"><span>Dashboard</span></div>
                             <div class="dashbard-menu-header">
-                                {% if user.profilepic.url == '' %}
+                                {% if user.profilepic.url == '' or user.profilepic.url == None %}
                                 <div class="dashbard-menu-avatar fl-wrap">
                                     <img src="https://avataaars.io/?avatarStyle=Circle&topType=Hat&accessoriesType=Sunglasses&facialHairType=Blank&clotheType=Hoodie&clotheColor=Pink&eyeType=Hearts&eyebrowType=Default&mouthType=Smile&skinColor=Tanned" alt="User Profile">
                                     <h4>Welcome, <span> {{ user.first_name }} {{user.last_name }}</span></h4>
@@ -101,13 +101,14 @@
                                 </div>
                             </div>
                             <div class="clearfix"></div>
+                            <!---
                             <div class="row">
                                 <div class="col-md-10">
                                     <div class="notification success-notif  fl-wrap">
                                         <p>Your listing <a href="#">Family house in Brooklyn</a> has been approved!</p>
                                         <a class="notification-close" href="#"><i class="fal fa-times"></i></a>
                                     </div>
-                                    <!-- <div class="dashboard-widget-title fl-wrap">Your  Statistic</div>
+                                     <div class="dashboard-widget-title fl-wrap">Your  Statistic</div>
                                     <div class="dasboard-content fl-wrap">
                                         
                                         <div class="chart-wrap   fl-wrap">
@@ -124,10 +125,10 @@
                                             <canvas id="canvas-chart"></canvas>
                                         </div>
                                         								
-                                    </div> -->
+                                    </div> 
                                     <div class="dashboard-widget-title fl-wrap">Last Activites</div>
                                     <div class="dashboard-list-box  fl-wrap">
-                                        <!-- dashboard-list end-->
+                                       
                                         <div class="dashboard-list fl-wrap">
                                             <div class="dashboard-message">
                                                 <span class="close-dashboard-item color-bg"><i class="fal fa-times"></i></span>
@@ -138,8 +139,7 @@
                                                 <div class="main-dashboard-message-time"><i class="fal fa-calendar-week"></i> 28 may 2020</div>
                                             </div>
                                         </div>
-                                        <!-- dashboard-list end-->
-                                        <!-- dashboard-list end-->
+                                     
                                         <div class="dashboard-list fl-wrap">
                                             <div class="dashboard-message">
                                                 <span class="close-dashboard-item color-bg"><i class="fal fa-times"></i></span>
@@ -150,8 +150,7 @@
                                                 <div class="main-dashboard-message-time"><i class="fal fa-calendar-week"></i> 28 may 2020</div>
                                             </div>
                                         </div>
-                                        <!-- dashboard-list end-->
-                                        <!-- dashboard-list end-->
+                                        
                                         <div class="dashboard-list fl-wrap">
                                             <div class="dashboard-message">
                                                 <span class="close-dashboard-item color-bg"><i class="fal fa-times"></i></span>
@@ -162,10 +161,10 @@
                                                 <div class="main-dashboard-message-time"><i class="fal fa-calendar-week"></i> 28 may 2020</div>
                                             </div>
                                         </div>
-                                        <!-- dashboard-list end-->
+                                       
                                     </div>
                                 </div>
-                           <!--     <div class="col-md-4">
+                               <div class="col-md-4">
                                     
                                     <div class="dasboard-widget fl-wrap">
                                         <div class="dasboard-widget-title fl-wrap">
@@ -267,12 +266,11 @@
                         <div class="dashboard-footer-links fl-wrap">
                             <span>Helpfull Links:</span>
                             <ul>
-                                <li><a href="about">About  </a></li>
-                                <li><a href="blog">Blog</a></li>
-                                <!-- <li><a href="terms">Terms of use</a></li>
-                                <li><a href="privacy_policy">Privacy Policy</a></li> -->
-                                <li><a href="contacts">Contact Us</a></li>
-                                <li><a href="help">Help Center</a></li>
+                                <li><a href="/about">About  </a></li>
+                                <li><a href="/blog">Blog</a></li>
+                                <li><a href="/terms">Terms of use</a></li>
+                                <li><a href="/privacy_policy">Privacy Policy</a></li>
+                                <li><a href="/help">Help Center</a></li>
                             </ul>
                         </div>
                         <a href="#main" class="dashbord-totop  custom-scroll-link"><i class="fas fa-caret-up"></i></a>

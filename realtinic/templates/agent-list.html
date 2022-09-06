@@ -71,8 +71,12 @@
                                         <div class="listing-item">
                                             <article class="geodir-category-listing fl-wrap">
                                                 <div class="geodir-category-img fl-wrap  agent_card">
-                                                    <a href="agent-single.html" class="geodir-category-img_item">
+                                                    <a href="/agents/{{agent.id_user}}" class="geodir-category-img_item">
+                                                        {% if agent.profilepic %}
                                                         <img src="{{agent.profilepic.url}}" alt="{{agent.profilepic.url}}">
+                                                        {% else %}
+                                                        <img src="https://avataaars.io/?avatarStyle=Circle&topType=Hat&accessoriesType=Sunglasses&facialHairType=Blank&clotheType=Hoodie&clotheColor=Pink&eyeType=Hearts&eyebrowType=Default&mouthType=Smile&skinColor=Tanned" height="" alt="">
+                                                        {% endif %}
                                                         <ul class="list-single-opt_header_cat">
                                                             <li><span class="cat-opt color-bg">{{agent.properties.count}} listing{{agent.properties.count|pluralize}}</span></li>
                                                         </ul>
@@ -313,10 +317,10 @@
                                                             <h4>Helpful links</h4>
                                                         </div>
                                                         <ul class="footer-list fl-wrap">
-                                                            <li><a href="about">About Our Company</a></li>
-                                                            <li><a href="blog">News and Blog</a></li>
-                                                            <li><a href="download">Download</a></li>
-                                                            <li><a href="help">Help Center</a></li>
+                                                            <li><a href="/about">About Our Company</a></li>
+                                                            <li><a href="/blog">News and Blog</a></li>
+                                                            <li><a href="/download">Download</a></li>
+                                                            <li><a href="/help">Help Center</a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -350,7 +354,7 @@
                                                             <h4>Affliates and Subsidiaries</h4>
                                                         </div>
                                                         <ul class="footer-list fl-wrap">
-                                                            <li><a href="https://www.manager.realtinic.com" target="_blank">Realtinic Rental Manager</a></li>
+                                                            <li><a href="https://manager.realtinic.com" target="_blank">Realtinic Rental Manager</a></li>
                                                             <!-- <li><a href="https://www.guvenrealty.com" target="_blank">Guven Realty</a></li> -->
                                                         </ul>
                                                     </div>
@@ -365,9 +369,9 @@
                                             <div class="copyright"> &#169; Realtinic 2022 .  All rights reserved.</div>
                                             <div class="subfooter-nav">
                                                 <ul class="no-list-style">
-                                                    <!-- <li><a href="terms">Terms of use</a></li>
-                                                    <li><a href="privacy_policy">Privacy Policy</a></li> -->
-                                                    <li><a href="blog">Blog</a></li>
+                                                    <li><a href="/terms">Terms of use</a></li>
+                                                    <li><a href="/privacy_policy">Privacy Policy</a></li>
+                                                    <li><a href="/blog">Blog</a></li>
                                                 </ul>
                                             </div>
                                         </div>

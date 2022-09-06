@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import django_heroku
 import os
 import cloudinary
+
 from pathlib import Path
 
 
@@ -44,7 +45,7 @@ INSTALLED_APPS = [
     'main',
     'cloudinary',
     'django_filters',
-    # 'channels',
+    'django.contrib.sitemaps',
 ]
 
 
@@ -181,3 +182,5 @@ cloudinary.config(
   api_secret = 'EhiM_owDDrmqxcPP60ecpZ5SWDs',
   secure = True
 )
+import cloudinary.uploader
+import cloudinary.api

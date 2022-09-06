@@ -33,6 +33,7 @@ urlpatterns = [
     path('my-bookings', views.bookings, name='My Bookings'),
     path('logout', views.logout, name='Log Out'),
     path('my-messages/<str:room_name>', views.chat, name='chat'),
+    path('saved-homes', views.saved_homes, name='Saved Homes'),
     # path('agent-signin', views.agent_signin, name='Sign In Agent'),
 ]
 
