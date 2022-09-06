@@ -63,7 +63,7 @@ class Userprofile(AbstractBaseUser, PermissionsMixin):
     last_login = models.DateTimeField(auto_now_add=True)
     #saved properties - many to one
 
-    profilepic = models.ImageField(upload_to='upload_agent_image', null=True, blank=True)
+    profilepic = models.ImageField(upload_to=upload_agent_image, null=True, blank=True)
     bio = models.CharField(max_length=700, null=True, blank=True)
     location = models.CharField(max_length=250, null=True, blank=True)
     tel = models.BigIntegerField(null=True, blank=True)
@@ -91,6 +91,9 @@ class Userprofile(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.username
+
+    def fullname(self):
+        return f'{self.first_name} {self.last_name}'
         
 class Property(models.Model):
     

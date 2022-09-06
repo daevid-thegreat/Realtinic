@@ -79,10 +79,10 @@
                                                     <a class="host-avatar-wrap" href="agent-single.html">
                                                     <span>By {{listing.agent.first_name}}</span>
                                                     {% if listing.user_agent.profilepic %}
-                                                            <img src="{{ listing.user_agent.profilepic.url }}" alt="">
-                                                        {% else %}
-                                                            <img src="https://avataaars.io/?avatarStyle=Circle&topType=Hat&accessoriesType=Sunglasses&facialHairType=Blank&clotheType=Hoodie&clotheColor=Pink&eyeType=Hearts&eyebrowType=Default&mouthType=Smile&skinColor=Tanned" alt="">
-                                                        {% endif %}
+                                                        <img src="{{ listing.user_agent.profilepic.url }}" alt="">
+                                                    {% else %}
+                                                        <img src="https://avataaars.io/?avatarStyle=Circle&topType=Hat&accessoriesType=Sunglasses&facialHairType=Blank&clotheType=Hoodie&clotheColor=Pink&eyeType=Hearts&eyebrowType=Default&mouthType=Smile&skinColor=Tanned" alt="">
+                                                    {% endif %}
                                                     </a>
                                                 </div>
                                             </div>

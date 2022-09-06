@@ -1,6 +1,16 @@
 from django.contrib import admin
 from .models import *
 
+def verify_selected(modeladmin, request, queryset):
+    queryset.update(is_realtor=True, verified=True)
+
+verify_selected.short_description = 'Verify selected agents'
+
+def unverify_selected(modeladmin, request, queryset):
+    queryset.update(verified=False)
+
+unverify_selected.short_description = 'Unverify selected agents'
+
 class PropertyImageInline(admin.StackedInline):
     model = PropertyImage
     extra = 0
@@ -24,9 +34,11 @@ class UserAdmin(admin.ModelAdmin):
         'username',
         'is_realtor',
         # 'properties__sum',
-        'verified'
+        'verified',
     ]
     inlines = [UserPropertyInline, ReviewInline]
+    actions = [verify_selected, unverify_selected]
+    search_fields = ['username']
 
 @admin.register(Property)
 class PropertyAdmin(admin.ModelAdmin):

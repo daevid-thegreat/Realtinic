@@ -41,34 +41,34 @@
                                     <div class="row">
                                         <div class="col-sm-4">		 
                                             <label>Listing Title  <span class="dec-icon"><i class="far fa-briefcase"></i></span></label>
-                                            <input id="property_name" name="name" type="text" placeholder="Name" value=""/>
+                                            <input id="property_name" name="name" type="text" placeholder="Name" value="{{ listing.name }}"/>
                                         </div>
                                         <div class="col-sm-4">
                                             <label>Type</label>
                                             <div class="listsearch-input-item">
-                                                <select data-placeholder="All Types" name="list_type" class="chosen-select no-search-select" >
+                                                <select data-placeholder="All Types" name="list_type" class="chosen-select no-search-select">
                                                     <option>Choose Type</option>
-                                                    <option>For Rent</option>
-                                                    <option>For Sale</option>
+                                                    <option {% if listing.list_type == 'For Rent' %} selected {% endif %}>For Rent</option>
+                                                    <option {% if listing.list_type == 'For Sale' %} selected {% endif %}>For Sale</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-sm-4">		 
                                             <label>Listing Price  <span class="dec-icon"><i class="far fa-money-bill-wave"></i></span></label>
-                                            <input type="text" name="price" placeholder="Listing Price" value=""/>
+                                            <input type="text" name="price" placeholder="Listing Price" value="{{ listing.price }}"/>
                                         </div>
                                         <div class="col-sm-4">
                                             <label>Category</label>
                                             <div class="listsearch-input-item">
                                                 <select data-placeholder="Single-family" name="home_type" class="chosen-select no-search-select" >
                                                     <option>All Categories</option>
-                                                    <option>Single-family</option>
-                                                    <option>Semi-detached</option>
-                                                    <option>Apartment</option>
-                                                    <option>Townhomes</option>
-                                                    <option>Multi-family</option>
-                                                    <option>Mobile/Manufactured</option>
-                                                    <option>Condo</option>
+                                                    <option {% if listing.home_type == 'Single-family' %} selected {% endif %}>Single-family</option>
+                                                    <option {% if listing.home_type == 'Semi-detached' %} selected {% endif %}>Semi-detached</option>
+                                                    <option {% if listing.home_type == 'Apartment' %} selected {% endif %}>Apartment</option>
+                                                    <option {% if listing.home_type == 'Townhomes' %} selected {% endif %}>Townhomes</option>
+                                                    <option {% if listing.home_type == 'Multi-family' %} selected {% endif %}>Multi-family</option>
+                                                    <option {% if listing.home_type == 'Mobile/Manufactured' %} selected {% endif %}>Mobile/Manufactured</option>
+                                                    <option {% if listing.home_type == 'Condo' %} selected {% endif %}>Condo</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -91,22 +91,22 @@
                                                 <div class="listsearch-input-item">
                                                     <select data-placeholder="Apartments" name="city" class="chosen-select no-search-select" >
                                                         <option>All Cities</option>
-                                                        <option>Abuja</option>
-                                                        <option>Lagos</option>
-                                                        <option>Ibadan</option>
-                                                        <option>Osun</option>
+                                                        <option {% if listing.city == 'Abuja' %} selected {% endif %}>Abuja</option>
+                                                        <option {% if listing.city == 'Lagos' %} selected {% endif %}>Lagos</option>
+                                                        <option {% if listing.city == 'Ibadan' %} selected {% endif %}>Ibadan</option>
+                                                        <option {% if listing.city == 'Osun' %} selected {% endif %}>Osun</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="col-sm-6">
                                                 <label>Phone <span class="dec-icon"><i class="far fa-phone"></i> </span> </label>
-                                                <input type="text" name="telephone" placeholder="+7(123)987654" value=""/>
+                                                <input type="text" name="telephone" placeholder="+7(123)987654" value="{{ listing.telephone }}"/>
                                                 <!-- <span>Though you will be contacted by email, a phone number is required for incasity.</span> -->
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <label>Location <span class="dec-icon"><i class="far fa-map-marker"></i></span></label>
-                                            <input type="text" name="location" placeholder="Location of your property" value=""/>
+                                            <input type="text" name="location" placeholder="Location of your property" value="{{ listing.location }}"/>
                                         </div>
                                         <!-- <div class="col-sm-4">		 
                                             <label>Longitude (Drag marker on the map)  <span class="dec-icon"><i class="far fa-long-arrow-alt-right"></i></span></label>
@@ -169,35 +169,35 @@
                                             <div class="row">
                                                 <div class="col-sm-6">
                                                     <label>Area: <span class="dec-icon"><i class="far fa-sort-size-down-alt"></i></span></label>
-                                                    <input name="lot_size" type="text" placeholder="House Area (in sq .ft)" value=""/>																								
+                                                    <input name="lot_size" type="text" placeholder="House Area (in sq .ft)" value="{{ listing.lot_size }}"/>																								
                                                     <label>Yard size: <span class="dec-icon"><i class="far fa-trees"></i></span></label>
-                                                    <input name="yard_size" type="text" placeholder="Yard size" value=""/>		
+                                                    <input name="yard_size" type="text" placeholder="Yard size" value="{{ listing.yard_size }}"/>		
                                                     <label>Garage: <span class="dec-icon"><i class="far fa-warehouse"></i></span></label>
-                                                    <input name="garage" type="text" placeholder="Number of cars" value=""/>												
+                                                    <input name="garage" type="text" placeholder="Number of cars" value="{{ listing.garage }}"/>												
                                                 </div>
                                                 <div class="col-sm-6">
                                                     <label>Rooms: <span class="dec-icon"><i class="far fa-users"></i></span></label>
-                                                    <input name="rooms" type="text" placeholder="Total House Rooms" value="0"/>
+                                                    <input name="rooms" type="text" placeholder="Total House Rooms" value={% if listing %} "{{ listing.rooms }}" {% else %} "0" {% endif %}/>
                                                     <label>Bedrooms: <span class="dec-icon"><i class="far fa-bed"></i></span></label>
-                                                    <input name="bedrooms" type="text" placeholder="House Bedrooms" value="0"/>
+                                                    <input name="bedrooms" type="text" placeholder="House Bedrooms" value={% if listing %} "{{ listing.bedrooms }}" {% else %} "0" {% endif %}/>
                                                     <label>Full Bathrooms: <span class="dec-icon"><i class="far fa-bath"></i></span></label>
-                                                    <input name="full_bathrooms" type="text" placeholder="House Bathrooms" value="0"/>	
+                                                    <input name="full_bathrooms" type="text" placeholder="House Bathrooms" value={% if listing %} "{{ listing.full_bathrooms }}" {% else %} "0" {% endif %}/>	
                                                     <label>Half Bathrooms: <span class="dec-icon"><i class="far fa-bath"></i></span></label>
-                                                    <input name="half_bathrooms" type="text" placeholder="Half Bathrooms" value="0"/>	
+                                                    <input name="half_bathrooms" type="text" placeholder="Half Bathrooms" value={% if listing %} "{{ listing.half_bathrooms }}" {% else %} "0" {% endif %}/>	
                                                     <label>One-quarter Bathrooms: <span class="dec-icon"><i class="far fa-bath"></i></span></label>
-                                                    <input name="one_quarter_bathrooms" type="text" placeholder="¼ Bathrooms" value="0"/>	
+                                                    <input name="one_quarter_bathrooms" type="text" placeholder="¼ Bathrooms" value={% if listing %} "{{ listing.one_quarter_bathrooms }}" {% else %} "0" {% endif %}/>	
                                                     <label>Three-quarter Bathrooms: <span class="dec-icon"><i class="far fa-bath"></i></span></label>
-                                                    <input name="three_quarter_bathrooms" type="text" placeholder="¾ Bathrooms" value="0"/>																									
+                                                    <input name="three_quarter_bathrooms" type="text" placeholder="¾ Bathrooms" value={% if listing %} "{{ listing.three_quarter_bathrooms }}" {% else %} "0" {% endif %}/>																									
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <label>Property Description</label>
                                             <div class="listsearch-input-item">
-                                                <textarea id="description" name="description" cols="40" rows="3" style="height: 235px" placeholder="Datails" spellcheck="false"></textarea>
+                                                <textarea id="description" name="description" cols="40" rows="3" style="height: 235px" placeholder="Datails" spellcheck="false">{{ listing.description }}</textarea>
                                                 <div>
                                                     <label>Built On:</label>
-                                                    <input id="built_on" type="text" name="built_on">
+                                                    <input id="built_on" type="text" name="built_on" value="{{ listing.built_on|date:"Y-m-d" }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -221,35 +221,35 @@
                                         <!-- Checkboxes -->
                                         <ul class="fl-wrap filter-tags no-list-style ds-tg">
                                             <li>
-                                                <input id="pool" type="checkbox" name="pool">
+                                                <input id="pool" type="checkbox" name="pool" {% if listing.pool == 'yes' %} checked {% endif %}>
                                                 <label for="pool"> Pool</label>
                                             </li>
                                             <li>
-                                                <input id="power" type="checkbox" name="power">
+                                                <input id="power" type="checkbox" name="power" {% if listing.power == 'yes' %} checked {% endif %}>
                                                 <label for="power"> 24/7 Power Supply</label>
                                             </li>
                                             <li>
-                                                <input id="temp" type="checkbox" name="temp">
+                                                <input id="temp" type="checkbox" name="temp" {% if listing.temp == 'yes' %} checked {% endif %}>
                                                 <label for="temp"> Temperature Control</label>
                                             </li>
                                             <li>
-                                                <input id="garden" type="checkbox" name="garden">
+                                                <input id="garden" type="checkbox" name="garden" {% if listing.garden == 'yes' %} checked {% endif %}>
                                                 <label for="garden">Garden</label>
                                             </li>
                                             <li>
-                                                <input id="solar_power" type="checkbox" name="solar_power">
+                                                <input id="solar_power" type="checkbox" name="solar_power" {% if listing.solar_power == 'yes' %} checked {% endif %}>
                                                 <label for="solar_power">Solar Power</label>
                                             </li>
                                             <li>
-                                                <input id="drain" type="checkbox" name="drain">
+                                                <input id="drain" type="checkbox" name="drain" {% if listing.drain == 'yes' %} checked {% endif %}>
                                                 <label for="drain">Drainage System</label>
                                             </li>
                                             <li>
-                                                <input id="cctv" type="checkbox" name="cctv">
+                                                <input id="cctv" type="checkbox" name="cctv" {% if listing.cctv == 'yes' %} checked {% endif %}>
                                                 <label for="cctv">CCTV</label>
                                             </li>
                                             <li>
-                                                <input id="water" type="checkbox" name="water">
+                                                <input id="water" type="checkbox" name="water" {% if listing.water == 'yes' %} checked {% endif %}>
                                                 <label for="water">24/7 Water Supply</label>
                                             </li>
                                         </ul>
@@ -271,10 +271,10 @@
                                         <!-- content-widget-switcher -->	
                                         <div class="col-md-4">
                                             <div class="content-widget-switcher fl-wrap">
-                                                <span class="content-widget-switcher-title">Property URls</span>
+                                                <span class="content-widget-switcher-title">Property URLs</span>
                                                 <div class="content-widget-switcher-item fl-wrap">					  
                                                     <label>Video URL: <span class="dec-icon"><i class="fab fa-youtube"></i></span></label>
-                                                    <input name="video_link" type="text" placeholder="Youtube Or Vimeo" value=""/>
+                                                    <input name="video_link" type="text" placeholder="Youtube Or Vimeo" value="{{ listing.video_link }}"/>
                                                 </div>
                                             </div>
                                         </div>	
@@ -294,7 +294,7 @@
                                 </div>
                             </div>
                             <!-- dasboard-widget-box  end-->
-                            <input type="submit"class="btn  color-bg float-btn" name="List property" >
+                            <input type="submit"class="btn color-bg float-btn" name="List property" >
                         </form>
                         </div>
                     </div>

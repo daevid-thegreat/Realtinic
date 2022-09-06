@@ -91,10 +91,10 @@
                                                         <div class="bg  "  data-bg="{{listing.header_image.url}}"></div>
                                                     </div>
                                                     <div class="overlay"></div>
-                                                    <a href="/listing/{{listing.id}}" class="color-bg">View</a>
+                                                    <a href="listing/{{listing.id}}" class="color-bg">View</a>
                                                 </div>
                                                 <div class="dashboard-listings-item_content">
-                                                    <h4><a href="/listing/{{listing.id}}">{{ listing.name }}</a></h4>
+                                                    <h4><a href="listing/{{listing.id}}">{{ listing.name }}</a></h4>
                                                     <div class="geodir-category-location">
                                                         <a href="#"><i class="fas fa-map-marker-alt"></i> <span>  {{ listing.location }}</span></a>
                                                     </div>
@@ -103,7 +103,7 @@
                                                     <div class="dashboard-listings-item_opt">
                                                         <span class="viewed-counter"><i class="fas fa-eye"></i> Viewed -  {{ listing.views }} </span>
                                                         <ul>
-                                                            <li><a href="#" class="tolt" data-microtip-position="top-left"  data-tooltip="Edit"><i class="far fa-edit"></i></a></li>
+                                                            <li><a href="edit-listing/{{listing.id}}" class="tolt" data-microtip-position="top-left"  data-tooltip="Edit"><i class="far fa-edit"></i></a></li>
                                                             <li><a href="#" class="tolt" data-microtip-position="top-left"  data-tooltip="Disable"><i class="far fa-signal-alt-slash"></i></a></li>
                                                             <li><a href="#" class="tolt" data-microtip-position="top-left"  data-tooltip="Delete"><i class="far fa-trash-alt"></i></a></li>
                                                         </ul>

@@ -50,8 +50,8 @@
                                             </div> -->
                                             <div class="list-single-stats">
                                                 <ul class="no-list-style">
-                                                    <li><span class="bookmark-counter"><i class="fas fa-comment-alt"></i> Reviews -  4 </span></li>
-                                                    <li><span class="bookmark-counter"><i class="fas fa-sitemap"></i> Listings -  6 </span></li>
+                                                    <li><span class="bookmark-counter"><i class="fas fa-comment-alt"></i> Reviews -  {{user.reviews.count}} </span></li>
+                                                    <li><span class="bookmark-counter"><i class="fas fa-sitemap"></i> Listings -  {{user.properties.count}} </span></li>
                                                 </ul>
                                             </div>
                                             <div class="card-verified tolt" data-microtip-position="left" data-tooltip="Verified"><i class="fal fa-user-check"></i></div>
@@ -93,6 +93,7 @@
                                             <!--tab -->
                                             <div class="tab">
                                                 <div id="tab-listing" class="tab-content first-tab">
+                                                    {% for listing in user.properties.all %}
                                                     <!-- listing-item-wrap-->
                                                     <div class="listing-item-container one-column-grid-wrap  box-list_ic fl-wrap">
                                                         <!-- listing-item -->
@@ -100,15 +101,15 @@
                                                             <article class="geodir-category-listing fl-wrap">
                                                                 <div class="geodir-category-img fl-wrap">
                                                                     <a href="listing-single.html" class="geodir-category-img_item">
-                                                                        <img src="images/all/3.jpg" alt="">
+                                                                        <img src="{{listing.header_image.url}}" alt="">
                                                                         <div class="overlay"></div>
                                                                     </a>
                                                                     <div class="geodir-category-location">
-                                                                        <a href="#" class="single-map-item tolt" data-newlatitude="40.72956781" data-newlongitude="-73.99726866"   data-microtip-position="top-left" data-tooltip="On the map"><i class="fas fa-map-marker-alt"></i> <span>  70 Bright St New York, USA</span></a>
+                                                                        <a href="#" class="single-map-item tolt" data-newlatitude="40.72956781" data-newlongitude="-73.99726866"   data-microtip-position="top-left" data-tooltip="On the map"><i class="fas fa-map-marker-alt"></i> <span>{{listing.location}}</span></a>
                                                                     </div>
                                                                     <ul class="list-single-opt_header_cat">
-                                                                        <li><a href="#" class="cat-opt blue-bg">Sale</a></li>
-                                                                        <li><a href="#" class="cat-opt color-bg">Apartment</a></li>
+                                                                        <li><a href="#" class="cat-opt blue-bg">{{listing.list_type}}</a></li>
+                                                                        <li><a href="#" class="cat-opt color-bg">{{listing.home_type}}</a></li>
                                                                     </ul>
                                                                     <a href="#" class="geodir_save-btn tolt" data-microtip-position="left" data-tooltip="Save"><span><i class="fal fa-heart"></i></span></a>
                                                                     <a href="#" class="compare-btn tolt" data-microtip-position="left" data-tooltip="Compare"><span><i class="fal fa-random"></i></span></a>
@@ -117,26 +118,28 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="geodir-category-content fl-wrap">
-                                                                    <h3 class="title-sin_item"><a href="listing-single.html">Gorgeous House For Sale</a></h3>
-                                                                    <div class="geodir-category-content_price">$ 600,000</div>
-                                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla.</p>
+                                                                    <h3 class="title-sin_item"><a href="listing-single.html">{{listing.name}}</a></h3>
+                                                                    <div class="geodir-category-content_price">$ {{listing.price}}</div>
+                                                                    <p>{{listing.description}}</p>
                                                                     <div class="geodir-category-content-details">
                                                                         <ul>
-                                                                            <li><i class="fal fa-bed"></i><span>3</span></li>
-                                                                            <li><i class="fal fa-bath"></i><span>2</span></li>
-                                                                            <li><i class="fal fa-cube"></i><span>450 ft2</span></li>
+                                                                            <li><i class="fal fa-bed"></i><span>{{listing.bedrooms}}</span></li>
+                                                                            <li><i class="fal fa-bath"></i><span>{{listing.total_bathrooms}}</span></li>
+                                                                            <li><i class="fal fa-cube"></i><span>{{listing.lot_size}} ft2</span></li>
                                                                         </ul>
                                                                     </div>
                                                                     <div class="geodir-category-footer fl-wrap">
-                                                                        <a href="agent-single.html" class="gcf-company"><img src="images/avatar/2.jpg" alt=""><span>By Liza Rose</span></a>
+                                                                        <a href="agent-single.html" class="gcf-company"><img src="{{listing.agent.profilepic.url}}" alt=""><span>By {{listing.agent.fullname}}</span></a>
                                                                         <div class="listing-rating card-popup-rainingvis tolt" data-microtip-position="top" data-tooltip="Good" data-starrating2="4"></div>
                                                                     </div>
                                                                 </div>
                                                             </article>
                                                         </div>
                                                         <!-- listing-item end-->	
-                                                                                                            </div>
+                                                    </div>
                                                     <!-- listing-item-wrap end-->
+                                                    {% endfor %}
+                                                    
                                                     <!-- pagination-->
                                                     <div class="pagination">
                                                         <a href="#" class="prevposts-link"><i class="fa fa-caret-left"></i></a>
@@ -254,9 +257,9 @@
                                                 <ul class="no-list-style">
                                                     <li><span><i class="fal fa-phone"></i> Phone :</span> <a href="#">{{ user.tel}}</a></li>
                                                     <li><span><i class="fal fa-envelope"></i> Mail :</span> <a href="#">{{ user.email}}</a></li>
-                                                    <li><span><i class="fal fa-map-marker"></i> Adress :</span> <a href="#">{{ user.location }}</a></li>
+                                                    <li><span><i class="fal fa-map-marker"></i> Address :</span> <a href="#">{{ user.location }}</a></li>
                                                     {% if user.website != None %}
-                                                    <li><span><i class="fal fa-browser"></i> Website :</span> <a href="#">themeforest.net</a></li>
+                                                    <li><span><i class="fal fa-browser"></i> Website :</span> <a href="#">{{user.website}}</a></li>
                                                     {% else %}
                                                     {% endif %}
                                                 </ul>
@@ -264,10 +267,18 @@
                                             <div class="profile-widget-footer fl-wrap">
                                                 <div class="card-info-content_social ">
                                                     <ul>
-                                                        <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                                                        <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
-                                                        <li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
-                                                        <li><a href="#" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+                                                        {% if agent.facebook %}
+                                                        <li><a href="{{agent.facebook}}" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                                        {% endif %}
+                                                        {% if agent.twitter %}
+                                                        <li><a href="https://twitter.com/{{agent.twitter}}" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                                                        {% endif %}
+                                                        {% if agent.instagram %}
+                                                        <li><a href="https://www.instagram.com/{{agent.instagram}}" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                                                        {% endif %}
+                                                        {% if agent.linkedin %}
+                                                        <li><a href="{{agent.linkedin}}" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+                                                        {% endif %}
                                                     </ul>
                                                 </div>
                                                 <a href="/my-messages/{{room}}" class="custom-scroll-link tolt csls" data-microtip-position="left" data-tooltip="Write Message"><i class="fal fa-paper-plane"></i></a>
