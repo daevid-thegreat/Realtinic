@@ -78,7 +78,7 @@
                                                 <div class="col-md-4">
                                                     <a class="host-avatar-wrap" href="agent-single.html">
                                                     <span>By {{listing.agent.first_name}}</span>
-                                                    <img src="images/avatar/1.jpg" alt="">
+                                                    <img src={% if listing.agent.profilepic %} "{{listing.agent.profilepic.url}}" {% else %} "images/avatar/1.jpg" {% endif %} alt="">
                                                     </a>
                                                 </div>
                                             </div>

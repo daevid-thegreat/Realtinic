@@ -74,15 +74,23 @@
                                                     <a href="agent-single.html" class="geodir-category-img_item">
                                                         <img src="{{agent.profilepic.url}}" alt="{{agent.profilepic.url}}">
                                                         <ul class="list-single-opt_header_cat">
-                                                            <li><span class="cat-opt color-bg">4 listings</span></li>
+                                                            <li><span class="cat-opt color-bg">{{agent.properties.count}} listing{{agent.properties.count|pluralize}}</span></li>
                                                         </ul>
                                                     </a>
                                                     <div class="agent-card-social fl-wrap">
                                                         <ul>
-                                                            <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                                                            <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
-                                                            <li><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
-                                                            <li><a href="#" target="_blank"><i class="fab fa-vk"></i></a></li>
+                                                            {% if agent.facebook %}
+                                                            <li><a href="{{agent.facebook}}" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                                                            {% endif %}
+                                                            {% if agent.twitter %}
+                                                            <li><a href="https://twitter.com/{{agent.twitter}}" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                                                            {% endif %}
+                                                            {% if agent.instagram %}
+                                                            <li><a href="https://www.instagram.com/{{agent.instagram}}" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                                                            {% endif %}
+                                                            {% if agent.linkedin %}
+                                                            <li><a href="{{agent.linkedin}}" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+                                                            {% endif %}
                                                         </ul>
                                                     </div>
                                                     <div class="listing-rating card-popup-rainingvis" data-starrating2="4"><span class="re_stars-title">Good</span></div>
@@ -103,8 +111,8 @@
                                                     {% endif %}
                                                     <div class="geodir-category-footer fl-wrap">
                                                         <a href="agents/{{agent.id_user}}" class="btn float-btn color-bg small-btn">View Profile</a>
-                                                        <a href="mailto:yourmail@email.com" class="tolt ftr-btn" data-microtip-position="left" data-tooltip="Write Message"><i class="fal fa-envelope"></i></a>
-                                                        <a href="tel:123-456-7890" class="tolt ftr-btn" data-microtip-position="left" data-tooltip="Call Now"><i class="fal fa-phone"></i></a>	
+                                                        <a href="mailto:{{agent.email}}" class="tolt ftr-btn" data-microtip-position="left" data-tooltip="Write Message"><i class="fal fa-envelope"></i></a>
+                                                        <a href="tel:{{agent.tel}}" class="tolt ftr-btn" data-microtip-position="left" data-tooltip="Call Now"><i class="fal fa-phone"></i></a>	
                                                     </div>
                                                 
                                             </article>

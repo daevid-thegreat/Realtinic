@@ -7,6 +7,7 @@ from .models import *
 from django.contrib.auth import get_user_model
 from django.core.paginator import Paginator
 from django.db.models import Sum, Q
+import cloudinary.api
 User = get_user_model()
 
 # Create your views here.
@@ -106,14 +107,19 @@ def listing(request):
 
     return render(request, 'listing.html', context)
 
+def assign_features(value):
+    features = ['pool', 'power', 'temp', 'garden', 'solar_power', 'drain', 'cctv', 'water']
+    features_dict = {}
+    for feature in features:
+        if value[feature]: features_dict[feature] = 'yes'
+        else: features_dict[feature] = 'no'
+    
+    return features_dict
 
 @login_required(login_url='/')
 def addlisting(request):
     if request.user.is_realtor == True:
         if request.method == 'POST':
-
-            # print(request.POST)
-
             name = request.POST['name']
             location = request.POST['location']
             list_type = request.POST['list_type']
@@ -138,8 +144,19 @@ def addlisting(request):
             cctv = request.POST.get('cctv', False)
             water = request.POST.get('water', False)
 
+            features = assign_features({
+                'pool': pool,
+                'power': power,
+                'temp': temp,
+                'garden': garden,
+                'solar_power': solar_power,
+                'drain': drain,
+                'cctv': cctv,
+                'water': water,
+            })
+
             lot_size = request.POST['lot_size']
-            yard_size = request.POST['lot_size']
+            yard_size = request.POST['yard_size']
             # upload image
             header_image = request.FILES.get('header_image')
             images = request.FILES.getlist('property_images')
@@ -166,14 +183,14 @@ def addlisting(request):
                 rooms=rooms, 
                 bedrooms=bedrooms,
 
-                pool=pool,
-                power=power,
-                temp=temp,
-                garden=garden,
-                solar_power=solar_power,
-                drain=drain,
-                cctv=cctv,
-                water=water,
+                pool=features['pool'],
+                power=features['power'],
+                temp=features['temp'],
+                garden=features['garden'],
+                solar_power=features['solar_power'],
+                drain=features['drain'],
+                cctv=features['cctv'],
+                water=features['water'],
                 
                 full_bathrooms=full_bathrooms, 
                 half_bathrooms=half_bathrooms, 
@@ -201,6 +218,91 @@ def addlisting(request):
         return render(request, 'dashboard-add-listing.html')
     else:
         return render(request, 'index.html')
+
+@login_required(login_url='/')
+def editlisting(request, id):
+    if request.user.is_realtor == True:
+        listing = Property.objects.get(id = id)
+        listing = get_object_or_404(Property, id=id)
+        if listing in request.user.properties.all():
+            if request.method == 'POST':
+                listing.name = request.POST['name']
+                listing.location = request.POST['location']
+                listing.list_type = request.POST['list_type']
+                listing.city = request.POST['city']
+                listing.price= request.POST['price']
+                listing.home_type = request.POST['home_type']
+                listing.rooms = request.POST['rooms']
+                listing.bedrooms = request.POST['bedrooms']
+                listing.full_bathrooms = request.POST['full_bathrooms']
+                listing.half_bathrooms = request.POST['half_bathrooms']
+                listing.one_quarter_bathrooms = request.POST['one_quarter_bathrooms']
+                listing.three_quarter_bathrooms = request.POST['three_quarter_bathrooms']
+                listing.garage = request.POST['garage']
+                listing.telephone = request.POST.get('telephone', False)
+
+                pool = request.POST.get('pool', False)
+                power = request.POST.get('power', False)
+                temp = request.POST.get('temp', False)
+                garden = request.POST.get('garden', False)
+                solar_power = request.POST.get('solar_power', False)
+                drain = request.POST.get('drain', False)
+                cctv = request.POST.get('cctv', False)
+                water = request.POST.get('water', False)
+
+                features = assign_features({
+                    'pool': pool,
+                    'power': power,
+                    'temp': temp,
+                    'garden': garden,
+                    'solar_power': solar_power,
+                    'drain': drain,
+                    'cctv': cctv,
+                    'water': water,
+                })
+                
+                listing.pool = features['pool']
+                listing.power = features['power']
+                listing.temp = features['temp']
+                listing.garden = features['garden']
+                listing.solar_power = features['solar_power']
+                listing.drain = features['drain']
+                listing.cctv = features['cctv']
+                listing.water = features['water']
+
+                listing.lot_size = request.POST['lot_size']
+                listing.yard_size = request.POST['yard_size']
+                
+                header_image = request.FILES.get('header_image')
+                if header_image:
+                    cloudinary.api.delete_resources(listing.header_image)
+                    listing.header_image = header_image
+
+                images = request.FILES.getlist('property_images')
+                if images:
+                    for prop_image in listing.images.all():
+                        cloudinary.api.delete_resources(prop_image.property_image)
+                    listing.images.all().delete()
+
+                for image in images:
+                    prop_img = PropertyImage.objects.create(
+                        property = listing, 
+                        property_image = image
+                    )
+                    prop_img.save()
+                
+
+                listing.description = request.POST['description']
+                listing.built_on = request.POST['built_on']
+                listing.video_link = request.POST['video_link']
+                
+                listing.save()
+                
+                return redirect('Edit listing', id)            
+
+        return render(request, 'dashboard-add-listing.html', {'listing': listing})
+    else:
+        return render(request, 'index.html')
  
 @login_required(login_url='/')
 def logout(request):
@@ -209,8 +311,7 @@ def logout(request):
 
 def findagents(request):
     agents= Userprofile.objects.all().filter(is_realtor = True)
-    print(agents)
-    q = Paginator(agents, 2)
+    q = Paginator(agents, 6)
 
     page = request.GET.get('page')
     agents = q.get_page(page)
@@ -312,66 +413,38 @@ def dashboard(request):
 
     count_views = Property.objects.filter(agent=request.user).aggregate(Sum('views'))
     if count_views['views__sum'] is None:
-        count_views = 0
+        count_views['views__sum'] = 0
 
     count_saved = Property.objects.filter(agent=request.user).aggregate(Sum('saved'))
     if count_saved['saved__sum'] is None:
-        count_saved = 0
+        count_saved['saved__sum'] = 0
 
     return render(request, 'dashboard.html', {'list_count':count_list, 'views_count':count_views['views__sum'], 'saved_count':count_saved['saved__sum']})
 
 @login_required(login_url='/')
 def user_profile(request):
     if request.user.is_realtor == True:
-        if request.method == 'POST' and 'info':
+        if request.method == 'POST' and 'info' in request.POST:
             user_id = request.user.id_user
-            image = request.FILES.get('image')
-            if image:
-                user = Userprofile.objects.get(id_user=user_id)
-                user.image = image
-                user.save()
-            first_name = request.POST.get('first_name')
-            if first_name != '':
-                user = Userprofile.objects.get(id_user=user_id)
-                user.first_name = first_name
-                user.save()
-            last_name = request.POST.get('last_name')
-            if last_name != '':
-                user = Userprofile.objects.get(id_user=user_id)
-                user.last_name = last_name
-                user.save()
-            email = request.POST.get('email')
-            if email != '':
-                user = Userprofile.objects.get(id_user=user_id)
-                user.email = email
-                user.save()
-            tel = request.POST.get('tel')
-            if tel != '':
-                user = Userprofile.objects.get(id_user=user_id)
-                user.tel = tel
-                user.save()
-            address = request.POST.get('address')
-            if address != '':
-                user = Userprofile.objects.get(id_user=user_id)
-                user.location = address
-                user.save()
-            website = request.POST.get('website')
-            if website != '':
-                user = Userprofile.objects.get(id_user=user_id)
-                user.website = website
-                user.save()
-            bio = request.POST.get('bio')
-            if bio != '':
-                user = Userprofile.objects.get(id_user=user_id)
-                user.bio = bio
-                user.save()
+            user = Userprofile.objects.get(id_user=user_id)
+
+            user.profilepic = request.FILES.get('profile-image')
+            user.first_name = request.POST.get('first_name')
+            user.last_name = request.POST.get('last_name')
+            user.email = request.POST.get('email')
+            user.tel = request.POST.get('tel')
+            user.address = request.POST.get('address')
+            user.website = request.POST.get('website')
+            user.bio = request.POST.get('bio')
+            
+            user.save()
             return redirect('my-profile')
 
-        if request.method == 'POST' and 'password':
+        if request.method == 'POST' and 'pword' in request.POST:
             user_id = request.user.id_user
             password1 = request.POST['password']
             password2 = request.POST['password2']
-            if user.check_password(request.POST['main_password']):
+            if request.user.check_password(request.POST['main_password']):
                 if password1 == password2:
                     user = User.objects.get(id_user = user_id)
                     user.set_password(password1)
@@ -381,34 +454,16 @@ def user_profile(request):
 
                     return render(request, 'my-profile.html', {'error':'Passwords do not match or current password is incorrect'})
 
-        if request.method == 'POST' and 'socials':
-
+        if request.method == 'POST' and 'socials' in request.POST:
             user_id = request.user.id_user
-            facebook = request.POST['facebook']
-            if facebook != '':
-                user = Userprofile.objects.get(id_user=user_id)
-                user.facebook = facebook
-                user.save()
-            twitter = request.POST['twitter']
-            if twitter != '':
-                user = Userprofile.objects.get(id_user=user_id)
-                user.twitter = twitter
-                user.save()
-            instagram = request.POST['instagram']
-            if instagram != '':
-                user = Userprofile.objects.get(id_user=user_id)
-                user.instagram = instagram
-                user.save()
-            linkedin = request.POST['linkedin']
-            if linkedin != '':
-                user = Userprofile.objects.get(id_user=user_id)
-                user.linkedin = linkedin
-                user.save()
-            whatsapp = request.POST['whatsapp']
-            if whatsapp != '':
-                user = Userprofile.objects.get(id_user=user_id)
-                user.whatsapp = whatsapp
-                user.save()
+            user = Userprofile.objects.get(id_user=user_id)
+            user.facebook = request.POST['facebook']
+            user.twitter = request.POST['twitter']
+            user.instagram = request.POST['instagram']
+            user.linkedin = request.POST['linkedin']
+            user.whatsapp = request.POST['whatsapp']
+            user.save()
+            return redirect('my-profile')
         return render(request, 'dashboard-myprofile.html')
     else:
         return render(request, 'user-profile.html')
@@ -429,7 +484,6 @@ def single_listing(request, id):
         if request.method == 'POST' and 'save' in request.POST:
             if listing in request.user.saved_property.all():
                 listing.saved.add(request.user)
-                print('do')
             else: 
                 listing.saved.remove(request.user)
             return redirect('/listing/'+str(listing.id))

@@ -76,9 +76,9 @@
                                             {% endif %}
                                             <div class="change-photo-btn">
                                                 <div class="photoUpload">
-                                                    <span>  Upload New Photo</span>
-                                                    <input name="image" type="file" class="upload" accept="image/*">
-                                                </div>
+                                                    <span>Upload New Photo</span>
+                                                    <input name="profile-image" type="file" class="upload" accept="image/*">
+                                            </div>
                                             </div>
                                         </div>
                                         <div class="bg-wrap bg-parallax-wrap-gradien" style="background-color: purple;">
@@ -91,19 +91,19 @@
                                     <div class="dasboard-widget-box fl-wrap">
                                         <div class="custom-form">
                                             <label>First Name <span class="dec-icon"><i class="far fa-user"></i></span></label>
-                                            <input name = "first_name" type="text" placeholder="{{user.first_name}}" value="{{user.first_name}}"/>
+                                            <input name="first_name" type="text" placeholder="First Name" value="{{user.first_name}}"/>
                                             <label>Last Name <span class="dec-icon"><i class="fas fa-user"></i></span></label>
-                                            <input name = "last_name" type="text" placeholder="{{ user.last_name }}" value="{{ user.last_name }}"/>
+                                            <input name="last_name" type="text" placeholder="Last Name" value="{{ user.last_name }}"/>
                                             <label>Phone<span class="dec-icon"><i class="far fa-phone"></i> </span></label>
-                                            <input name = "tel" type="text" placeholder="{{ user.tel }}" value="{{ user.tel }}"/>	
+                                            <input name="tel" type="text" placeholder="Telephone" value="{{ user.tel }}"/>	
                                             <label>Adress <span class="dec-icon"><i class="fas fa-map-marker"></i> </span></label>
-                                            <input name = "address" type="text" placeholder="{{ user.location }}" value=""/>										
+                                            <input name="address" type="text" placeholder="Location" value=""/>										
                                             <label>Website <span class="dec-icon"><i class="far fa-globe"></i> </span></label>
-                                            <input name = "website" type="text" placeholder="{{ user.website }}" value=""/>
+                                            <input name="website" type="text" placeholder="Website" value=""/>
                                             <label>About </label>
-                                            <textarea name = "bio" cols="40" rows="3" placeholder="{{ user.bio }}" style="margin-bottom:20px;"></textarea>
+                                            <textarea name="bio" cols="40" rows="3" placeholder="Bio" style="margin-bottom:20px;">{{ user.bio }}</textarea>
                                             <label>Email Address <span class="dec-icon"><i class="far fa-envelope"></i></span></label>
-                                            <input name = "email" type="text" placeholder="{{ user.email }}" value=""/>
+                                            <input name="email" type="text" placeholder="Email" value="{{ user.email }}"/>
                                             <!-- <div class="dasboard-widget-title fl-wrap">
                                                 <h4>Verification</h4>
                                             </div> -->
@@ -125,20 +125,20 @@
                                         <div class="custom-form">
                                             <div class="pass-input-wrap fl-wrap">
                                                 <label>Current Password<span class="dec-icon"><i class="far fa-lock-open-alt"></i></span></label>
-                                                <input type="password" class="pass-input" placeholder="" value=""/>
+                                                <input type="password" name="main_password" class="pass-input" placeholder="" value=""/>
                                                 <span class="eye"><i class="far fa-eye" aria-hidden="true"></i> </span>
                                             </div>
                                             <div class="pass-input-wrap fl-wrap">
                                                 <label>New Password<span class="dec-icon"><i class="far fa-lock-alt"></i></span></label>
-                                                <input type="password" class="pass-input" placeholder="" value=""/>
+                                                <input type="password" name="password" class="pass-input" placeholder="" value=""/>
                                                 <span class="eye"><i class="far fa-eye" aria-hidden="true"></i> </span>
                                             </div>
                                             <div class="pass-input-wrap fl-wrap">
                                                 <label>Confirm New Password<span class="dec-icon"><i class="far fa-shield-check"></i> </span></label>
-                                                <input type="password" class="pass-input" placeholder="" value=""/>
+                                                <input type="password" name="password2" class="pass-input" placeholder="" value=""/>
                                                 <span class="eye"><i class="far fa-eye" aria-hidden="true"></i> </span>
                                             </div>
-                                            <button class="btn    color-bg  float-btn" name="password" >Save Changes</button>
+                                            <button class="btn color-bg float-btn" name="pword" >Save Changes</button>
                                         </form>
                                         </div>
                                     </div>
@@ -150,39 +150,20 @@
                                             {% csrf_token %}
                                         <div class="custom-form">
                                             <label>Whatsapp  <span class="dec-icon"><i class="fab fa-whatsapp"></i></span></label>
-                                            {% if user.whatsapp == None %}
-                                            <input type="text" name="whatsapp" placeholder="whatsapp number" value=""/>
-                                            {% else %}
-                                            <input type="text" name="whatsapp" placeholder="{{ user.whatsapp }}" value=""/>
-                                            {% endif %}
-
+                                            <input type="text" name="whatsapp" placeholder="Whatsapp Number" {% if user.whatsapp %} value="{{ user.whatsapp }}" {% endif %}/>
+                                            
                                             <label>Facebook  <span class="dec-icon"><i class="fab fa-facebook"></i></span></label>
-                                            {% if user.facebook == None %}
-                                            <input type="text" name="facebook" placeholder="Facebook profile link" value=""/>
-                                            {% else %}
-                                            <input type="text" name="facebook" placeholder="{{ user.facebook }}" value=""/>
-                                            {% endif %}
+                                            <input type="text" name="facebook" placeholder="Facebook profile link" {% if user.facebook %} value="{{ user.facebook }}" {% endif %}/>
 
                                             <label>Twitter <span class="dec-icon"><i class="fab fa-twitter"></i></span></label>
-                                            {% if user.twitter == None %}
-                                            <input type="text" name="twitter" placeholder="Twitter username" value=""/>
-                                            {% else %}
-                                            <input type="text" name="twitter" placeholder="{{ user.twitter }}" value=""/>
-                                            {% endif %}
+                                            <input type="text" name="twitter" placeholder="Twitter username" {% if user.twitter %} value="{{ user.twitter }}" {% endif %}/>
 
                                             <label>Instagram<span class="dec-icon"><i class="fab fa-instagram"></i>  </span></label>
-                                            {% if user.instagram == None %}
-                                            <input type="text" name="instagram" placeholder="Instagram username" value=""/>
-                                            {% else %}
-                                            <input type="text" name="instagram" placeholder="{{ user.instagram }}" value=""/>	
-                                            {% endif %}
+                                            <input type="text" name="instagram" placeholder="Instagram username" {% if user.instagram %} value="{{ user.instagram }}" {% endif %}/>
 
                                             <label>Linkedin<span class="dec-icon"><i class="fab fa-linkedin"></i>  </span></label>
-                                            {% if user.linkedin == None %}
-                                            <input type="text" name="linkedin" placeholder="linkedin username" value=""/>	
-                                            {% else %}
-                                            <input type="text" name="linkedin" placeholder="{{ user.linkedin }}" value=""/>
-                                            {% endif %}
+                                            <input type="text" name="linkedin" placeholder="Linkedin link" {% if user.linkedin %} value="{{ user.linkedin }}" {% endif %}/>
+
                                             <button class="btn color-bg float-btn" type="submit" name="socials">Save Changes</button>
                                         </div>
                                         </form>
