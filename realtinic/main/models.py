@@ -68,7 +68,7 @@ class Userprofile(AbstractBaseUser, PermissionsMixin):
     location = models.CharField(max_length=250, null=True, blank=True)
     tel = models.BigIntegerField(null=True, blank=True)
     website = models.URLField(null=True, blank=True)
-    whatsapp = models.IntegerField(null=True, blank=True)
+    whatsapp = models.BigIntegerField(null=True, blank=True)
 
     facebook =models.URLField(null=True, blank=True)
     instagram =models.CharField(max_length=50, null=True, blank=True)

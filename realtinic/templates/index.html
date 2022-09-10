@@ -128,7 +128,14 @@
                                                     </ul>
                                                 </div>
                                                 <div class="geodir-category-footer fl-wrap">
-                                                    <a href="agents/{{property.agent.id_user}}" class="gcf-company"><img src="{{property.agent.profilepic.url}}" alt=""><span>By {{property.agent.first_name}} {{property.agent.last_name}}</span></a>
+                                                    <a href="agents/{{property.agent.id_user}}" class="gcf-company">
+                                                        {% if property.agent.url != none %}
+                                                        <img src="{{property.agent.profilepic.url}}" alt="">
+                                                        {% else %}
+                                                        <img src="https://avataaars.io/?avatarStyle=Circle&topType=Hat&accessoriesType=Sunglasses&facialHairType=Blank&clotheType=Hoodie&clotheColor=Pink&eyeType=Hearts&eyebrowType=Default&mouthType=Smile&skinColor=Tanned" alt="">
+                                                        {% endif %}
+                                                        <span>By {{property.agent.first_name}} {{property.agent.last_name}}</span></a>
+                                                        
                                                     <div class="listing-rating card-popup-rainingvis tolt" data-microtip-position="top" data-tooltip="Good" data-starrating2="4"></div>
                                                 </div>
                                             </div>

@@ -439,7 +439,7 @@ def user_profile(request):
             user.last_name = request.POST.get('last_name')
             user.email = request.POST.get('email')
             user.tel = request.POST.get('tel')
-            user.address = request.POST.get('address')
+            user.location = request.POST.get('address')
             user.website = request.POST.get('website')
             user.bio = request.POST.get('bio')
             
